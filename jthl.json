@@ -3,6 +3,15 @@
 "spider":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/XBPQ.jar",
 "lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly90ZWxlZ3JhbS1mZWl5YW5nZGlnaXRhbC52MS5taw=="]}]}],
 "sites":[
+  {
+            "key": "新6V",
+            "name": "🧲新6V┃磁力",
+            "type": 3,
+            "api": "csp_Xb6vGuard",
+            "searchable": 1,
+            "changeable": 0,
+            "timeout": 20
+        },
    {
             "key": "js豆瓣1",
             "name": "🌈豆瓣热播",
