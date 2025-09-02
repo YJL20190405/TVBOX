@@ -48,7 +48,7 @@
 	  "quickSearch":1,
 	  "filterable":1,
 	  "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e9%87%8e%e8%8d%b7%e5%a1%98.json",
-  "jar": "https://codeberg.org/a526898155/TVBOX/src/commit/987cdd5702a7eaf50681ad69a85b383a3d260fde/jar/spider.jar"},
+  "jar": "https://codeberg.org/a526898155/TVBOX/src/commit/e55ca41978153d353b4dc5a7e690e4ab50168c7e/jar/XBPQ.jar"},
   {
             "key": "csp_Lib",
             "name": "🍲Lib影视(SP)",
@@ -322,7 +322,8 @@
         },
 {"key":"csp_xBPQ_香蕉超清xbpq","name":"🏆天天综合","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
-"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%bb%bc%e5%90%88.json"},
+"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%bb%bc%e5%90%88.json",
+  "jar": "https://codeberg.org/a526898155/TVBOX/src/commit/e55ca41978153d353b4dc5a7e690e4ab50168c7e/jar/XBPQ.jar"},
 {"key":"csp_xBPQ_天天直播","name":"🏆天天直播","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%9b%b4%e6%92%ad.json"},
