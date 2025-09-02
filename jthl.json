@@ -1,6 +1,6 @@
 {
 //{"key":"key_〔资源名称〕","name":"资源名称","type":0,"api":"csp_〔jar内文件名称〕","searchable":1,"quickSearch":1,"filterable":0,"jar":"〔jar文件地址〕","ext":"〔txt json文件地址〕","playUrl":"〔播放解析地址〕","categories":["〔自定义资源列表〕","〔自定义资源列表〕"] },
-"spider":"https://codeberg.org/a526898155/TVBOX/src/commit/b83f362e189b0bcad5e59f9c9fafa28d483c8bb6/jar/spider.jar",
+"spider":"https://jihulab.com/ymz1231/jar/-/raw/main/ymz5.jar",
 "lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly90ZWxlZ3JhbS1mZWl5YW5nZGlnaXRhbC52MS5taw=="]}]}],
 "sites":[
    {
