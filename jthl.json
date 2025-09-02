@@ -133,19 +133,7 @@
      {"key": "csp_xBPQ_voflix","name": "🏕️vofliX","type": 3,"api": "csp_xBPQ",
 "searchable": 1,"quickSearch": 1,"filterable": 0,
 "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/voflixHD.json"},
-{"key": "哔滴","name":"💥哔滴影视", "type": 3,
-            "quickSearch": 1,
-            "api": "csp_AppQi",
-            "ext": {
-                "url": "",
-                "site": "https://ooxooxooxooxoo-1259561579.cos.ap-chengdu.myqcloud.com/ip.json",
-                "dataKey": "5ae8ee4bb95ea0ce",
-                "dataIv": "5ae8ee4bb95ea0ce",
-                "deviceId": "",
-                "version": "120",
-                "ua": "okhttp/3.10.0 BDYS/109.0.0.8"
-            }
-        },
+ {"key":"csp_Bdys","name":"🐞哔嘀影视","type":3,"api":"csp_Bdys","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://v.xlys.ltd.ua"},
  {//非凡资源备用网址:ffzy1.tv ffzy2.tv ffzy3.tv ffzy4.tv ffzy5.tv
             "key": "csp_xml_非凡资源",
             "name": "🥗非凡资源(SP)",
