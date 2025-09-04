@@ -482,10 +482,6 @@ WWE,http://137.175.36.206:8188/wwe_twn/playlist.m3u8?tid=MACA9233903292339032&ct
 CCTV风云音乐,http://218.17.216.102:9901/tsfile/live/1073_1.m3u8
 风云音乐,http://113.117.74.17:808/hls/117/index.m3u8
 🇨🇳｜电影轮播,#genre#
-🦄金马影院,http://hpull.kktv8.com/livekktv/128600025/playlist.m3u8
-黑莓电影,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225718/index.m3u8
-黑莓电影,http://39.134.115.221:8080/PLTV/88888910/224/3221225769/index.m3u8
-NewTV超级电影,http://39.135.138.58:18890/PLTV/88888888/224/3221225623/index.m3u8
 🐟神乐影片1,http://dns.yiandrive.com:13571/douyu/122402
 🐟神乐影片2,http://dns.yiandrive.com:13571/douyu/85894
 🐟贝爷影厅1,http://dns.yiandrive.com:13571/douyu/252802
@@ -586,7 +582,6 @@ NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/32212262
 🐟斗鱼小品1,http://dns.yiandrive.com:13571/douyu/9322175
 🐟斗鱼小品2,http://dns.yiandrive.com:13571/douyu/1486165
 🇨🇳｜网红主播,#genre#
-韩国,https://live-global-cdn-v02.afreecatv.com/live-stm-35/auth_master_playlist.m3u8?aid=.A32.7bbT56vyHM9fKZk.WXDyiOruActBVQURHcUqkEAMq2msKVPo2ssCGE7T8n0DP_TJfCqreTcT2CJidxOvl26_ykJgZHawFtBqbHjwhP4ylqv7Am0W7IWOaMKtHQ8[https://play.afreecatv.com/eunyoung1238/246041298]
 🐯小羊炖土豆,http://dns.yiandrive.com:13571/huya/372582
 🐯桃大大、,http://dns.yiandrive.com:13571/huya/160584
 🐯ATB-M2舞团,http://dns.yiandrive.com:13571/huya/147165
@@ -597,6 +592,7 @@ NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/32212262
 🐯虎牙-快乐老家,http://dns.yiandrive.com:13571/huya/880351
 🐱YY-993,http://dns.yiandrive.com:13571/yy/22490906
 🐟南妹儿呀,http://dns.yiandrive.com:13571/douyu/1486165
+👄奶尤uu,http://dns.yiandrive.com:13571/bilibili/181284885
 👄悲伤小饼干1,http://dns.yiandrive.com:13571/bilibili/1961608037
 👄白莉甜_,http://dns.yiandrive.com:13571/bilibili/1705538829
 斗鱼测试,http://dns.yiandrive.com:13571/douyu/4238637
@@ -607,8 +603,6 @@ NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/32212262
 🐟悬疑探案,http://jiandjh.51vip.biz:35455/douyu/11104966
 🐟柚子听书,https://epg.112114.xyz/bili/26567533
 🐟柚子听书,https://jiandjh.51vip.biz:35455/bili/26567533
-🐟b站,https://cn-gddg-ct-01-14.bilivideo.com/live-bvc/953831/live_3493085386377924_67507903/index.m3u8?expires=1681464594&len=0&oi=2004363521&pt=web&qn=0&trid=1007eaf24014530641aeabdf7b003e4df555&sigparams=cdn,expires,len,oi,pt,qn,trid&cdn=cn-gotcha01&sign=89609c2da8c68337151e4a2b9a861eea&sk=37ed535ccdf2fae9d105fd6e0fcb9bff&flvsk=5f5e20ab52bbe91046600f9c59b30eaf&p2p_type=1&sl=1&free_type=0&mid=441197535&sid=cn-gddg-ct-01-14&chash=1&sche=ban&bvchls=1&score=8&pp=rtmp&source=onetier&trace=890&site=54ae46615c6b9a57cbba03f6717fdccb&order=1
-🐟b站,https://cn-hnld-ct-01-44.bilivideo.com/live-bvc/858466/live_514242447_61527882.m3u8?expires=1681410917&len=0&oi=2004363521&pt=h5&qn=10000&trid=10038c25e28e72d444a2ad01e87f4e092759&sigparams=cdn,expires,len,oi,pt,qn,trid&cdn=cn-gotcha01&sign=8056a294fb338c8dd8e65f7d74119883&sk=be15dfdd194bef1d2463726a88abd2c5&p2p_type=0&sl=1&free_type=0&mid=0&sid=cn-hnld-ct-01-44&chash=1&sche=ban&score=1&pp=rtmp&source=one&trace=1098&site=954e7a9f3d5b0d656c15d4799d359b09&order=1
 🐯盗墓系列,http://dns.yiandrive.com:13571/huya/27675697
 🇨🇳｜埋堆堆,#genre#
 测试,http://dns.yiandrive.com:13571/huya/660004
