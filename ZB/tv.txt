@@ -460,6 +460,7 @@ WWE,http://137.175.36.206:8188/wwe_twn/playlist.m3u8?tid=MACA9233903292339032&ct
 💃快手热舞,https://api.e1e1.top/shuang/s.php
 💃快手热舞,https://api.e1e1.top/crosswise/cw.php
 💃快手热舞,https://api.e1e1.top/whole/w.php
+💃快手热舞,https://api.e1e1.top/wd/wd.php
 💃快手热舞,https://jiejie.uk/xjj/get/video.php
 💃快手热舞,https://v.nrzj.vip/tiktok/video.php
 💃快手热舞,https://jiejie.uk/xjj/tiktok/video.php
@@ -470,6 +471,7 @@ WWE,http://137.175.36.206:8188/wwe_twn/playlist.m3u8?tid=MACA9233903292339032&ct
 💃快手热舞,https://api.e1e1.top/meitui/mt.php
 💃快手热舞,https://tvv.tw/xjj/get/video.php
 💃快手热舞,http://wmsp.cc/video.php
+💃快手热舞,http://api.yujn.cn/api/zzxjj.php
 💃快手热歌,https://188sp.711888.xyz/188/video.php
 💃快手热歌,https://188sp.711888.xyz/188/video.php
 🐟親愛的老公丶,http://dns.yiandrive.com:13571/douyu/6739424
