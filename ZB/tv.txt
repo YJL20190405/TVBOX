@@ -98,6 +98,7 @@ CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 💃快手热舞,https://api.mhimg.cn/api/Sj_girls_video
 💃快手热舞,https://api.e1e1.top/shuang/s.php
 💃快手热舞,http://api.yujn.cn/api/sbkl.php
+💃快手热舞,https://xjj.349457.xyz/video.php
 💃快手热舞,https://api.e1e1.top/crosswise/cw.php
 💃快手热舞,https://api.e1e1.top/whole/w.php
 💃快手热舞,http://api.yujn.cn/api/hanfu.php
@@ -111,7 +112,6 @@ CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 💃快手热舞,http://api.yujn.cn/api/juhexjj.php?type=video
 💃快手热舞,https://api.suyanw.cn/api/jksp.php
 💃快手热舞,https://api.suyanw.cn/api/xjj/api.php
-💃快手热舞,https://xjj.349457.xyz/video.php
 💃快手热舞,http://api.yujn.cn/api/diaodai.php
 💃快手热舞,https://api.e1e1.top/meitui/mt.php
 💃快手热舞,https://tvv.tw/xjj/get/video.php
@@ -121,10 +121,10 @@ CGTN纪录,https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 💃快手热舞,http://4gicc.716888.xyz/fenlei/zj/gengxin/gengxin.php
 💃快手热舞,http://api.yujn.cn/api/zzxjj.php
 💃快手热舞,http://api.yujn.cn/api/xjj.php
-💃快手热舞,http://api.yujn.cn/api/ks_fc.php
 💃快手热舞,https://api.yujn.cn/api/manzhan.php
 💃快手热舞,http://api.qemao.com/api/douyin/
 💃快手热歌,https://188sp.711888.xyz/188/video.php
+💃快手热歌,http://api.yujn.cn/api/ks_fc.php
 💃快手热歌,http://epimw.716888.xyz/fenlei/djxjj/dj1.php
 🐟親愛的老公丶,http://dns.yiandrive.com:13571/douyu/6739424
 🐟龙吟虎斗鱼,http://dns.yiandrive.com:13571/douyu/8901218
