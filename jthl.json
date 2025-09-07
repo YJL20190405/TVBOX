@@ -164,7 +164,7 @@
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e9%9b%b6%e9%9b%b6%e4%b8%83%e5%bd%b1%e8%a7%86.json"},
 {"key":"js_B站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
 "searchable":0,"quickSearch":0,"filterable":1,
-"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
+"ext":"https://raw.gitcode.com/weixin_55546471/dcck/raw/master/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
     {"key": "csp_Bili哔哩合集","name": "🅱️哔哩合集","type": 3,"api": "csp_Bili",
     "searchable": 1,"quickSearch": 1,"filterable": 1,
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/Bilibili/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.json"},
