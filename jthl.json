@@ -10,22 +10,22 @@
             "key": "js豆瓣1",
             "name": "🌈豆瓣热播",
             "type": 3,
-            "api": "https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+            "api": "https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
             "ext": "http://alist.xn--z7x900a.love:63/豆瓣.js",
             "searchable": 0,
             "quickSearch": 0,
             "filterable": 0
         },
         {"key":"csp_QQ","name":"🐧腾讯视频","type": 3,
-        "api": "https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+        "api": "https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
         "ext": "http://111.67.196.181/js/%E8%85%BE%E8%AE%AF%E8%A7%86%E9%A2%91.js"},
 {"key":"爱奇艺","name":"🐨爱奇艺(SP)","type":3,
-"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+"api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
 "ext":"https://notabug.org/qizhen15800/My9394/raw/master/js/奇珍异兽.js"},
 {
       "key": "youku",
       "name": "👑优酷（官）",
-      "type":3,"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+      "type":3,"api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
       "ext":"https://notabug.org/qizhen15800/My9394/raw/master/js/优酷.js"},
 {"key": "sp_Mgtv","name": "🍋芒果TV","type": 3,"api": "csp_Mgtv","searchable": 1,"quickSearch": 1,"filterable": 1,"changeable": 0},
        {//https://fabu.bulei.cc/
@@ -118,7 +118,7 @@
     {"key":"js_qy",
    "name":"🍥创艺影视",
    "type":3,
-   "api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+   "api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
    "searchable": 2,
     "quickSearch": 0,
      "filterable": 0,
@@ -173,7 +173,7 @@
         "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%90%ac%e4%b9%a6%e7%bd%91.json"},
         {
             "key" : "drpy_js_海盗听书","name" : "📚️海盗听书","type" : 3,
-            "api" : "https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+            "api" : "https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
             "searchable": 2,"quickSearch": 0,"filterable": 0,
             "ext" : "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/js_%e6%b5%b7%e7%9b%97%e5%90%ac%e4%b9%a6.js"
         },{"key":"csp_ts","name":"📚️230听书","type":3,"api":"csp_XBPQ","searchable":1,"quickSearch":1,"filterable":1,
@@ -190,7 +190,7 @@
             "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%e6%9c%89%e5%a3%b0%e5%b0%8f%e8%af%b4%e5%90%a7.json"
         },
 {"key":"js_xm","name":"📚️喜马拉雅","type":3,
-"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+"api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
 "searchable": 2, "quickSearch": 0, "filterable": 0,
 "ext":"https://notabug.org/qizhen15800/My9394/raw/master/js/xima.js"},         
 { 
@@ -276,7 +276,7 @@
 		"filterable": 1,
 		"ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/plugin/pyhuya.py"
 	},
-{"key":"dr_JustLive","name": "📽️在线直播","type":3,"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js","ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/JustLive.js","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"dr_JustLive","name": "📽️在线直播","type":3,"api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min","ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/JustLive.js","searchable":0,"quickSearch":0,"filterable":0},
 {"key": "csp_XYQHiker_土狗影院","name":"🐶土狗影院","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%e5%9c%9f%e7%8b%97%e5%bd%b1%e9%99%a2.json",
 "jar":"https://files.zohopublic.com.cn/public/workdrive-public/download/uyv0t678c488189af47bb91dc108484d17431"},
@@ -287,7 +287,7 @@
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%e7%95%b0%e4%b8%96%e7%95%8c%e5%8b%95%e6%bc%ab.json",
     "jar": "https://codeberg.org/a526898155/TVBOX/src/commit/674bf93df90dfca08df5f4264646cd8d4e362c60/jar/custom_spider.jar"},
     {"key":"怡萱动漫","name":"🌺怡萱动漫","type":3,
-    "api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js",
+    "api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
     "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/%e6%80%a1%e8%90%b1%e5%8a%a8%e6%bc%ab.js"},
     {"key":"drpy_js_NT动漫","name":"🌺‍NT动漫","type":3,
     "api":"https://cdn.jsdelivr.net/gh/yxcqr/DZDRPY@main/libs/drpy.min.js",
