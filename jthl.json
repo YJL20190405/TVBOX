@@ -162,7 +162,7 @@
     {"key": "csp_xBPQ_零零七","name": "💢零零七","type": 3,"api": "csp_xBPQ",
     "searchable": 1,"quickSearch": 1,"filterable": 0,
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e9%9b%b6%e9%9b%b6%e4%b8%83%e5%bd%b1%e8%a7%86.json"},
-{"key":"js_B站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://cnb.cool/yjl-2019/TVBOX/-/git/raw/main/js/drpy.min.js",
+{"key":"js_B站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://cnb.cool/yjl-2019/pg/-/git/raw/master/js/drpy.min",
 "searchable":0,"quickSearch":0,"filterable":1,
 "ext":"https://cnb.cool/yjl-2019/TVBOX/-/git/raw/main/js/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
     {"key": "csp_Bili哔哩合集","name": "🅱️哔哩合集","type": 3,"api": "csp_Bili",
