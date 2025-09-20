@@ -178,8 +178,8 @@
             "quickSearch": 0,
             "changeable": 0,
             "ext": {
-                "json": "https://nos.netease.com/ysf/0075389dca9afadd4614e9713765ff17.txt"
-            }
+                "json": "https://nos.netease.com/ysf/0075389dca9afadd4614e9713765ff17.txt",
+      "jar":"https://coss.yupoo.com/upchat/2025-09-17/1758116715370.jpg"}
         },
     {"key": "csp_Bili哔哩合集","name": "🅱️哔哩合集","type": 3,"api": "csp_Bili",
     "searchable": 1,"quickSearch": 1,"filterable": 1,
