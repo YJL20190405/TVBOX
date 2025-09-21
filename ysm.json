@@ -72,7 +72,7 @@
         {"key":"csp_JianPian","name":"🔨荐片","type":3,"api":"csp_JianPian","playerType":1,"searchable":1,"quickSearch":1,"filterable":1},
         {"key":"csp_Ikanbot","name": "👾Ikanbot","type": 3,"api": "csp_Ikanbot","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":"https://v.aikanbot.com"},
         //B站系列
-        {"key":"js_B站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
+        {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
 "searchable":0,"quickSearch":0,"filterable":1,
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
 {
