@@ -1,5 +1,6 @@
 {
 "classes":[
+    {"type_name":"登陆配置","type_id":"peizhi"},
 {
 "type_name":"音乐",
 "type_id":"音乐"},
@@ -12,6 +13,7 @@
 {
 "type_name":"女团",
 "type_id":"女团"},
+{"type_name":"沙雕动漫","type_id":"一口气沙雕动漫"},
 {
 "type_name":"直播平台",
 "type_id":"直播平台"},
