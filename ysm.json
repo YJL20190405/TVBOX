@@ -95,7 +95,7 @@
             "ext": {
                 "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/b.json"}
         },
-         {
+        {
       "key": "哔哩视频",
       "name": "哔哩｜视频",
       "type": 3,
@@ -110,7 +110,7 @@
       },
       "jar": "https://www.lequxiang.com.cn/down.php/4a782a513874914d2e685913ee6fbc07.txt",
       "ext": {
-        "json": "https://gitee.com/PizazzXS/another-d/raw/master/movie/json/BLSP.json",
+        "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/BLSP.json",
         "cookie": "http://127.0.0.1:9978/file/TVBox/bili_cookie.txt"
       }
     },
