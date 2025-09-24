@@ -66,6 +66,13 @@
         {"key":"csp_BLSGod","name":"🧲80S影视","type":3,"api":"csp_BLSGod","searchable":1,"quickSearch":1,"filterable":1},
         {"key":"csp_Xunlei8","name":"🧲迅雷吧","type":3,"api":"csp_Xunlei8","searchable":1,"quickSearch":1,"filterable":1},
         //jar内置爬虫规则区
+        {"key":"热播弹幕版","name":"📺热播┃弹幕","type":3,"api":"csp_TianTianGuard","searchable":1,"quickSearch":1,"filterable":1,
+        "jar": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",
+        "ext":{"danmu":true,"site":0},
+"timeout":10},
+{"key":"小苹果弹幕版","name":"🍎苹果┃弹幕","type":3,"api":"csp_XpgGuard","searchable":1,"quickSearch":1,"filterable":1,
+ "jar": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",
+ "ext":{"danMu": "弹"},"timeout":10},
         {"key":"360_spider","name":"🐞360影视","type":3,"api":"csp_SP360","filterable":1,"quickSearch":1,"searchable":1},
         {"key":"csp_Kuaikan","name":"💡快看影视","type":3,"api":"csp_Kuaikan","searchable":1,"quickSearch":1,"filterable":1},
         {"key":"csp_LiteApple","name":"🐞小苹果影视","type":3,"api":"csp_LiteApple","filterable":1,"quickSearch":1,"searchable":1},
