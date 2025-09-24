@@ -183,16 +183,6 @@
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://v.aikanbot.com"},
          //磁力资源区
         //{"key": "csp_Mp4Mov","name": "🧲Mp4电影","type": 3,"api": "csp_Mp4Mov","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://www.skymp4.com"},
-        {//非凡资源备用网址:ffzy1.tv ffzy2.tv ffzy3.tv ffzy4.tv ffzy5.tv
-            "key": "csp_xml_非凡资源",
-            "name": "🥗非凡资源(SP)",
-            "type": 1,
-            //"api": "https://www.ah121.com/api.php/provide/vod/from/ffm3u8/?at/xml/",
-            "api": "http://cj.ffzyapi.com/api.php/provide/vod/",
-            "searchable": 1,
-            "quickSearch": 1,
-            "categories": ["动作片","喜剧片","科幻片","恐怖片","爱情片","剧情片","战争片","伦理片","国产剧","欧美剧","香港剧","韩国剧","台湾剧","日本剧","海外剧","泰国剧","国产动漫","日韩动漫","欧美动漫","港台动漫","海外动漫","大陆综艺","港台综艺","日韩综艺","欧美综艺"]},
-            {//量子资源（备用网址): Lzizy1.com 至 Lzizy8.com
       "key": "量子资源",
       "name": "🥑量子资源(SP)",
       "type": 1,
@@ -287,7 +277,17 @@
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/金牌影视.js"},
         
         {"key":"柚子资源","name":"🍊柚子资源","type":0,"api":"https://api.yzzy-api.com/inc/api.php","searchable":1,"quickSearch":1,"categories":["动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","国产剧","台湾剧","韩国剧","欧美剧","香港剧","泰国剧","日本剧","福利","记录片","动画片","海外剧","倫理片","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫","港台动漫","海外动漫","搞笑","音乐","影视","汽车","短剧大全","预告片","预告片","体育"]},
-        
+        //采集
+        {//非凡资源备用网址:ffzy1.tv ffzy2.tv ffzy3.tv ffzy4.tv ffzy5.tv
+            "key": "csp_xml_非凡资源",
+            "name": "🥗非凡资源(SP)",
+            "type": 1,
+            //"api": "https://www.ah121.com/api.php/provide/vod/from/ffm3u8/?at/xml/",
+            "api": "http://cj.ffzyapi.com/api.php/provide/vod/",
+            "searchable": 1,
+            "quickSearch": 1,
+            "categories": ["动作片","喜剧片","科幻片","恐怖片","爱情片","剧情片","战争片","伦理片","国产剧","欧美剧","香港剧","韩国剧","台湾剧","日本剧","海外剧","泰国剧","国产动漫","日韩动漫","欧美动漫","港台动漫","海外动漫","大陆综艺","港台综艺","日韩综艺","欧美综艺"]},
+            {//量子资源（备用网址): Lzizy1.com 至 Lzizy8.com
         //直播规则区
         //{"key": "csp_Yj1211","name": "📡JustLive","type": 3,"api": "csp_Yj1211","playerType":1,"searchable":1,"quickSearch":1,"filterable":1},
         {"key":"快手直播","name":"😎快手┃直播","type":3,"api":"csp_KsLiveGuard","searchable":0,"quickSearch":0,"filterable":1,"style":{"type":"rect","ratio":1.433},
