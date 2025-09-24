@@ -80,7 +80,7 @@
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
 {
             "key": "Bili",
-            "name": "🅱哔哔合集┃弹幕",
+            "name": "🅱️哔哔合集┃弹幕",
             "type": 3,
             "api": "csp_BiliGuard",
             "style": {
@@ -97,7 +97,7 @@
         },
         {
       "key": "哔哩视频",
-      "name": "哔哩｜视频",
+      "name": "🅱️哔哩｜视频",
       "type": 3,
       "api": "csp_BiliYS",
       "searchable": 1,
@@ -111,7 +111,7 @@
       "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/pizazz%EF%BC%88%E6%BD%87%E6%B4%92%E5%BC%B9%E5%B9%95%EF%BC%89.txt",
       "ext": {
         "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/BLSP.json",
-        "cookie": "http://127.0.0.1:9978/file/TVBox/bili_cookie.txt"
+        "cookie": ""
       }
     },
         {"key":"JS哔哩直播","name":"哔哩直播[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","searchable": 0,"quickSearch": 0,"filterable": 1,"ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/哔哩直播.js"},
