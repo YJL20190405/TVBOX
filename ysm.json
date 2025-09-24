@@ -6,7 +6,7 @@
           "name": "本地live文件",
           "type":"0",
           "pass": true,
-          "url":"http://127.0.0.1:9978/file/XYQTVBox/live.txt",
+          "url":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
           "epg": "http://cdn.1678520.xyz/epg/?ch={name}&date={date}",     
           "logo": "https://epg.iill.top/logo/{name}.png"
         },
@@ -39,6 +39,8 @@
         {"key":"配置中心","name":"❤配置｜中心","type":3,"api":"csp_Config","searchable":0,"changeable":0,
         "jar":"https://jar.yy.xn--dkw.xn--6qq986b3xl/m/jar.php?id=index;md5;b8ccf68972d12e3983a93b35b4024345",
         "style":{"type":"rect","ratio":1.597}},
+        {"key":"配置中心","name":"👨‍🍳‍配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
+        "jar":"https://jar.yy.xn--dkw.xn--6qq986b3xl/m/jar.php?id=index;md5;b8ccf68972d12e3983a93b35b4024345"},
         {"key":"drpy_js_豆瓣","name":"豆瓣[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
         {"key":"drpy_js_奇珍异兽","name":"奇珍异兽[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/奇珍异兽.js"},
         {"key":"drpy_js_优酷","name":"优酷[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/优酷.js"},
