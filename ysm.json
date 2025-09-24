@@ -280,7 +280,7 @@
         "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/虎牙直播.json"},
         {"key": "csp_XYQHiker_斗鱼直播","name": "🐠斗鱼直播(XYQH)","type": 3,"api": "csp_XYQHiker","searchable": 1,"quickSearch": 0,"filterable": 1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
-        "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/斗鱼直播.json"}
+        "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/斗鱼直播.json"},
         //点击示例
         //document.getElementById('EaKWQVrB').click()
         //document.getElementsByClassName('swal-button swal-button--confirm')[0].click()
