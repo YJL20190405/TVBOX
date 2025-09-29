@@ -1,0 +1,7 @@
+[{"name": "哔哩合集大全","version": 3,
+    "webSite": "https://www.bilibili.com/",
+    "api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
+"order": "B",
+ "type": 101,
+"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"}
+]
