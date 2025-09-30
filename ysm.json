@@ -125,7 +125,7 @@
 //B站系列
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
 "searchable":0,"quickSearch":0,"filterable":1,
-"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js","danMu":"弹"},
+"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
 {
             "key": "Bili",
             "name": "🅱️哔哔合集┃弹幕",
@@ -172,9 +172,8 @@
 		"jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
         {"key":"360_spider","name":"🐞360影视","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
-        {"key":"csp_Kuaikan","name":"💡快看影视","type":3,"api":"csp_Kuaikan","searchable":1,"quickSearch":1,"filterable":1},
         {"key":"csp_LiteApple","name":"🐞小苹果影视","type":3,"api":"csp_LiteApple","searchable":1,"quickSearch":1,"filterable":1,
-        "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
+        "jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
         //{"key":"csp_Czsapp","name":"🐞厂长资源","type":3,"api":"csp_Czsapp","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://www.czzy77.com"},
         {"key":"csp_Bdys","name":"🐞哔嘀影视","type":3,"api":"csp_Bdys","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://v.xlys.ltd.ua"},
