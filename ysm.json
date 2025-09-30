@@ -165,8 +165,7 @@
     },
         {"key":"JS哔哩直播","name":"哔哩直播[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","searchable": 0,"quickSearch": 0,"filterable": 1,"ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/哔哩直播.js"},
         //jar内置爬虫规则区
-        {"key":"WexBDys","name":"🎇滴滴┃秒播🎇","type":3,"api":"csp_WexBDysGuard","searchable":1,"changeable":1,
-        "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
+        {"key":"WexBDys","name":"🎇滴滴┃秒播🎇","type":3,"api":"csp_WexBDysGuard","searchable":1,"changeable":1},
         {
 			"key": "csp_Jpys",
 			"name": "🥇金牌┃影视","type": 3,"searchable": 1,"quickSearch": 0,"api": "csp_Jpys",
