@@ -37,9 +37,8 @@
     	}
     ],
     "sites": [
-        {"key":"配置中心","name":"❤配置｜中心","type":3,"api":"csp_Config","searchable":0,"changeable":0,
-        "jar":"https://jar.yy.xn--dkw.xn--6qq986b3xl/m/jar.php?id=index;md5;b8ccf68972d12e3983a93b35b4024345",
-        "style":{"type":"rect","ratio":1.597}},
+        {"key":"Wexconfig","name":"🐮通用类型┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
+"jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/2B21409_773_wex_20250930234712135newMediaImage.png;md5;cbdc8e5a748c47dadad445743d5c29ed"},
         {"key":"配置中心","name":"👨‍🍳‍配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de"},
         {"key":"drpy_js_豆瓣","name":"豆瓣[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
