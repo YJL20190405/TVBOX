@@ -1,7 +1,7 @@
 {
     "wallpaper": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
-    "spider": "https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f",//小米弹幕
-    //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
+    //"spider": "https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f",//小米弹幕
+    "spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
     "lives": [
         {
@@ -166,6 +166,10 @@
         //jar内置爬虫规则区
         {"key":"WexBDys","name":"🎇滴滴┃秒播🎇","type":3,"api":"csp_WexBDysGuard","searchable":1,"changeable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
+        {
+			"key": "csp_Jpys",
+			"name": "🥇金牌┃影视","type": 3,"searchable": 1,"quickSearch": 0,"api": "csp_Jpys",
+		"jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
         {"key":"360_spider","name":"🐞360影视","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
         {"key":"csp_Kuaikan","name":"💡快看影视","type":3,"api":"csp_Kuaikan","searchable":1,"quickSearch":1,"filterable":1},
@@ -266,9 +270,6 @@
         {"key": "csp_XYQHiker_来看点播","name":"⛅️来看点播(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/来看点播.json"},
-        {"key":"drpy_js_金牌","name":"金牌影视[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
-        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/金牌影视.js"},
-        
         {"key":"柚子资源","name":"🍊柚子资源","type":0,"api":"https://api.yzzy-api.com/inc/api.php","searchable":1,"quickSearch":1,"categories":["动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","国产剧","台湾剧","韩国剧","欧美剧","香港剧","泰国剧","日本剧","福利","记录片","动画片","海外剧","倫理片","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫","港台动漫","海外动漫","搞笑","音乐","影视","汽车","短剧大全","预告片","预告片","体育"]},
         //采集
         {//非凡资源备用网址:ffzy1.tv ffzy2.tv ffzy3.tv ffzy4.tv ffzy5.tv
