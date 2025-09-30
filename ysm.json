@@ -120,8 +120,6 @@
 "timeout":10},
 {"key":"荐片弹幕版","name":"🆗荐片┃手机","type":3,"api":"csp_JianpianGuard","searchable":1,"changeable":0,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
 "timeout":10},
-{"key":"️爱看Bot弹幕版","name":"🆗爱看┃弹幕","type":3,"api":"csp_IkanbotGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
-"timeout":10},
 //B站系列
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js",
 "searchable":0,"quickSearch":0,"filterable":1,
@@ -171,6 +169,8 @@
         {"key":"Diduanys","name":"🐮二小深渊┃弹幕","type":3,"api":"csp_WexDiduanysGuard","searchable":1,"changeable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
         {"key":"WexkuihuatvGuard","name":"🐮二小葵花┃弹幕","type":3,"api":"csp_WexkuihuatvGuard","searchable":1,"changeable":1,
+        "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
+        {"key":"WexikanbotGuard","name":"🐮二小爱看┃弹幕","type":3,"api":"csp_WexikanbotGuard","searchable":1,"changeable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/46EE9ED_773_wex_20250927223656750newMediaImage.png;md5;6f56c5c172347ad4ac47f7a8c93eeee0"},
         {
 			"key": "csp_Jpys",
