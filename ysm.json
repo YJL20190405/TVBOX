@@ -139,8 +139,7 @@
             "quickSearch": 0,
             "filterable":1,
             "changeable": 0,
-            "jar": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",
-            //"jar": "https://coss.yupoo.com/upchat/2025-09-17/1758116715370.jpg;md5;98ca59a872d6d4d89c8c7e2aafb4dae1",
+            "jar": "https://coss.yupoo.com/upchat/2025-09-17/1758116715370.jpg;md5;98ca59a872d6d4d89c8c7e2aafb4dae1",
             "ext": {
                 "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/b.json"}
         },
