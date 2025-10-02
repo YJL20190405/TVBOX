@@ -39,7 +39,7 @@
     "sites": [
       {
 			"key": "豆豆",
-			"name": "🌈小米豆瓣┃推荐",
+			"name": "🌈虎斑豆瓣┃推荐",
 			"type": 3,
 			"quickSearch": 0,
 			"filterable": 0,
@@ -200,29 +200,7 @@
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://v.xlys.ltd.ua"},
         {"key": "csp_XYQHiker_修罗影视","name":"🧲修罗影视(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/哔嘀影视.json"},
-            {
-      "key": "d'd",
-      "name": "修罗|弹幕",
-      "type": 3,
-      "api": "csp_HBPQ",
-      "jar":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/HPBQ%28XPBQ%E5%BC%B9%E5%B9%95%E7%89%88%20%EF%BC%8C%E6%94%B9csp_XPBQ%E4%B8%BAcsp_HPBQ%29.jar",
-      "ext": {
-        "数组": "card card-sm card-link&&</div>",
-        "图片": "src=\"&&\"",
-        "标题": "mb-0 card-title text-truncate\">&&<",
-        "副标题": "start-0 text-red-fg\">&&</span>",
-        "链接": "href=\"&&\"",
-        "简介": "剧情简介：&&\"",
-        "线路标题": "磁力+>&&<",
-        "播放数组": "download-list&&</tbody>",
-        "播放列表": "<tr&&</tr>",
-        "播放标题": "text-muted\">&&</td>[不包含:网盘下载]",
-        "跳转播放链接": "href=\"&&\"",
-        "分类url": "https://v.xlys.ltd.ua/s/all/{catePg}?type={cateId};;d0",
-        "分类": "电影$0#电视剧$1"
-      }
-    },
-        //{"key":"csp_Kunyu77","name":"🐞77影视","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
+                   //{"key":"csp_Kunyu77","name":"🐞77影视","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
         {"key":"csp_JianPian","name":"🔨荐片","type":3,"api":"csp_JianPian","playerType":1,"searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
         {"key":"csp_Ikanbot","name": "👾Ikanbot","type": 3,"api": "csp_Ikanbot","searchable":1,"quickSearch":1,"filterable":1,
@@ -243,7 +221,6 @@
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
         {"key":"csp_Xunlei8","name":"🧲迅雷吧","type":3,"api":"csp_Xunlei8","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8"},
-
         //{"key": "csp_XYQHiker_酷奇MV","name":"🎤酷奇MV(XYQH)","type":3,"api":"csp_XYQHiker","searchable":0,"quickSearch":0,"filterable":1,"ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/酷奇MV.json"},
         {"key": "csp_XYQHiker_短剧屋","name":"🎬短剧屋","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
@@ -330,14 +307,6 @@
       "api": "http://cj.lziapi.com/api.php/provide/vod/",
       "categories": ["动作片", "喜剧片","科幻片","恐怖片","爱情片","剧情片", "国产剧","战争片","伦理片","台湾剧","香港剧","欧美剧", "韩国剧", "日本剧","泰国剧","欧美综艺","日韩综艺","港台综艺","电影解说" ,"国产动漫", "港台动漫","海外动漫","欧美动漫","日韩动漫","体育"]
     },
-     {
-      "key": "采集",
-      "name": "采集|弹幕",
-      "type": 3,
-      "api": "csp_HBcms10",
-      "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/HPBQ%28XPBQ%E5%BC%B9%E5%B9%95%E7%89%88%20%EF%BC%8C%E6%94%B9csp_XPBQ%E4%B8%BAcsp_HPBQ%29.jar",
-      "ext": "https://360zy.com/api.php/provide/vod/"
-    },
         //直播规则区
         //{"key": "csp_Yj1211","name": "📡JustLive","type": 3,"api": "csp_Yj1211","playerType":1,"searchable":1,"quickSearch":1,"filterable":1},
         {"key":"快手直播","name":"😎快手┃直播","type":3,"api":"csp_KsLiveGuard","searchable":0,"quickSearch":0,"filterable":1,"style":{"type":"rect","ratio":1.433},
@@ -346,8 +315,7 @@
         "searchable": 0,"quickSearch": 0,"filterable": 1},
         {"key": "csp_XYQHiker_虎牙直播","name": "🐯虎牙直播(XYQH)","type": 3,"api": "csp_XYQHiker","searchable": 1,"quickSearch": 0,"filterable": 1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
-        //"ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/虎牙直播.json"},
-        "ext": "http://hb.小虎斑.site:25252/仅供测试/hbtc.json"},
+        "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/虎牙直播.json"},
         {"key": "csp_XYQHiker_斗鱼直播","name": "🐠斗鱼直播(XYQH)","type": 3,"api": "csp_XYQHiker","searchable": 1,"quickSearch": 0,"filterable": 1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar;md5;39f47cafa594a9d606bff5b0ac71b4a8",
         "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/斗鱼直播.json"},
@@ -365,13 +333,6 @@
 "timeout":25},
 {"key":"找盘","name":"🎾找盘┃搜索","type":3,"api":"csp_V2PanGuard","searchable":1,"filterable":1,"changeable":0,"ext":{"danmu":true},
 "timeout":25},
-    {
-      "key": "huban",
-      "name": "弹幕|小窗",  //外挂需要搜索触发
-      "type": 3,
-      "jar": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar",
-      "api": "csp_Huban"
-    },
 {"key":"push_agent","name":"🛴手机┃推送","type":3,"api":"csp_PushGuard","searchable":0,"filterable":0,"changeable":0,"ext":{"danmu":true},
 "timeout":25}
         
