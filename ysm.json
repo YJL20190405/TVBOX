@@ -2,9 +2,10 @@
     "wallpaper": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/51354B2_773_wex_20251001025150819newMediaImage.png;md5;63edca97deb202864b7e9078d26296f1",//王二小弹幕
     //"spider": "https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f",//小米弹幕
-    "spider": "https://fly.qingyuji.cn/f/KwQZtw/oo.png;md5;51f99b9091f72617786d4c90bdb87d06",//OK弹幕
+    //"spider": "https://fly.qingyuji.cn/f/KwQZtw/oo.png;md5;51f99b9091f72617786d4c90bdb87d06",//OK弹幕
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
+    "spider": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
     "lives": [
         {
           "name": "本地live文件",
@@ -38,7 +39,41 @@
     	}
     ],
     "sites": [
-           
+            {
+            "key": "至尊",
+            "name": "魔尊|4K弹幕",
+            "type": 3,
+            "api": "csp_AppZzun",
+            "ext": "./txt/app.txt"
+        },
+        {
+            "key": "魔尊",
+            "name": "重楼|4K弹幕",
+            "type": 3,
+            "api": "csp_HBcms10",
+            "ext": "./txt/cms.txt"
+        },
+        {
+            "key": "紫萱",
+            "name": "紫萱|4K弹幕",
+            "type": 3,
+            "api": "csp_AppZzun",
+            "ext": "./txt/app2.txt"
+        },
+        {
+            "key": "竹生",
+            "name": "竹生|4K弹幕",
+            "type": 3,
+            "api": "csp_HBT4",
+            "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qVTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXNZV0pwSXlNamJHRmlhUT09"
+        },
+        {
+            "key": "归安",
+            "name": "归安|4K弹幕",
+            "type": 3,
+            "api": "csp_HBT4",
+            "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXRhV2hrY2lNakkyMXBhR1J5"
+        }, 
       {
 			"key": "豆豆",
 			"name": "🌈虎斑豆瓣┃推荐",
@@ -47,8 +82,7 @@
 			"filterable": 0,
 			"changeable": 0,
 			"api": "csp_Douban",
-            //"jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
-            "jar":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/spider.jar",
+            "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
 			"searchable": 0},
         //{"key":"drpy_js_豆瓣","name":"豆瓣","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
         {"key":"drpy_js_奇珍异兽","name":"奇珍异兽[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/奇珍异兽.js"},
@@ -60,6 +94,7 @@
         {"key":"配置中心","name":"👨‍🍳‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de"},
         //网盘资源区OK猫JAR
+
         {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_ErXiaoGuard","quickSearch":1,"changeable":1,"filterable":1,"ext":{"danmu":true},
 "timeout":25},
 {"key":"双星","name":"🆗双星┃4K弹幕","type":3,"api":"csp_Star2Guard","searchable":1,"filterable":1,"changeable":0,"style":{"type":"list"},
