@@ -2,10 +2,9 @@
     "wallpaper": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/51354B2_773_wex_20251001025150819newMediaImage.png;md5;63edca97deb202864b7e9078d26296f1",//王二小弹幕
     //"spider": "https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f",//小米弹幕
-    //"spider": "https://fly.qingyuji.cn/f/KwQZtw/oo.png;md5;51f99b9091f72617786d4c90bdb87d06",//OK弹幕
+    "spider": "https://fly.qingyuji.cn/f/KwQZtw/oo.png;md5;51f99b9091f72617786d4c90bdb87d06",//OK弹幕
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
-    //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
-    "spider": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+    //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",,
     "lives": [
         {
           "name": "本地live文件",
@@ -39,41 +38,6 @@
     	}
     ],
     "sites": [
-            {
-            "key": "至尊",
-            "name": "魔尊|4K弹幕",
-            "type": 3,
-            "api": "csp_AppZzun",
-            "ext": "./txt/app.txt"
-        },
-        {
-            "key": "魔尊",
-            "name": "重楼|4K弹幕",
-            "type": 3,
-            "api": "csp_HBcms10",
-            "ext": "./txt/cms.txt"
-        },
-        {
-            "key": "紫萱",
-            "name": "紫萱|4K弹幕",
-            "type": 3,
-            "api": "csp_AppZzun",
-            "ext": "./txt/app2.txt"
-        },
-        {
-            "key": "竹生",
-            "name": "竹生|4K弹幕",
-            "type": 3,
-            "api": "csp_HBT4",
-            "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qVTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXNZV0pwSXlNamJHRmlhUT09"
-        },
-        {
-            "key": "归安",
-            "name": "归安|4K弹幕",
-            "type": 3,
-            "api": "csp_HBT4",
-            "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXRhV2hrY2lNakkyMXBhR1J5"
-        }, 
       {
 			"key": "豆豆",
 			"name": "🌈虎斑豆瓣┃推荐",
