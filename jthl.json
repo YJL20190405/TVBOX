@@ -94,22 +94,24 @@
     {"key":"csp_xBPQ_GAOAA","name":"👠GAOAA","type":3,"api":"csp_xBPQ",
     "searchable":0,"quickSearch":1,"filterable":1,
      "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/GAOAA.json"},
+     {//本站邮箱:ziyuanxing5@gmail.com
+  "key":"爱爱影视","name":"🥇爱爱影视","type":1,"api":"https://xzybb1.com/api.php/provide/vod/",
+"searchable":1,"quickSearch":1,"filterable":1},
      { "key": "(18+)JAV名优", "name": "🥇JAV名优", "type": 0, "api": "http://mygzycj.com/api.php?ac=list", "searchable": 1, "quickSearch": 1, "filterable": 0 },
     {//本站易记域名：www.9191md.me备用域名地址：www.36717.info备用域名地址：www.36717.pw备用域名地址：www.bt4.cc发布页地址：www.7000.me纸飞机联系：@ccdd78//本站易记域名：www.9191md.me备用域名地址：www.36717.info备用域名地址：www.36717.pw备用域名地址：www.bt4.cc发布页地址：www.7000.me纸飞机联系：@ccdd78
       "key":"91md","name":"🥇91麻豆","type":1,"api":"https://91md.me/api.php/provide/vod/from/mdm3u8/","searchable":1,"quickSearch":1,"filterable":0},
 {//本站永久网址：aays.vip  本站QQ群:366784126
   "key":"爱爱影视","name":"🥇爱爱影视","type":1,"api":"http://22.shaozeyk.top/api.php/provide/vod/",
 "searchable":1,"quickSearch":1,"filterable":1},
-{"key": "滴滴资源","name": "🥇滴滴资源","type": 0,"api": "https://api.ddapi.cc/api.php/provide/vod/at/xml", "searchable": 1,"quickSearch": 1, "filterable": 0 },{
-            "key": "番外",
-            "name": "🥇番外采集",
-            "type": 1,
-            "api": "http://fhapi9.com/api.php/provide/vod/",
-            "playUrl": "",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "categories": [
+{"key": "滴滴资源","name": "🥇滴滴资源","type": 0,"api": "https://api.ddapi.cc/api.php/provide/vod/at/xml", "searchable": 1,"quickSearch": 1, "filterable": 0 },
+{"key": "番外",
+"name": "🥇番外采集",
+"type": 1,
+"api": "http://fhapi9.com/api.php/provide/vod/",
+"playUrl": "", "searchable": 1,
+"quickSearch": 1,
+"filterable": 1,
+ "categories": [
                 "群交淫乱",
                 "偷拍自拍",
                 "制服丝袜",
