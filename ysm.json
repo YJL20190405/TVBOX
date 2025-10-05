@@ -46,6 +46,7 @@
 			"filterable": 0,
 			"changeable": 0,
 			"api": "csp_Douban",
+           "playerType": 2, 
             "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
 			"searchable": 0},
             {
