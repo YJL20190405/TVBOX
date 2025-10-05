@@ -49,14 +49,6 @@
 			"api": "csp_Douban",
             "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
 			"searchable": 0},
-            {
-"key": "配置",
-"name": "懒羊羊弹幕小窗",
-"type": 3,
-"api": "csp_ConfigCenter",
-"playerType": 2,
-"jar": "http://117.50.184.199:97/jar/custom_spider.jar"
-},
         //{"key":"drpy_js_豆瓣","name":"豆瓣","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
         {"key":"drpy_js_奇珍异兽","name":"奇珍异兽[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/奇珍异兽.js"},
         {"key":"drpy_js_优酷","name":"优酷[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/优酷.js"},
