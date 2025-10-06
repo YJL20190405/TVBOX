@@ -6,7 +6,67 @@
 "sites":[
  {"key": "csp_New6v","name": "🧲新6V","type": 3,"api": "csp_New6v","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":"https://www.xb6v.com",
   "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar;md5;6eef2fe11608a31d31c32d4dcf00edaf"},
-   
+   {
+      "key": "539",
+      "name": "🖥️539剧",
+      "type": 3,
+      "api": "csp_XBPQ",
+      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": {
+         "简介": "+detail-content\" style=*>&&</span>",
+    "分类url": "https://www.539539.xyz/index.php/vod/show/area/{area}/class/{class}/id/{cateId}/page/{catePg}/year/{year}.html",
+    "分类": "短剧$25#电视剧$2#电影$1#动漫$4#综艺$3#伦理$26#写真$27"
+      }
+},
+{
+            "key": "疯猫影视",
+            "name": "疯猫AV影视(XBPQ)",
+            "type": 3,
+            "api": "csp_XBPQ",
+            "ext": {
+                "请求头":"手机",
+"站名":"疯猫av",
+"主页url":"https://bb.fmav711.icu",
+"数组":"col-md-3 resent-grid recommended-grid&&</div></div></div>", 
+"标题":"title\"&&</a>",
+"图片":"data-original=\"&&\"", 
+"副标题":"views views-info\"&&</p>",
+"线路数组":"glyphicon-play-circle\"&&</a>",
+"播放数组":"myList&&</ul>",
+"播放标题":"</span>&&/a>",
+"搜索url":"/ss/key_{wd}_p{pg}.html",
+"简介":"myList\"&&</p>",
+"嗅探词": ".m3u8#.mp4#.flv#.mp3#.m4a",
+"分类url":"/fly/{cateId}B4_p{catePg}.html",
+"分类数组":"<a&&</a>",
+"分类标题": ">&&/a>", 
+"分类ID":"/fly/&&B4_p.html"
+            },
+            "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar"
+        },
+        {
+      "key": "11影網",
+      "name": "🔞112vv┃影视",
+      "type": 3,
+      "api": "csp_XBPQ",
+      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": {
+        "主页url": "https://www.112vv.me/vodtype/26.html",
+        "播放数组":"mod play-list&&</ul",
+        "跳转播放链接": "var player_aaaa*url\":\"&&\"",
+        "链接": "href=\"&&\"",
+       "标题": "alt=\"&&\"",
+       "直接播放":"1",
+       "分类url": "https://www.112vv.me/vodtype/{cateId}-{catePg}.html;;z",
+        "分类": "国产视频$6#欧美高清$24#日韩视频$23#熟女人妻$32#国产传媒$12#亚洲专区$22#中文字幕$25#三级电影$26#高清名优$38#日本素人$37#少女萝莉$31#强奸乱伦$29#制服丝袜$30#童颜巨乳$28"
+      }
+    },
 {"key":"dr_JustLive","name": "📽️在线直播","type":3,"api":"https://notabug.org/qizhen15800/My9394/raw/master/js/lib/drpy.min.js","ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/JustLive.js","searchable":0,"quickSearch":0,"filterable":0},
 {"key": "csp_XYQHiker_土狗影院","name":"🐶土狗影院","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%e5%9c%9f%e7%8b%97%e5%bd%b1%e9%99%a2.json",
@@ -94,6 +154,20 @@
     {"key":"csp_xBPQ_GAOAA","name":"👠GAOAA","type":3,"api":"csp_xBPQ",
     "searchable":0,"quickSearch":1,"filterable":1,
      "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/GAOAA.json"},
+       {
+      "key": "PUA外剧",
+      "name": "🖥️PUA外剧",
+      "type": 3,
+      "api": "csp_XBPQ",
+      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": {
+        "分类url": "https://www.p-ua.com/vodshow/1-----------/area/{area}/by/{by}/class/{class}/id/{cateId}/page/{catePg}/year/{year}.html",
+        "分类": "欧美剧$26#海外剧$29#日韩剧$16#卡通剧$28#福利剧$49"
+      }
+},
      {//本站邮箱:ziyuanxing5@gmail.com
   "key":"幸资源","name":"🥇幸资源","type":1,"api":"https://xzybb1.com/api.php/provide/vod/",
 "searchable":1,"quickSearch":1,"filterable":1},
