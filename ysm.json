@@ -45,9 +45,9 @@
 			"quickSearch": 0,
 			"filterable": 0,
 			"changeable": 0,
-			"api": "csp_Douban",
+			"api": "csp_Douban"
             //"jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
-			"searchable": 1},
+			},
             {
 "key": "配置",
 "name": "懒羊羊弹幕小窗",
