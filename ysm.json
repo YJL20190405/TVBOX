@@ -46,7 +46,7 @@
 			"filterable": 0,
 			"changeable": 0,
 			"api": "csp_Douban"
-            //"jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+            //"jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
 			},
             {
 "key": "配置",
@@ -57,7 +57,7 @@
 "jar": "http://117.50.184.199:97/jar/custom_spider.jar"},
     {
       "key": "设置",
-      "name": "虎斑弹幕设置",
+      "name": "🐯虎斑弹幕设置",
       "type": 3,
       "api": "csp_HBconfig",
       "jar": "https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
@@ -113,50 +113,50 @@
 {"key":"123社区","name":"🆗123┃4K","type":3,"api":"csp_Time123Guard","quickSearch":0,"changeable":0,"filterable":1,"timeout":25},
  {
       "key": "至尊",
-      "name": "魔尊|4K弹幕",
+      "name": "🐯魔尊|4K弹幕",
       "type": 3,
       "api": "csp_AppZzun",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "ext": "http://154.219.113.13:12121/json/app.txt"
     },
     {
       "key": "魔尊",
-      "name": "重楼|4K弹幕",
+      "name": "🐯重楼|4K弹幕",
       "type": 3,
       "api": "csp_HBcms10",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "ext": "http://154.219.113.13:12121/json/cms.txt"
     },
         {
       "key": "紫萱",
-      "name": "紫萱|4K弹幕",
+      "name": "🐯紫萱|4K弹幕",
       "type": 3,
       "api": "csp_AppZzun",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "ext": "http://154.219.113.13:12121/json/app2.txt"
     },
     {
       "key": "竹生",
-      "name": "竹生|4K弹幕",
+      "name": "🐯竹生|4K弹幕",
       "type": 3,
       "api": "csp_HBT4",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
 "ext":"YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qVTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXNZV0pwSXlNamJHRmlhUT09"
     },
     {
       "key": "归安",
-      "name": "归安|4K弹幕",
+      "name": "🐯归安|4K弹幕",
       "type": 3,
       "api": "csp_HBT4",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXRhV2hrY2lNakkyMXBhR1J5"
     },
     {
       "key": "薄心",
-      "name": "薄心|4K弹幕",
+      "name": "🐯薄心|4K弹幕",
       "type": 3,
       "api": "csp_HBT4",
-      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMWxjbmhwWVc4akl5TmxjbmhwWVc4PQ=="
     },
   {"key":"瓜子","name":"🆗瓜子┃弹幕","type":3,"api":"csp_GuaziGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},"timeout":10},
