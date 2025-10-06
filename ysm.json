@@ -55,6 +55,13 @@
 "api": "csp_ConfigCenter",
 "playerType": 2,
 "jar": "http://117.50.184.199:97/jar/custom_spider.jar"},
+    {
+      "key": "设置",
+      "name": "虎斑弹幕设置",
+      "type": 3,
+      "api": "csp_HBconfig",
+      "searchable": 1,
+      "jar": "https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar"},
         //{"key":"drpy_js_豆瓣","name":"豆瓣","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
         {"key":"drpy_js_奇珍异兽","name":"奇珍异兽[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/奇珍异兽.js"},
         {"key":"drpy_js_优酷","name":"优酷[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/优酷.js"},
@@ -104,6 +111,54 @@
 {"key":"海绵","name":"🆗海绵┃4K","type":3,"api":"csp_HaiMianGuard","quickSearch":1,"changeable":1,"filterable":1,"timeout":25},
 {"key":"雷鲸","name":"🆗雷鲸┃4K","type":3,"api":"csp_LeiJingGuard","quickSearch":1,"changeable":1,"filterable":1,"timeout":25},
 {"key":"123社区","name":"🆗123┃4K","type":3,"api":"csp_Time123Guard","quickSearch":0,"changeable":0,"filterable":1,"timeout":25},
+ {
+      "key": "至尊",
+      "name": "魔尊|4K弹幕",
+      "type": 3,
+      "api": "csp_AppZzun",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "ext": "http://154.219.113.13:12121/json/app.txt"
+    },
+    {
+      "key": "魔尊",
+      "name": "重楼|4K弹幕",
+      "type": 3,
+      "api": "csp_HBcms10",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "ext": "http://154.219.113.13:12121/json/cms.txt"
+    },
+        {
+      "key": "紫萱",
+      "name": "紫萱|4K弹幕",
+      "type": 3,
+      "api": "csp_AppZzun",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "ext": "http://154.219.113.13:12121/json/app2.txt"
+    },
+    {
+      "key": "竹生",
+      "name": "竹生|4K弹幕",
+      "type": 3,
+      "api": "csp_HBT4",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+"ext":"YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qVTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXNZV0pwSXlNamJHRmlhUT09"
+    },
+    {
+      "key": "归安",
+      "name": "归安|4K弹幕",
+      "type": 3,
+      "api": "csp_HBT4",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMXRhV2hrY2lNakkyMXBhR1J5"
+    },
+    {
+      "key": "薄心",
+      "name": "薄心|4K弹幕",
+      "type": 3,
+      "api": "csp_HBT4",
+      "jar":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTCR.jar",
+      "ext": "YUhSMGNEb3ZMekUxTkM0eU1Ua3VNVEV6TGpFek9qUTROall2ZEdWemRDNXdhSEEvYzJsMFpUMWxjbmhwWVc4akl5TmxjbmhwWVc4PQ=="
+    },
   {"key":"瓜子","name":"🆗瓜子┃弹幕","type":3,"api":"csp_GuaziGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},"timeout":10},
 {"key":"热播弹幕版","name":"🆗热播┃弹幕","type":3,"api":"csp_TianTianGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true,"site":0},
 "timeout":10},
