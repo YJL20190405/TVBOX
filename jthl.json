@@ -32,7 +32,7 @@
       "filterable": 1,
       "ext": {
         "主页url": "https://www.1av.shop/vodtype/25.html",
-        "播放数组":"mod play-list&&</ul",
+        "播放数组":"play-list&&</ul",
         "线路标题":"activ=\"&&\"",
         "跳转播放链接": "var player_aaaa*url\":\"&&\"",
         "链接": "href=\"&&\"",
