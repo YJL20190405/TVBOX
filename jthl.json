@@ -71,7 +71,7 @@
       "name": "🔞3AV┃影视",
       "type": 3,
       "api": "csp_XBPQ",
-"jar":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar",
+"jar":"https://gitee.com/lwlxh/tvhome/raw/master/XBPQ.jar",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
