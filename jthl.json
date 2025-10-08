@@ -44,9 +44,8 @@
 "分类数组":"<a&&</a>",
 "分类标题": ">&&/a>", 
 "分类ID":"/fly/&&B4_p.html"
-            },
-            "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar"
-        }, 
+  }
+    }, 
         {//https://dd.fldh.club/
       "key": "jap影網",
       "name": "🔞6av┃影视",
@@ -133,8 +132,7 @@
         },
 {"key":"csp_xBPQ_香蕉超清xbpq","name":"🏆天天综合","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
-"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%bb%bc%e5%90%88.json",
-        "jar":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/18.jar"},
+"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%bb%bc%e5%90%88.json"},
 {"key":"csp_xBPQ_天天直播","name":"🏆天天直播","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%9b%b4%e6%92%ad.json"},
@@ -147,6 +145,7 @@
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%ba%8a%e5%90%a7%e6%90%9c%e7%b4%a2xbpq.json"},
 {"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
+"jar":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/XBPQ.jar",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/%E9%BB%84%E4%BB%93%E5%BA%93.json"},
 {"key":"XYQBiu_测试3",	"name":"🏆新香蕉超清资源","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":0,
