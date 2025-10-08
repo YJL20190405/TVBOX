@@ -6,6 +6,26 @@
 "sites":[
  {"key": "csp_New6v","name": "🧲新6V","type": 3,"api": "csp_New6v","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":"https://www.xb6v.com",
   "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar;md5;6eef2fe11608a31d31c32d4dcf00edaf"},
+  {
+      "key": "黑料网",
+      "name": "🔞黑料影视",
+      "type": 3,
+      "api": "csp_XBPQ",
+      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": {
+        "主页url": "https://7j0mt.ngfdzvv.cc/",
+        "播放数组":"mod play-list&&</ul",
+        "跳转播放链接": "var player_aaaa*url\":\"&&\"",
+        "链接": "href=\"&&\"",
+       "标题": "alt=\"&&\"",
+       "直接播放":"1",
+       "分类url": "https://7j0mt.ngfdzvv.cc/{cateId}-{catePg}.html;;z",
+        "分类": "国产视频$hlcg#欧美高清$jrrs#日韩视频$23#熟女人妻$32#国产传媒$12#亚洲专区$22#中文字幕$25#三级电影$26#高清名优$38#日本素人$37#少女萝莉$31#强奸乱伦$29#制服丝袜$30#童颜巨乳$28"
+      }
+    },
    {
       "key": "539",
       "name": "🖥️539剧",
