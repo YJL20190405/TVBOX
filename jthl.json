@@ -4,7 +4,7 @@
 //"spider":"https://fs-im-kefu.7moor-fs2.com/im/2768a390-5474-11ea-afc9-7b323e3e16c0/YT6QM5eC.png;md5;b3249d225e1e720653fc6dbf6fde21e6",
 "sites":[
  {"key": "csp_New6v","name": "🧲新6V","type": 3,"api": "csp_New6v","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":"https://www.xb6v.com",
-  "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar;md5;6eef2fe11608a31d31c32d4dcf00edaf"},
+  "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar"},
  
    {
       "key": "539",
