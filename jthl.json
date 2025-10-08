@@ -364,7 +364,7 @@
       "filterable": 0
     },
 {"key":"*环亚资源","name":"*🔞环亚资源","type":0,"api":"http://wmcj8.com/inc/sapi.php","searchable":0,"quickSearch":0},
-        { "key": "KpgxdyE", "name": "🔞黄AV资源(已修复)", "type": 0, "api": "https://www.pgxdy.com/api/xml.php", "searchable": 1, "quickSearch": 1, "filterable": 1 },
+        { "key": "KpgxdyE", "name": "🔞黄AV资源(已修复)", "type": 0, "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar","api": "https://www.pgxdy.com/api/xml.php", "searchable": 1, "quickSearch": 1, "filterable": 1 },
 {"key":"*玖玖资源","name":"*🔞玖玖资源","type":0,"api":"http://99zywcj.com/inc/sapi.php?ac=videolist","searchable":0,"quickSearch":0},
 {"key":"*佳丽资源","name":"*🔞佳丽资源","type":1,"api":"http://www.jializyzapi.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
 {"key":"*鲨鱼资源","name":"*🔞鲨鱼资源","type":1,"api":"https://shayuapi.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
