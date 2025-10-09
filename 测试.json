@@ -3308,7 +3308,7 @@
  {"key":"csp_xBPQ_香蕉AV解说","name":"🏆香蕉解说","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"./h/%e9%a6%99%e8%95%89%e8%a7%a3%e8%af%b4.json","jar":"./jar/Yoursmile2.jar"},
 {"key":"csp_xBPQ_香蕉废柴","name":"🏆香蕉废柴","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"./h/%e9%a6%99%e8%95%89%e5%ba%9f%e6%9f%b4.json","jar":"./jar/Yoursmile2.jar"},
 {"key":"csp_xBPQ_香蕉直播","name":"🏆香蕉直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"./h/%e9%a6%99%e8%95%89%e7%9b%b4%e6%92%ad.json","jar":"./jar/Yoursmile2.jar"}, 
-{"key":"csp_xBPQ_黄仓库","name":"🏆黄仓库","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%E9%BB%84%E4%BB%93%E5%BA%93.json","jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/XBPQ.jar"},
+{"key":"csp_xBPQ_黄仓库","name":"🏆黄仓库","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%E9%BB%84%E4%BB%93%E5%BA%93.json","jar":"https://jihulab.com/ymz1231/jar/-/raw/main/ymz5.jar"},
 { "key": "KpgxdyE", "name": "🔞黄AV资源(已修复)", "type": 0, "api": "https://www.pgxdy.com/api/xml.php", "searchable": 1, "quickSearch": 1, "filterable": 1 },
 	{"key": "橘猫资源","name": "🔞橘猫资源","type": 1,"api": "https://to.to-long.com/api.php/provide/vod/", "searchable": 1,"quickSearch": 1, "filterable": 0 },
 {"key":"滴滴资源","name":"滴滴资源","type":1,"api":"https://api.ddapi.cc/api.php/provide/vod/at/json","searchable":1,"quickSearch":1},
