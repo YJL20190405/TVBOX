@@ -61,7 +61,7 @@
        "标题": "title=\"&&\"",
        "直接播放":"1",
        "分类url": "http:/7664ck.cc/vodtype/{cateId}-{catePg}.html;;z",
-        "分类": "国产视频$1#欧美高清$2#日韩视频$3#熟女人妻$4#国产传媒$8#亚洲专区$22#中文字幕$25#三级电影$26#高清名优$38#日本素人$37#少女萝莉$31#强奸乱伦$29#制服丝袜$30#童颜巨乳$28"
+        "分类": "日韩AV$1#国产系列$2#日韩视频$3#熟女人妻$4#中文无码$8#亚洲专区$22#中文字幕$25#三级电影$26#高清名优$38#日本素人$37#少女萝莉$31#强奸乱伦$29#制服丝袜$30#童颜巨乳$28"
       }
     },
         {//https://dd.fldh.club/
@@ -173,6 +173,7 @@
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%ba%8a%e5%90%a7%e6%90%9c%e7%b4%a2xbpq.json"},
 {"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
+"jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/Yoursmile.jar",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%E9%BB%84%E4%BB%93%E5%BA%93.json"},
 {"key":"XYQBiu_测试3",	"name":"🏆新香蕉超清资源","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":0,
