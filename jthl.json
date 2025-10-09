@@ -5,7 +5,7 @@
 "sites":[
  {"key": "csp_New6v","name": "🧲新6V","type": 3,"api": "csp_New6v","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":"https://www.xb6v.com",
   "jar": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/jar/custom_spider.jar"},
- 
+ {"key":"黄色仓库(采集)🔞","name":"🔞黄色仓库(采集)🔗💯","type":1,"api":"http://234444.xyz/api.php/provide/vod/","searchable":1,"quickSearch":1, "categories": [],"style": {"type": "rect","ratio": 1.6}},
    {
       "key": "539",
       "name": "🖥️539剧",
