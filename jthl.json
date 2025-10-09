@@ -11,7 +11,7 @@
       "name": "🖥️539剧",
       "type": 3,
       "api": "csp_XBPQ",
-      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -50,7 +50,6 @@
       "name": "🔞黄色┃仓库",
       "type": 3,
       "api": "csp_XBPQ",
-      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -70,7 +69,7 @@
       "name": "🔞6av┃影视",
       "type": 3,
       "api": "csp_XBPQ",
-      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -107,7 +106,7 @@
       "name": "🔞112vv┃影视",
       "type": 3,
       "api": "csp_XBPQ",
-      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -174,7 +173,6 @@
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%ba%8a%e5%90%a7%e6%90%9c%e7%b4%a2xbpq.json"},
 //{"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_xBPQ",
 //"searchable":1,"quickSearch":1,"filterable":1,
-//"jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
 //"ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%E9%BB%84%E4%BB%93%E5%BA%93.json"},
 {"key":"XYQBiu_测试3",	"name":"🏆新香蕉超清资源","type":3,"api":"csp_xBPQ",
 "searchable":1,"quickSearch":1,"filterable":0,
@@ -215,7 +213,7 @@
       "name": "🖥️PUA外剧",
       "type": 3,
       "api": "csp_XBPQ",
-      "jar": "https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
+
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
