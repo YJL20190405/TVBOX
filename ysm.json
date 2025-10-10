@@ -62,6 +62,25 @@
       "api": "csp_HBconfig",
       "jar": "https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDM.jar",
       "searchable": 1},
+      {
+    "spider": "./custom_spider.jar",
+    "wallpaper": "https://gitee.com/amg99/tvjson/raw/master/img/myimg.jpg",
+    "warningText": "仅作学习交流测试使用，配置或下载后请于24小时之内删除",
+    "lives": [],
+    "sites": [
+        {
+            "name": "嗷呜弹幕",
+            "key": "嗷呜弹幕",
+            "type": 3,
+            "api": "csp_GoConfigAmns",
+            "indexs": 1,
+            "searchable": 0,
+            "filterable": 0,
+            "quickSearch": 0,
+            "changeable": 0
+        }
+    ]
+}
         //{"key":"drpy_js_豆瓣","name":"豆瓣","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/drpy.js"},
         {"key":"drpy_js_奇珍异兽","name":"奇珍异兽[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/奇珍异兽.js"},
         {"key":"drpy_js_优酷","name":"优酷[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/优酷.js"},
