@@ -62,8 +62,7 @@
         {"key":"drpy_js_百忙无果","name":"百忙无果[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/百忙无果.js"},
         {"key":"Wexconfig","name":"🐮王二小┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
 "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/35842A0_773_wex_20251004220600232newMediaImage.png;md5;47ddcda7e66c4408c7d7470b4e2be335"},
-        {"key":"配置中心","name":"👨‍🍳‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
-        "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de"},
+        {"key":"配置中心","name":"👨‍🍳‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43}},
         //网盘资源区OK猫JAR
 
         {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_ErXiaoGuard","quickSearch":1,"changeable":1,"filterable":1,"ext":{"danmu":true},
