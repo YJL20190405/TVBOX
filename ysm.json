@@ -61,30 +61,30 @@
       "name": "落日|自定",
       "type": 3,
       "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar",
-      "api": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
-      "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/腾腾.js"
+      "api": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/drpy2.min.js",
+      "ext": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/腾腾.js"
     },
     {
       "key": "youyou",
       "name": "日出|自定",
       "type": 3,
-      "api": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
-      "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/优优.js"
+      "api": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/drpy2.min.js",
+      "ext": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/优优.js"
     },
     {
       "key": "qiqi",
       "name": "晚霞|自定",
       "type": 3,
       "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar",
-      "api": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
-      "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/奇奇.js"
+      "api": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/drpy2.min.js",
+      "ext": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/奇奇.js"
     },
     {
       "key": "mangmang",
       "name": "朝阳|自定",
       "type": 3,
-      "api": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
-      "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/茫茫.js"
+      "api": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/drpy2.min.js",
+      "ext": "https://gitee.com/youngxiayang/TVBOX/raw/master/js/茫茫.js"
     },
         {"key":"Wexconfig","name":"🐮王二小┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
 "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/35842A0_773_wex_20251004220600232newMediaImage.png;md5;47ddcda7e66c4408c7d7470b4e2be335"},
@@ -206,7 +206,7 @@
 {"key":"荐片弹幕版","name":"🆗荐片┃手机","type":3,"api":"csp_JianpianGuard","searchable":1,"changeable":0,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
 "timeout":10},
 //B站系列
-{"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/master/drpy2.min.js",
+{"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/master/js/drpy2.min.js",
 "searchable":0,"quickSearch":0,"filterable":1,
 
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
