@@ -419,6 +419,7 @@
         //{"name":"Json轮询","type":2,"url":"Sequence"},
         //{"name":"解析聚合","type":3,"url":"Demo"},
         {"name":"Web聚合","type":3,"url":"Web"},
+        {"name":"JY","type":0,"url":"https://jx.playerjy.com/?url="},
         {"name":"ikun","type":0,"url":"https://jx.hls.one/?url="},
 {"name":"XM","type":0,"url":"https://jx.xmflv.com/?url="},
 {"name":"A6","type":0,"url":"https://pl.a6club.com/player/analysis.php?v="},
