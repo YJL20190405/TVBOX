@@ -73,9 +73,8 @@
         "ext":"https://gitee.com/youngxiayang/TVBOX/raw/master/js/%E8%8C%AB%E8%8C%AB.js",
         "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar"},
         {"key":"Wexconfig","name":"🐮王二小┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
-"jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/3C91B7D_773_wex_20251010000651785newMediaImage.png"},
-        {"key":"配置中心","name":"👨‍🍳‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
-        "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de"},
+"jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/1A8FF6F_773_wex_20251016014414484newMediaImage.png"},
+        {"key":"配置中心","name":"👨‍🍳‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43}},
         //网盘资源区OK猫JAR
 
         {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_ErXiaoGuard","quickSearch":1,"changeable":1,"filterable":1,"ext":{"danmu":true},
