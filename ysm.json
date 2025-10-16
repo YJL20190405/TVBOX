@@ -40,12 +40,12 @@
     "sites": [
       {
 			"key": "豆豆",
-			"name": "🌈虎斑豆瓣┃推荐",
+			"name": "🌈豆瓣┃推荐",
 			"type": 3,
 			"quickSearch": 0,
 			"filterable": 0,
 			"changeable": 0,
-			"api": "csp_Douban","jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar"
+			"api": "csp_DoubanGuard"
             },
             {
 "key": "配置",
