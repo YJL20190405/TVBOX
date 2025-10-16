@@ -45,9 +45,8 @@
 			"quickSearch": 0,
 			"filterable": 0,
 			"changeable": 0,
-			"api": "csp_Douban"
-            //"jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar",
-			},
+			"api": "csp_Douban","jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar"
+            },
             {
 "key": "配置",
 "name": "懒羊羊弹幕小窗",
