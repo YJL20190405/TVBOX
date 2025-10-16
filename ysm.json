@@ -174,8 +174,6 @@
 "timeout":10},
 {"key":"小苹果弹幕版","name":"🆗苹果┃弹幕","type":3,"api":"csp_XpgGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
 "timeout":10},
-{"key":"加菲弹幕版","name":"🆗加菲┃弹幕","type":3,"api":"csp_JiaFeiGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
-"timeout":10},
 {"key":"云云弹幕版","name":"🆗云云┃弹幕","type":3,"api":"csp_YunYunGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
 "timeout":10},
 {"key":"雄鹰弹幕版","name":"🆗雄鹰┃弹幕","type":3,"api":"csp_XiongYingGuard","searchable":1,"quickSearch":1,"filterable":1,"ext":{"danmu":true},
