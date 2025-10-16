@@ -1,7 +1,7 @@
 {
     "wallpaper": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/5A073A5_773_wex_20251016233950991newMediaImage.png",//王二小弹幕
-    //"spider": "https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f",//小米弹幕
+    //"spider": "https://pan.qingyuji.cn/f/LQmBUo/1009.png",//小米弹幕
     "spider": "https://pan.qingyuji.cn/f/NBRrc3/k.png;md5;74f4202a281d458b4b28dbbaf3959b5a",//OK弹幕
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",,
@@ -245,10 +245,12 @@
       "api": "csp_Jianpian",
       "ext": "http://4icnx7.qyjzlh.com",
         "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar"},
+        {"key":"csp_Gz360","name":"🍉小米┃瓜子影视","type":3,"searchable":1,"quickSearch":0,"api":"csp_Gz360",
+		"jar":"https://pan.qingyuji.cn/f/LQmBUo/1009.png"},
         {
 			"key": "csp_Jpys",
 			"name": "🥇小米┃金牌影视","type": 3,"searchable": 1,"quickSearch": 0,"api": "csp_Jpys",
-		"jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
+		"jar":"https://pan.qingyuji.cn/f/LQmBUo/1009.png"},
 {
 			"key": "鲸鱼",
 			"name": "🐋小米┃鲸鱼弹",
@@ -257,7 +259,7 @@
 			"type": 3,
 			"api": "csp_AppQi",
 			"ext": "rP+4azM8YFgp3eAhyeALtUUEFpbkqmzGj2V5VZryxRbpkSjlsHbarRCZPOInvId4s3WK9rZ2YJsDy8NvMqQKQXowVmh33j+qD55VxmvMzzffqLi7UXvCKdy6PzbDhzFq",
-"jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
+"jar":"https://pan.qingyuji.cn/f/LQmBUo/1009.png"},
 {
 			"key": "热热",
 			"name": "🔥小米骚火┃影视",
@@ -266,7 +268,7 @@
 			"quickSearch": 0,
 			"api": "csp_AppRJ",
 			"ext": "Z2MNziRBwjQxqaBuUxNkDRyvTntIkN1cOXhjyWgjCTc=",
-"jar":"https://fly.qingyuji.cn/f/OwBPC3/logo.png;md5;673e105f447b397553abc81447497f6f"},
+"jar":"https://pan.qingyuji.cn/f/LQmBUo/1009.png"},
         //{"key":"csp_Czsapp","name":"🐞厂长资源","type":3,"api":"csp_Czsapp","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://www.czzy77.com"},
         {"key":"csp_Bdys","name":"🐞哔嘀影视","type":3,"api":"csp_Bdys","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://v.xlys.ltd.ua"},
