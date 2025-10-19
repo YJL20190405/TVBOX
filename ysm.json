@@ -244,13 +244,6 @@
         //{"key":"WexkuihuatvGuard","name":"🐮二小瓜子┃弹幕","type":3,"api":"csp_WexkuihuatvGuard","searchable":1,"changeable":1,"jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/5A073A5_773_wex_20251016233950991newMediaImage.png"},
         {"key":"WexikanbotGuard","name":"🐮二小爱看┃弹幕","type":3,"api":"csp_WexikanbotGuard","searchable":1,"changeable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/5A073A5_773_wex_20251016233950991newMediaImage.png"},
-       {
-      "key": "jianpian",
-      "name": "🐯荐片|弹幕",
-      "type": 3,
-      "api": "csp_Jianpian",
-      "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar",
-      "ext": "http://4icnx7.qyjzlh.com"},
         {"key":"csp_Gz360","name":"🍉小米┃瓜子影视","type":3,"searchable":1,"quickSearch":0,
         //"jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
         "api":"csp_Gz360"},
