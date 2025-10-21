@@ -253,9 +253,6 @@
         {"key":"csp_Gz360","name":"🍉小米┃瓜子影视","type":3,"searchable":1,"quickSearch":0,
         "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
         "api":"csp_Gz360"},
-        {"key": "csp_Jpys","name": "🥇小米┃金牌影视","type": 3,"searchable": 1,"quickSearch": 0,
-        "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
-        "api": "csp_Jpys"},
 {"key": "鲸鱼","name": "🐋小米┃鲸鱼弹","quickSearch": 0,"searchable": 1,"type": 3,"api": "csp_AppQi",
             "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
 			"ext": "rP+4azM8YFgp3eAhyeALtUUEFpbkqmzGj2V5VZryxRbpkSjlsHbarRCZPOInvId4s3WK9rZ2YJsDy8NvMqQKQXowVmh33j+qD55VxmvMzzffqLi7UXvCKdy6PzbDhzFq"},
@@ -263,11 +260,37 @@
             "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
 			"ext": "Z2MNziRBwjQxqaBuUxNkDRyvTntIkN1cOXhjyWgjCTc="},
         //{"key":"csp_Czsapp","name":"🐞厂长资源","type":3,"api":"csp_Czsapp","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://www.czzy77.com"},
-          {
-      "key": "金牌",
-      "name": "潇洒｜金牌APP","type": 3,"api": "csp_AppMuou","searchable": 1,"changeable": 1,
+           {
+      "key": "冷心",
+      "name": "潇洒｜冷心APP",
+      "type": 3,
+      "api": "csp_AppMuou",
+      "jar":"https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
+      "ext": {
+        "url": "http://app.789dd.cn",
+        "name": "火猫影视"
+      }
+    },
+       {"key": "金牌","name": "潇洒｜金牌APP","type": 3,"api": "csp_AppMuou","searchable": 1,"changeable": 1,
       "jar":"https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
       "ext": {"url": "","site": "https://muouapp.oss-cn-hangzhou.aliyuncs.com/MUOUAPP/godbbq.txt","name": "金牌影院（请断网再安装）"}},
+          {
+      "key": "余白",
+      "name": "潇洒｜余白APP",
+      "type": 3,
+      "quickSearch": 1,
+      "api": "csp_AppGet",
+      "jar":"https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
+      "ext": {
+        "url": "https://dec.yb4k.top",
+        "site": "",
+        "dataKey": "KsmJgfp3MVQFKWRa",
+        "dataIv": "KsmJgfp3MVQFKWRa",
+        "deviceId": "",
+        "version": "",
+        "token": "d51f0cf047e7d4c5f76e2720cfdcaa927055e77c5e8cc0a1a7e49ca198067161",
+        "ua": ""
+      }},
         {"key": "csp_XYQHiker_修罗影视","name":"🧲修罗影视(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/哔嘀影视.json"},
                    //{"key":"csp_Kunyu77","name":"🐞77影视","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar"},
