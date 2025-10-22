@@ -46,7 +46,8 @@
 			"quickSearch": 0,
 			"filterable": 0,
 			"changeable": 0,
-			"api": "csp_DoubanGuard"
+            "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
+			"api": "csp_Douban"
             },
             {
 "key": "配置",
