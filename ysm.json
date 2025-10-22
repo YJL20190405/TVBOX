@@ -260,17 +260,13 @@
         //{"key":"csp_Czsapp","name":"🐞厂长资源","type":3,"api":"csp_Czsapp","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://www.czzy77.com"},
            {
       "key": "冷心",
-      "name": "潇洒｜冷心APP",
+      "name": "肥猫｜冷心APP",
       "type": 3,
       "api": "csp_AppMuou",
       "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
-      "ext": {
-        "url": "http://app.789dd.cn",
-        "name": "火猫影视"
-      }
-    },
+      "ext": "http://app.789dd.cn|火猫影视"},
        {"key": "金牌","name": "潇洒｜金牌APP","type": 3,"api": "csp_AppMuou","searchable": 1,"changeable": 1,
-      "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
+      "jar":"https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
       "ext": {"url": "","site": "https://muouapp.oss-cn-hangzhou.aliyuncs.com/MUOUAPP/godbbq.txt","name": "金牌影院（请断网再安装）"}},
           {
       "key": "余白",
@@ -278,7 +274,7 @@
       "type": 3,
       "quickSearch": 1,
       "api": "csp_AppGet",
-      "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
+      "jar":"https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
       "ext": {
         "url": "https://dec.yb4k.top",
         "site": "",
