@@ -190,14 +190,10 @@ NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/32212262
 峨眉电影,http://112.19.214.90:8883/tsfile/live/1004_1.m3u8
 峨眉电影,http://182.151.211.171:808/hls/58/index.m3u8
 🇨🇳｜欢乐剧场,#genre#
-古装剧场,http://39.135.138.58:18890/PLTV/88888888/224/3221225678/index.m3u8
 🐯金庸电视剧,https://live.ottiptv.cc/huya/11602082
 🐯古装电视剧,https://live.ottiptv.cc/huya/11352960
 🐯动物世界,https://live.ottiptv.cc/huya/21059609
-嘉佳卡通,http://23.237.10.66:16662
 🐯动画剧场,https://live.ottiptv.cc/huya/11602065
-动漫秀场,http://183.207.255.188/live/program/live/dmxchd/4000000/mnf.m3u8
-黑莓动画,http://39.134.115.221:8080/PLTV/88888910/224/3221225672/index.m3u8
 🐟万合天宜,https://live.ottiptv.cc/douyu/9220456
 🐯陈翔六点半,https://live.ottiptv.cc/huya/11274154
 🐟吟笑扒片,https://live.ottiptv.cc/douyu/2987100
