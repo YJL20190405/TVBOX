@@ -46,11 +46,7 @@ CGTN,http://112.27.235.94:8000/hls/17/index.m3u8
 黑龙江卫视,http://112.27.235.94:8000/hls/48/index.m3u8
 内蒙古卫视,http://112.27.235.94:8000/hls/49/index.m3u8
 🇨🇳｜数字地方频道,#genre#
-鳳凰衛視中文台,https://gite,http://bxtv.3a.ink/api.php?id=fhzw
-鳳凰衛視資訊台,https://gite,http://bxtv.3a.ink/api.php?id=fhzx
-鳳凰衛視香港台,https://gite,http://bxtv.3a.ink/api.php?id=fhhk
 翡翠台,http://bxtv.3a.ink/api.php?id=fct
-myTV SUPER 18台,https://li,http://bxtv.3a.ink/api.php?id=18
 TVB Plus,http://bxtv.3a.ink/api.php?id=tvbp
 明珠台,http://bxtv.3a.ink/api.php?id=mz
 無線新聞台,http://bxtv.3a.ink/api.php?id=wxxw
@@ -330,6 +326,7 @@ coco~,http://dewlaboing.imwyt.top/live/cx_366195.flv
 金屋藏娇,http://01yowzbola.wljzml.top/live/cx_383526.flv
 金屋藏娇,http://lamansupasje.abrillantlee.top/live/cx_383526.flv
 金屋藏娇,http://dewlaboing.imwyt.top/live/cx_383526.flv
+金屋藏娇,http://lanfhllcjoahohadmcld.xinzhitushu.xyz/live/cx_383526.flv
 海棠依旧,http://dewlaboing.imwyt.top/live/cx_382709.flv
 田野寻弯,http://lamansupasje.abrillantlee.top/live/cx_367356.flv
 @磨人小妖精,http://15wyktxzla.dianshe.top/live/cx_378768.flv
@@ -342,6 +339,7 @@ coco~,http://dewlaboing.imwyt.top/live/cx_366195.flv
 爱上潇洒,http://howgreatala.imwyt.top/live/cx_382144.flv
 柠檬U,http://lashfoaw064.abrillantlee.top/live/cx_369848.flv
 小妮欧妮,http://dewlaboing.imwyt.top/live/cx_382766.flv
+小妮欧妮,http://lasuimakertname.abrillantlee.top/live/cx_382766.flv
 小兔奶糖,http://lakjzhbenth1.xinzhitushu.xyz/live/cx_383451.flv
 
 🇰🇷O-la-la HD,http://hidra.live:80/LVH60Ml8Hc/O4XSkHm6Yj/35357
