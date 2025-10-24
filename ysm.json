@@ -56,12 +56,6 @@
 "api": "csp_ConfigCenter",
 "playerType": 2,
 "jar": "http://117.50.184.199:97/jar/custom_spider.jar"},
-    {
-      "key": "设置",
-      "name": "虎斑网弹|设置",
-      "type": 3,
-     "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar", 
-      "api": "csp_HBconfig"},
          {"key":"drpy_js_腾云驾雾","name":"🐧腾滕┃小米","type":3,
         "api":"https://gitee.com/PizazzXS/another-d/raw/master/js/drpy2.min.js",
         "ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/js/TXSP.js"}, 
