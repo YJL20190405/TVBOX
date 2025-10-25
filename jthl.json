@@ -159,7 +159,7 @@
 "searchable":0,"quickSearch":1,"filterable":1,
 "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/Yoursmile3.jar",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%ba%8a%e5%90%a7%e6%90%9c%e7%b4%a2xbpq.json"},
-{"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_xBPQ",
+{"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_HBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
 "jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/HBDMlux.jar",
 //jar":"https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/h.jar",
