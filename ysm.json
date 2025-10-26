@@ -16,10 +16,10 @@
           "logo": "https://epg.iill.top/logo/{name}.png"
         },
         {
-          "name": "BMCH",
+          "name": "sanbao",
           "type":"0",
           "pass": true,
-          "url": "https://github.moeyy.xyz/https://raw.githubusercontent.com/big-mouth-cn/tv/main/iptv-ok.m3u",
+          "url": "https://iptvindex.com/tv.txt",
           "epg": "https://epg.v1.mk/json?ch={name}&date={date}",     
           "logo": "https://epg.v1.mk/logo/{name}.png"
         },
