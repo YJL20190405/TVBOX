@@ -24,10 +24,10 @@
           "logo": "https://epg.v1.mk/logo/{name}.png"
         },
         {
-          "name": "Tianmu",
+          "name": "fty",
           "type":"0",
           "pass": true,
-          "url": "https://ghfile.geekertao.top/https://raw.githubusercontent.com/TianmuTNT/iptv/main/iptv.txt",
+          "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
           "epg": "https://epg.v1.mk/json?ch={name}&date={date}",     
           "logo": "https://epg.v1.mk/logo/{name}.png"
         },
