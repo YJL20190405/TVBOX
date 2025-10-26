@@ -4,9 +4,13 @@ https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv6/result.m3u
 
 🇨🇳｜央视高清,#genre#
 CCTV1,http://112.27.235.94:8000/hls/1/index.m3u8
+CCTV1,http://tvtj.jxwltx.com:8003/cctv1.m3u8
 CCTV2,http://112.27.235.94:8000/hls/2/index.m3u8
+CCTV2,http://tvtj.jxwltx.com:8003/cctv2.m3u8
 CCTV3,http://112.27.235.94:8000/hls/3/index.m3u8
+CCTV3,http://tvtj.jxwltx.com:8003/cctv3.m3u8
 CCTV4,http://112.27.235.94:8000/hls/4/index.m3u8
+CCTV4,http://tvtj.jxwltx.com:8003/cctv4.m3u8
 CCTV5,http://112.27.235.94:8000/hls/5/index.m3u8
 CCTV5+,http://112.27.235.94:8000/hls/6/index.m3u8
 CCTV6,http://112.27.235.94:8000/hls/7/index.m3u8
@@ -22,7 +26,9 @@ CCTV15,http://112.27.235.94:8000/hls/16/index.m3u8
 CGTN,http://112.27.235.94:8000/hls/17/index.m3u8
 🇨🇳｜卫视高清,#genre#
 安徽卫视,http://112.27.235.94:8000/hls/26/index.m3u8
+安徽卫视,http://tvtj.jxwltx.com:8003/ahws.m3u8 
 北京卫视,http://112.27.235.94:8000/hls/27/index.m3u8
+北京卫视,http://tvtj.jxwltx.com:8003/bjws.m3u8 
 上海卫视,http://112.27.235.94:8000/hls/28/index.m3u8
 浙江卫视,http://112.27.235.94:8000/hls/29/index.m3u8
 广东卫视,http://112.27.235.94:8000/hls/30/index.m3u8
