@@ -58,12 +58,12 @@ TVB Plus,http://bxtv.3a.ink/api.php?id=tvbp
 明珠台,http://bxtv.3a.ink/api.php?id=mz
 無線新聞台,http://bxtv.3a.ink/api.php?id=wxxw
 美亞電影台,http://bxtv.3a.ink/api.php?id=meiya
-PopC",http://bxtv.3a.ink/api.php?id=popc
+PopC,http://bxtv.3a.ink/api.php?id=popc
 VIUTV,http://bxtv.3a.ink/api.php?id=viutv
 千禧經典台,http://bxtv.3a.ink/api.php?id=qxjd
 NOW新闻,http://bxtv.3a.ink/api.php?id=now
-广东体育" ,http://bxtv.3a.ink/api.php?id=gdty
-广东珠江" ,http://bxtv.3a.ink/api.php?id=gdzj
+广东体育,http://bxtv.3a.ink/api.php?id=gdty
+广东珠江,http://bxtv.3a.ink/api.php?id=gdzj
 中天新聞台,http://bxtv.3a.ink/api.php?id=ztxw
 🇨🇳｜快抖舞曲,#genre#
 💃快手热舞,http://www.kankanbb.top/video.php
