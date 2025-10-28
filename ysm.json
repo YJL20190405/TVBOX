@@ -12,7 +12,7 @@
           "type":"0",
           "pass": true,
           "url":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
-          "epg": "http://cdn.1678520.xyz/epg/?ch={name}&date={date}",     
+          "epg": "https://epg.v1.mk/json?ch={name}&date={date}",  
           "logo": "https://epg.iill.top/logo/{name}.png"
         },
         {
