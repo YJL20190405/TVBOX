@@ -60,6 +60,7 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 中天新聞台,http://bxtv.3a.ink/api.php?id=ztxw
 🇨🇳｜快抖舞曲,#genre#
 💃快手热舞,http://www.kankanbb.top/video.php
+💃快手热舞,http://qej6c.716888.xyz/fenlei/zj/heji1/heji1.php?
 💃快手热舞,https://v.nrzj.vip/video.php
 💃快手热舞,http://v.nrzj.vip/video.php
 💃快手热舞,https://api.mhimg.cn/api/Sj_girls_video
