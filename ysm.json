@@ -1,7 +1,7 @@
 {
     "wallpaper": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/2873EE0_773_wex_20251022150319875newMediaImage.png",//王二小弹幕
-    //"spider": "https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",//小米弹幕
+    //"spider": "https://pan.qingyuji.cn/f/Pm3yi4/1028logo.jpg",//小米弹幕
    //"spider": "https://www.lequxiang.com.cn/down.php/d0bb248fc392d455afb29928a94501b1.txt",
     "spider": "https://gitee.com/youngxiayang/TVBOX/raw/master/JAR/okDM.png",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
@@ -225,10 +225,10 @@
 "jar": "https://oss4liview.moji.com/thd_file/2025/10/27/2265e06f34db117bc6df05047dd4aa91.jpg;md5;1acb683fd1fb4f2c0492747745f6229a",
 "changeable":1},
 {"key": "鲸鱼","name": "🐋小米┃鲸鱼","quickSearch": 0,"searchable": 1,"type": 3,"api": "csp_AppQi",
-            "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
+            "jar":"https://pan.qingyuji.cn/f/Pm3yi4/1028logo.jpg",
 			"ext": "rP+4azM8YFgp3eAhyeALtUUEFpbkqmzGj2V5VZryxRbpkSjlsHbarRCZPOInvId4s3WK9rZ2YJsDy8NvMqQKQXowVmh33j+qD55VxmvMzzffqLi7UXvCKdy6PzbDhzFq"},
                   {"key":"追忆","name":"🐖小米追忆┃APP","type":3,"api":"csp_AppSy","quickSearch":0,
-            "jar":"https://pan.qingyuji.cn/f/d/0m3jF8/1007.jpg",
+            "jar":"https://pan.qingyuji.cn/f/Pm3yi4/1028logo.jpg",
             "ext":"oJGDh+VBrPcwnx19VbSGqy9EkivA/Gc+cSt3uSBzyPzDTmKYyoi6Wr4VgqU2u0Sh7AAuGc4/a7UWVU6BEmFetA=="},
 {"key":"热播","name":"🐼肥猫┃热播APP","type":3,"api":"csp_AppRJ",
 "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
