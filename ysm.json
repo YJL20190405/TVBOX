@@ -204,7 +204,7 @@
             "changeable": 0,
 "jar": "https://coss.yupoo.com/upchat/2025-09-17/1758116715370.jpg;md5;98ca59a872d6d4d89c8c7e2aafb4dae1",
             "ext": {
-                "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/b.json"}
+                "json": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/Bilibili/BLHJ.json"}
         },
 {"key":"bilimd","name":"🆗🅱哔哩┃影视","type":3,"api":"csp_BilimdGuard","searchable":1,"quickSearch":0,"changeable":0,"filterable":1,
 "style":{"type":"rect","ratio":1.433},"timeout":10},
