@@ -1,6 +1,5 @@
 {   
-     "wallpaper": "https://www.yumus.cn/api/?target=img&brand=360&type=8",
-     //4k0,meinv=1，aiqing=2，fengjing=3，dongmang=5，mingxing=6，mengchong=7，youxi=8，qiche9，炫酷时尚=10，yingshi=11，junshi=12，tiyu=13，wenzi=14
+     "wallpaper": "https://www.yumus.cn/api/?target=img&brand=360&type=8",//4k专区0,美女=1，爱情=2，风景大=3，动漫=5，明星=6，萌宠动物=7，游戏壁纸=8，汽车天下9，炫酷时尚=10，影视剧照=11，junshi=12，体育壁纸=13，文字=14
     //"wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
     //"wallpaper": "https://api.yujn.cn/api/pcfjsp.php",//动漫视频壁纸
     //"wallpaper": "https://wp.upx8.com/api.php?content=风景",//自定关键字
