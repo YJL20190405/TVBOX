@@ -18,7 +18,7 @@
           "pass": true,
           "url":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/ZB/tv.txt",
           "epg": "https://epg.v1.mk/json?ch={name}&date={date}",  
-          "logo": "https://epg.iill.top/logo/{name}.png"
+          "logo": "https://epg.v1.mk/logo/{name}.png"
         },
         {
           "name": "sanbao",
