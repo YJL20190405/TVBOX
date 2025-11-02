@@ -159,9 +159,9 @@ NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/32212262
 🐟斗鱼电影19,https://live.ottiptv.cc/douyu/6582435
 🐟斗鱼电影20,https://live.ottiptv.cc/douyu/323876
 🇨🇳｜经典老片,#genre#
-🐯周星驰,https://m.huya.com/11342412
+🐯周星驰粤语,http://cfss.cc/cdn/hy/11336587.m3u8
 🐯周星驰,https://live.ottiptv.cc/huya/11342412
-🐯吴孟达,https://live.ottiptv.cc/huya/11336592
+🐯周星驰,http://cfss.cc/cdn/hy/11342412.m3u8
 🐟经典港剧,https://live.ottiptv.cc/douyu/315457
 🐯港台电影,https://live.ottiptv.cc/huya/880261
 🐯香港警匪,https://live.ottiptv.cc/huya/11352886
