@@ -91,9 +91,12 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 💃快手热舞,http://api.yujn.cn/api/xjj.php
 💃快手热舞,https://api.yujn.cn/api/manzhan.php
 💃快手热舞,http://api.qemao.com/api/douyin/
+💃快手热舞,https://xn--vusr00g.v.nxog.top/m/tv/xjj.php?id=1
+💃快手热舞,https://xn--vusr00g.v.nxog.top/m/tv/xjj.php?id=2
+💃快手热歌,http://epimw.716888.xyz/fenlei/djxjj/dj1.php
+💃快手热歌,http://xjj1.716888.xyz/fenlei/djxjj/dj1.php
 💃快手热歌,https://188sp.711888.xyz/188/video.php
 💃快手热歌,http://api.yujn.cn/api/ks_fc.php
-💃快手热歌,http://epimw.716888.xyz/fenlei/djxjj/dj1.php
 💃快手热歌,http://qej6c.716888.xyz/fenlei/mvmn/mvmn.php?
 🐟親愛的老公丶,https://live.ottiptv.cc/douyu/6739424
 🐟龙吟虎斗鱼,https://live.ottiptv.cc/douyu/8901218
