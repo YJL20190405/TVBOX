@@ -190,6 +190,12 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 💃快手热歌,https://188sp.711888.xyz/188/video.php
 💃快手热歌,http://api.yujn.cn/api/ks_fc.php
 💃快手热歌,http://qej6c.716888.xyz/fenlei/mvmn/mvmn.php?
+🐟女团直播1,http://tv.ximix.us/douyu/17732
+🐟女团直播2,http://tv.ximix.us/douyu/113158
+🐟女团直播3,http://tv.ximix.us/douyu/10308234
+🐟模特直播1,http://tv.ximix.us/douyu/10118209
+🐟模特直播2,http://tv.ximix.us/douyu/9837104
+🐯美女T台秀,http://113.45.240.129:35455/huya/18501378
 🐟親愛的老公丶,https://live.ottiptv.cc/douyu/6739424
 🐟龙吟虎斗鱼,https://live.ottiptv.cc/douyu/8901218
 🐟龙吟虎斗鱼,http://jiandjh.51vip.biz:35455/douyu/8901218
@@ -208,8 +214,6 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐟斗鱼音乐2,https://live.ottiptv.cc/douyu/7537296
 🐟斗鱼动漫音乐,https://live.ottiptv.cc/douyu/9191790
 🐟斗鱼音乐一FHD,https://live.ottiptv.cc/douyu/9588891
-CCTV风云音乐,http://218.17.216.102:9901/tsfile/live/1073_1.m3u8
-风云音乐,http://113.117.74.17:808/hls/117/index.m3u8
 🇨🇳｜电影轮播,#genre#
 🐟神乐影片1,https://live.ottiptv.cc/douyu/122402
 🐟神乐影片2,https://live.ottiptv.cc/douyu/85894
@@ -220,7 +224,6 @@ CCTV风云音乐,http://218.17.216.102:9901/tsfile/live/1073_1.m3u8
 🐟麓山迷踪,https://live.ottiptv.cc/douyu/4505431
 🐟奶虫恐怖电影,https://live.ottiptv.cc/douyu/263824
 🐟恐怖经典,https://live.ottiptv.cc/douyu/1165374
-NewTV欢乐剧场,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221226210/index.m3u8
 🐯喜剧专场,https://live.ottiptv.cc/huya/11602044
 🐯喜剧专场,https://live.ottiptv.cc/huya/11602044
 🐯沈腾,https://live.ottiptv.cc/huya/11601968
@@ -330,6 +333,18 @@ https://vapi.cc.163.com/video_play_url/房间号
 🅱️真香KK,https://yylunbo.ottiptv.cc/bilibili/22305468
 🅱️香老师123,http://i.iill.top:12838/bilibili/21593109
 🅱️奶尤uu,http://i.iill.top:12838/bilibili/1812804885
+🅱️茶茶不缚i,http://i.iill.top:12838/bilibili/1844417182
+🐟🇰🇷瑜伽女孩,http://tv.ximix.us/douyu/10205199
+🐟🇰🇷钓鱼欧尼,http://tv.ximix.us/douyu/10616765
+🐯🇰🇷瑜伽裤直播1,http://113.45.240.129:35455/huya/30901472
+🐯🇰🇷瑜伽裤直播2,http://113.45.240.129:35455/huya/18152352
+🐯🇰🇷瑜伽裤直播3,http://113.45.240.129:35455/huya/30867827
+🐯🇰🇷瑜伽裤直播4,http://113.45.240.129:35455/huya/30901478
+🐯🇰🇷瑜伽裤直播5,http://113.45.240.129:35455/huya/30901474
+🐯🇰🇷瑜伽裤直播6,http://113.45.240.129:35455/huya/30901473
+🐯🇰🇷瑜伽裤直播7,http://113.45.240.129:35455/huya/30901477
+🐯🇰🇷瑜伽裤直播8,http://113.45.240.129:35455/huya/30805945
+🐟🇰🇷瑜伽裤直播9,http://tv.ximix.us/douyu/9974197
 斗鱼测试,https://live.ottiptv.cc/douyu/4238637
 🇨🇳｜电台听书,#genre#
 🐟斗鱼老烟斗,https://live.ottiptv.cc/douyu/2337939
@@ -403,11 +418,6 @@ https://vapi.cc.163.com/video_play_url/房间号
 埋堆堆60,https://live.ottiptv.cc/huya/23903164
 埋堆堆61,https://live.ottiptv.cc/huya/23728674
 埋堆堆62,https://live.ottiptv.cc/huya/23863818
-🇨🇳｜DJ音乐舞曲,#genre#
-朴孝敏SKETCH,https://15799848.s21v.faiusr.com/58/ABUIABA6GAAguq6r7gUouOyF4gE.mp4
-韩国动感舞曲1,https://15799848.s21v.faiusr.com/58/ABUIABA6GAAgr-2n9AUoqsakNg.mp4
-韩国动感舞曲2,https://15799848.s21v.faiusr.com/58/ABUIABA6GAAgz-qc4gUo4vj-tQY.mp4
-韩国DJ Soda Remix 2021 电音,https://vd3.bdstatic.com/mda-mev3hw0htz28h5wn/1080p/cae_h264/1622343504467773766/mda-mev3hw0htz28h5wn.mp4
 🇹🇼🇭🇰🇺🇸🇯🇵🇰🇷_8888,#genre#
 欧美放映厅,http://lashfoaw064.abrillantlee.top/live/cx_375008.flv
 日本AV放映室,http://howgreatala.imwyt.top/live/cx_373479.flv
