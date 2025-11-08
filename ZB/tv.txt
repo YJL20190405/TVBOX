@@ -217,7 +217,6 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 💃快手热舞,https://jiejie.uk/xjj/get/video.php
 💃快手热舞,https://v.nrzj.vip/tiktok/video.php
 💃快手热舞,http://wwzpr.716888.xyz//fenlei/zj/heji1/heji1.php
-💃快手热舞,https://jiejie.uk/xjj/tiktok/video.php
 💃快手热舞,http://xjj2.716888.xyz/fenlei/zj/gengxin/gengxin.php
 💃快手热舞,https://jiejie.uk/xjj/tiktok/video2.php
 💃快手热舞,http://api.yujn.cn/api/juhexjj.php?type=video
