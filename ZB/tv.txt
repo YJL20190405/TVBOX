@@ -341,6 +341,10 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐯古装电视剧,https://live.ottiptv.cc/huya/11352960
 🐯动物世界,https://live.ottiptv.cc/huya/21059609
 🐯动画剧场,https://live.ottiptv.cc/huya/11602065
+🐟精彩短剧看不停,http://tv.ximix.us/douyu/11824307
+🐟人生回答机本机,http://tv.ximix.us/douyu/9409722
+🐟哈利影视,http://tv.ximix.us/douyu/8475821
+🐟不思异剧场,http://tv.ximix.us/douyu/9297412
 🐟万合天宜,https://live.ottiptv.cc/douyu/9220456
 🐯陈翔六点半,https://live.ottiptv.cc/huya/11274154
 🐟吟笑扒片,https://live.ottiptv.cc/douyu/2987100
@@ -360,6 +364,8 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐟电影解说15,https://live.ottiptv.cc/douyu/8788687
 🐟斗鱼小品1,https://live.ottiptv.cc/douyu/9322175
 🐟斗鱼小品2,https://live.ottiptv.cc/douyu/1486165
+🐟王Li差点红,http://tv.ximix.us/douyu/9348469
+🐟田小豆短剧,http://tv.ximix.us/douyu/10378551
 🇨🇳｜网红主播,#genre#
 🐯小羊炖土豆,https://live.ottiptv.cc/huya/372582
 🐯桃大大、,https://live.ottiptv.cc/huya/160584
@@ -402,8 +408,12 @@ https://vapi.cc.163.com/video_play_url/房间号
 🐟斗鱼鬼故事,https://live.ottiptv.cc/douyu/9682807
 🐟悬疑探案,https://live.ottiptv.cc/douyu/11104966
 🐟悬疑探案,http://jiandjh.51vip.biz:35455/douyu/11104966
-🐟柚子听书,https://live.ottiptv.cc/bilibili/26567533
-🐟柚子听书,https://jiandjh.51vip.biz:35455/bili/26567533
+NewTV相声小品,http://newstreamcdnct.inter.ptqy.gitv.tv:80/tslive/c59_fast_1044_720P_t10/c59_fast_1044_720P_t10.m3u8?d
+🐟赵本山专场,http://tv.ximix.us/douyu/9817716
+🐟宋小宝专场,http://tv.ximix.us/douyu/9817729
+🐟贾玲专场,http://tv.ximix.us/douyu/10419541
+🐟许君聪专场,http://tv.ximix.us/douyu/10419558
+🐟沈腾马丽专场,http://tv.ximix.us/douyu/10153463
 🐯盗墓系列,https://live.ottiptv.cc/huya/27675697
 🇨🇳｜埋堆堆,#genre#
 测试,https://live.ottiptv.cc/huya/660004
