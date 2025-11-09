@@ -84,7 +84,7 @@
 {"key":"百度趣盘","name":"🆗度趣┃4K弹幕","type":3,"api":"csp_BaiduQuPanGuard","searchable":1,"filterable":1,"changeable":0,"style":{"type":"list"},
 //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
 "ext":{"danmu":true}},
-{"key":"光影弹幕版","name":"🆗光影┃4K弹幕","type":3,"api":"csp_GuanyingGuard","searchable":1,"filterable":1,"changeable":1,
+{"key":"光影弹幕版","name":"🆗观影┃4K弹幕","type":3,"api":"csp_GuanyingGuard","searchable":1,"filterable":1,"changeable":1,
 //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
 "ext":{"danmu":true},"timeout":25},
 {"key":"云集","name":"🆗云集┃4K弹幕","type":3,"api":"csp_YunJiGuard","quickSearch":1,"changeable":1,"filterable":1,
