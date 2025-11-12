@@ -10,7 +10,7 @@
     "class_url": "https://www.dmq2p0u2k9.shop/vodtype/{cateId}-{area}-{by}-{class}-----{catePg}---{year}.html",
     "class_name": "电影&电视剧&综艺&动漫&福利",
     "class_value": "20&21&23&22&35",
-    "filterdata": "https://agit.ai/yjl/dcck/raw/branch/master/XB/%e5%a4%a7%e7%b1%b3%e6%98%9f%e7%90%83%e7%ad%9b%e9%80%89.json",
+    "filterdata": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%e5%a4%a7%e7%b1%b3%e6%98%9f%e7%90%83%e7%ad%9b%e9%80%89.json",
     "cat_YN_twice": "1",
     "cat_twice_pre": "class=\"module-items",
     "cat_twice_suf": "<div class=\"fixedGroup",
