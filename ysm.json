@@ -7,19 +7,19 @@
     
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/3D9B941_773_wex_20251030154004765newMediaImage.png",//王二小弹幕
     //"spider": "https://pan.qingyuji.cn/f/Pm3yi4/1028logo.jpg",//小米弹幕
-   //"spider": "https://www.lequxiang.com.cn/down.php/ed32fdb6676ea49ad1642d1b2e15a265.txt",//潇洒
+   //"spider": "https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",//潇洒
     "spider": "https://gitee.com/youngxiayang/YJL/raw/master/JAR/okDM.png",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
     "sites": [
       {
 			"key": "豆豆",
-			"name": "🌈肥猫豆瓣┃推荐",
+			"name": "🌈潇洒豆瓣┃推荐",
 			"type": 3,
 			"quickSearch": 0,
 			"filterable": 0,
 			"changeable": 0,
-            "jar":"https://img2.gelonghui.com/library/965c0-d47366c3-4293-4676-a72b-76969f775dc9.png",
+            "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
 			"api": "csp_Douban"
             },
             {
@@ -40,7 +40,8 @@
         "ext":"https://gitee.com/youngxiayang/YJL/raw/master/JS/%E5%A5%87%E5%A5%87.js"},  
         {"key":"drpy_js_百忙无果","name":"🍋芒芒┃潇洒","type":3,
         "api":"https://gitee.com/PizazzXS/another-d/raw/master/js/drpy2.min.js",
-        "ext":"https://gitee.com/youngxiayang/YJL/raw/master/JS/%E8%8C%AB%E8%8C%AB.js"},  
+        "ext":"https://gitee.com/youngxiayang/YJL/raw/master/JS/%E8%8C%AB%E8%8C%AB.js"}, 
+        {"key":"三六零","name":"三六零｜潇洒","type":3,"api":"csp_SP360","jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt"}, 
         {"key":"Wexconfig","name":"🐮王二小┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
 "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/3D9B941_773_wex_20251030154004765newMediaImage.png"},
         {"key":"配置中心","name":"🆗‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,
@@ -207,26 +208,28 @@
 "jar":"https://img2.gelonghui.com/library/cc5ae-cad9c019-a704-4ae0-b1ab-d71b2f90eff9.png",
 "ext":"http://v.rbotv.cn"},
         //{"key":"csp_Czsapp","name":"🐞厂长资源","type":3,"api":"csp_Czsapp","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://www.czzy77.com"},
-           {
-      "key": "冷心",
-      "name": "🐼肥猫｜冷心APP",
-      "type": 3,
-      "api": "csp_AppMuou",
-      "jar":"https://img2.gelonghui.com/library/cc5ae-cad9c019-a704-4ae0-b1ab-d71b2f90eff9.png",
-      "ext": "http://app.789dd.cn|火猫影视"},
             {"key":"再来","name":"🐼肥猫｜再来APP","type":3,"api":"csp_AppQi",
             "jar":"https://img2.gelonghui.com/library/cc5ae-cad9c019-a704-4ae0-b1ab-d71b2f90eff9.png",
       "ext":"https://daen-1256234123.cos.ap-shanghai.myqcloud.com/MuQi/mqxh.txt|37kj83zs1q16jk6t|101"},
        {"key": "金牌","name": "潇洒｜金牌APP","type": 3,"api": "csp_AppMuou","searchable": 1,"changeable": 1,
-      "jar":"https://www.lequxiang.com.cn/down.php/ed32fdb6676ea49ad1642d1b2e15a265.txt",
+      "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
       "ext": {"url": "","site": "https://muouapp.oss-cn-hangzhou.aliyuncs.com/MUOUAPP/godbbq.txt","name": "金牌影院（请断网再安装）"}},
+      {"key":"火猫","name":"火猫｜APP","type":3,"api":"csp_AppMuou",
+
+      "ext":{"url":"http://app.789dd.cn","name":"火猫影视"}},
+         {"key":"私人","name":"私人｜APP","type":3,"changeable":1,"api":"csp_AppYsV2",
+         
+         "ext":"https://v.catcs.cc/api.php/v1.vod"},
+         {"key":"一一","name":"一一｜APP","type":3,"api":"csp_AppMuou","searchable":1,"changeable":1,
+         
+         "ext":{"url":"http://app.yiyi521.top","name":"YIYI影视"}},
           {
       "key": "余白",
       "name": "潇洒｜余白APP",
       "type": 3,
       "quickSearch": 1,
       "api": "csp_AppGet",
-      "jar":"https://www.lequxiang.com.cn/down.php/ed32fdb6676ea49ad1642d1b2e15a265.txt",
+      "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
       "ext": {
         "url": "https://dec.yb4k.top",
         "site": "",
@@ -285,11 +288,13 @@
     "ext":"7lj763gg402i79425739i7jghj118797l4hj840gi18633331l4708g2h7145403549g44l8ii56i187681hkjj3hhgh1ih3l32j250lk1k786lj20j468hk3hli4l46gig4i3g7g2722328j0136h01i7g5183k22k7gg3i72hk81gl8k9839kl7i0707"},
       {"key": "永乐影视",
       "name": "潇洒｜永乐影视","type": 3,"api": "csp_XBPQ",
-      "jar":"https://www.lequxiang.com.cn/down.php/ed32fdb6676ea49ad1642d1b2e15a265.txt",
+      "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
       "ext": "https://gitee.com/PizazzXS/another-d/raw/master/movie/json/YLYS.json"},
-        {"key": "csp_XYQHiker_农民影视","name":"🧑🏻‍农民影视潇洒","type":3,"api":"csp_HBPQ","searchable":1,"quickSearch":1,"filterable":1,
-      "jar":"https://www.lequxiang.com.cn/down.php/ed32fdb6676ea49ad1642d1b2e15a265.txt",
-        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/农民影视.json"},
+        {"key":"莫小影视","name":"莫小｜影视","type":3,"api":"csp_XBPQ","ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/MoXiaoYS.json"},
+{"key":"明星影视","name":"明星｜影视","type":3,"api":"csp_XBPQ","ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/MXYS.json"},
+{"key":"面包影视","name":"面包｜影视","type":3,"api":"csp_XBPQ","ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/MBYS.json"},
+{"key":"永乐影视","name":"永乐｜影视","type":3,"api":"csp_XBPQ","ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/YLYS.json"},
+{"key":"三九影视","name":"三九｜影视","type":3,"api":"csp_XBPQ","ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/SJYS.json"},
         //{"key": "csp_XYQHiker_七新影视","name":"🌟七新影视(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/七新影视.json"},
         {"key": "csp_XYQHiker_剧圈圈","name":"🌟剧圈圈(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
