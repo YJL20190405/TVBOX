@@ -391,6 +391,9 @@
     },
         //直播规则区
         //{"key": "csp_Yj1211","name": "📡JustLive","type": 3,"api": "csp_Yj1211","playerType":1,"searchable":1,"quickSearch":1,"filterable":1},
+        {"key":"哔哩直播","name":"🅱哔哩｜直播","type":3,
+        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
+        "api":"https://gitee.com/PizazzXS/another-d/raw/master/webcast/py/BLZB.py"},
 {"key":"快手直播","name":"😎快手┃直播","type":3,"api":"csp_KsLiveGuard","searchable":0,"quickSearch":0,"filterable":1,
 //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
 "style":{"type":"rect","ratio":1.433},"timeout":10},
