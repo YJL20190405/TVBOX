@@ -329,7 +329,7 @@
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/XB/%E5%A4%A7%E7%B1%B3%E6%98%9F%E7%90%83.json"},
         {"key": "csp_XYQHiker_可可影视","name":"☕️潇洒XYQH｜可可影视","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
-        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/可可影视.json"},
+        "ext":"https://gitee.com/youngxiayang/TVBOX/raw/main/XYQHiker/%E5%8F%AF%E5%8F%AF%E5%BD%B1%E8%A7%86.json"},
         {"key": "csp_XYQHiker_爱看影视","name":"👀爱看影视(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
   "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/爱看影视.json"},
