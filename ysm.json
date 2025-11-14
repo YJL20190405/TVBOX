@@ -288,8 +288,6 @@
         {"key":"csp_ts","name":"📚️230听书","type":3,"api":"csp_XBPQ","searchable":1,"quickSearch":1,"filterable":1,
         "ext":"https://jihulab.com/ymz1231/json/-/raw/main/230.json",
         "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt"},
-        {"key":"有声小说吧","name":"📚有声小说吧","type":3,"api":"https://ghfast.top/raw.githubusercontent.com/yoursmile66/TVBox/main/js/lib/drpy2.min.js","playerT ype":"2","可搜索":0,"quickSearch":0,"可过滤":0,
-        "ext":"https://ghfast.top/raw.githubusercontent.com/yoursmile66/TVBox/main/js/有声小说吧.js"},
         {"key":"Wexlaobaitingshu","name":"🐮二小‍白兔┃听书","type":3,"api":"csp_WexlaobaitingshuGuard","searchable":1,"changeable":1,
         "jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/3D9B941_773_wex_20251030154004765newMediaImage.png"},
 {"key":"有声小说","name":"🎧饭太硬┃极品听书","type":3,"api":"csp_Tingshu275Guard",
