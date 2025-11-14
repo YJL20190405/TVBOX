@@ -1,5 +1,5 @@
 {   
-     "wallpaper": "https://www.yumus.cn/api/?target=img&brand=360&type=11",//4k=0,meinv=1，aiqing=2，风景=3，动漫=5，mingxing=6，萌宠动物=7，游戏=8，汽车=9，炫酷=10，剧照=11，junshi=12，体育壁纸=13，wenzi=14
+     "wallpaper": "https://www.yumus.cn/api/?target=img&brand=360&type=0",//4k=0,meinv=1，aiqing=2，风景=3，动漫=5，mingxing=6，萌宠动物=7，游戏=8，汽车=9，炫酷=10，剧照=11，junshi=12，体育壁纸=13，wenzi=14
     //"wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
     //"wallpaper": "https://api.yujn.cn/api/pcfjsp.php",//动漫视频壁纸
     //"wallpaper": "https://wp.upx8.com/api.php?content=风景",//自定关键字
@@ -310,16 +310,22 @@
 {"key":"永乐影视","name":"潇洒XBPQ｜永乐影视","type":3,"api":"csp_XBPQ",
 "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
 "ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/YLYS.json"},
-{"key": "csp_XYQBiu_大米星球","name": "🍚大米星球","type": 3,"api": "csp_XBPQ",
+            {"key":"莫小影视","name":"潇洒XBPQ｜莫小影视","type":3,"api":"csp_XBPQ",
+        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
+        "ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/MoXiaoYS.json"},
+        {"key": "csp_XYQHiker_来看点播","name":"⛅️潇洒XYQH｜来看点播","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
+       "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
+        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/来看点播.json"},
+        {"key": "csp_XYQHiker_爱看影视","name":"👀潇洒XYQH｜爱看影视","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
+  "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
+        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/爱看影视.json"},
+                {"key": "csp_XYQHiker_可可影视","name":"☕️潇洒XYQH｜可可影视","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
+        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
+        "ext":"https://gitee.com/youngxiayang/TVBOX/raw/main/XYQHiker/%E5%8F%AF%E5%8F%AF%E5%BD%B1%E8%A7%86.json"},
+        {"key": "csp_XYQBiu_大米星球","name": "🍚大米星球","type": 3,"api": "csp_XBPQ",
     "searchable": 1,"quickSearch": 1,"filterable": 1,
     "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
     "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/keke.json"},
-        {"key": "csp_XYQHiker_可可影视","name":"☕️潇洒XYQH｜可可影视","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
-        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
-        "ext":"https://gitee.com/youngxiayang/TVBOX/raw/main/XYQHiker/%E5%8F%AF%E5%8F%AF%E5%BD%B1%E8%A7%86.json"},
-        {"key": "csp_XYQHiker_爱看影视","name":"👀潇洒XYQH｜爱看影视)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
-  "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
-        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/爱看影视.json"},
         //{"key": "csp_XYQHiker_九八剧","name":"🍷九八剧(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/九八剧.json"},
         {"key": "csp_XYQHiker_来看点播","name":"⛅️潇洒XYQH｜来看点播","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
