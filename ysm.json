@@ -315,7 +315,7 @@
         "ext":"https://gitee.com/PizazzXS/another-d/raw/master/movie/json/MoXiaoYS.json"},
         {"key": "csp_XYQHiker_来看点播","name":"⛅️潇洒XYQH｜来看点播","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
        "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
-        "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/来看点播.json"},
+        "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/XYQHiker/%E6%9D%A5%E7%9C%8B%E7%82%B9%E6%92%AD.json"},
         {"key": "csp_XYQHiker_爱看影视","name":"👀潇洒XYQH｜爱看影视","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
   "jar":"https://www.lequxiang.com.cn/down.php/40af81c860f9ae1f15e745a62a1e7834.txt",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/爱看影视.json"},
