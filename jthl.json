@@ -26,37 +26,16 @@
     "分类": "短剧$25#电视剧$2#电影$1#动漫$4#综艺$3#伦理$26#写真$27"
       }
 },
-{
-            "key": "疯猫影视",
+
+            { "key": "疯猫影视",
             "name": "疯猫AV影视(XBPQ)",
             "type": 3,
             "api": "csp_XBPQ",
-            "ext": {
-                "请求头":"手机",
-"站名":"疯猫av",
-"主页url":"https://bb.fmav711.icu",
-"数组":"col-md-3 resent-grid recommended-grid&&</div></div></div>", 
-"标题":"title\"&&</a>",
-"图片":"data-original=\"&&\"", 
-"副标题":"views views-info\"&&</p>",
-"线路数组":"glyphicon-play-circle\"&&</a>",
-"播放数组":"myList&&</ul>",
-"播放标题":"</span>&&/a>",
-"搜索url":"/ss/key_{wd}_p{pg}.html",
-"简介":"myList\"&&</p>",
-"嗅探词": ".m3u8#.mp4#.flv#.mp3#.m4a",
-"分类url":"/fly/{cateId}B4_p{catePg}.html",
-"分类数组":"<a&&</a>",
-"分类标题": ">&&/a>", 
-"分类ID":"/fly/&&B4_p.html",
-"分类": "91",
-"分类值": "fly",
- "类型": "动作片&喜剧片&爱情片&科幻片",
-  "类型值": "x4&S4&F4&Z4",
-        "筛选": "1"
-      }
-    }
-],
+                  "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+            "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/fmavys.json"},
+
         {//https://dd.fldh.club/
       "key": "jap影網",
       "name": "🔞6av┃影视",
