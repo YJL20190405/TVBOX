@@ -369,10 +369,12 @@
         {"key": "csp_XYQHiker_斗鱼直播","name": "🐠斗鱼直播(XYQH)","type": 3,"api": "csp_XYQHiker","searchable": 1,"quickSearch": 0,"filterable": 1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/斗鱼直播.json"},
-        //点击示例
-        //document.getElementById('EaKWQVrB').click()
-        //document.getElementsByClassName('swal-button swal-button--confirm')[0].click()
-        //document.getElementsByTagName('button')[0].click()
+{"key":"我的夸克","name":"🗽我的┃夸克","type":3,"api":"csp_MyQuarkGuard","searchable":0,"quickSearch":0,"changeable":0,"filterable":0,"indexs":0,"style":{"type":"list"},
+"timeout":30},
+{"key":"我的UC","name":"😼我的┃UC","type":3,"api":"csp_MyUcGuard","searchable":0,"quickSearch":0,"changeable":0,"filterable":0,"indexs":0,"style":{"type":"list"},
+"timeout":30},
+{"key":"我的百度","name":"☘️我的┃百度","type":3,"api":"csp_MyBaiduGuard","searchable":0,"quickSearch":0,"changeable":0,"filterable":0,"indexs":0,"style":{"type":"list"},
+"timeout":30},
         {"key":"音海","name":"🎸音海┃搜索","type":3,"api":"csp_YinHaiGuard","searchable":1,"filterable":1,"changeable":0,"ext":{"danmu":true},
 //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
 "timeout":25},
