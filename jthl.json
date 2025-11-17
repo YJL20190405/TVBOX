@@ -148,7 +148,7 @@
             "api" : "https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext" : "https://agit.ai/guot54/ygbh/raw/branch/master/JS/%e7%8c%ab%e4%ba%86%e4%b8%aa%e5%92%aa.js"
         },
-{"key":"csp_xBPQ_香蕉超清xbpq","name":"🏆天天综合","type":3,"api":"csp_xBPQ",
+{"key":"csp_xBPQ_香蕉超清xbpq","name":"🏆天天综合","type":3,"api":"csp_XBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
 "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/1215.jar",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%bb%bc%e5%90%88.json"},
@@ -163,7 +163,7 @@
 "searchable":0,"quickSearch":1,"filterable":1,
 "jar":"https://gitee.com/youngxiayang/TVBOX/raw/main/jar/Yoursmile3.jar",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/%e5%ba%8a%e5%90%a7%e6%90%9c%e7%b4%a2xbpq.json"},
-{"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_xBPQ",
+{"key":"csp_xBPQ_黄仓库","name":"🏆黄色仓库","type":3,"api":"csp_XBPQ",
 "searchable":1,"quickSearch":1,"filterable":1,
 "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/JAR/xsDM.txt",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/hsck.json"},
