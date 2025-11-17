@@ -28,13 +28,13 @@
 },
 
             { "key": "疯猫影视",
-            "name": "疯猫AV影视(XBPQ)",
+            "name": "疯猫AV影视",
             "type": 3,
-            "api": "csp_XBPQ",
+            "api": "csp_xBPQ",
                   "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
-"jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/18.jar",
+      "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/1215.jar",
             "ext": "https://codeberg.org/a526898155/TVBOX/raw/branch/main/xBPQ/fmavys.json"},
 
         {//https://dd.fldh.club/
