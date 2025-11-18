@@ -154,7 +154,7 @@
   //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
   "ext":{"danmu":true},"timeout":10},
 //B站系列
-{"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/drpy2.min.js",
+{"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/drpy2.js",
 "ext":"https://codeberg.org/a526898155/TVBOX/raw/branch/main/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
 {
             "key": "Bili",
