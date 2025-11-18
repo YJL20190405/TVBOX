@@ -35,6 +35,9 @@
         {"key":"配置中心","name":"🆗‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,
         //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
         "style":{"type":"rect","ratio":1.43}},
+        {"key":"config","name":"⚙小米┃配置中心","type":3,
+        "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
+        "api":"csp_Config","searchable":0},
         //网盘资源区OK猫JAR
 
 {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_ErXiaoGuard","quickSearch":1,"changeable":1,"filterable":1,
