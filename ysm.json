@@ -152,7 +152,7 @@
   "ext":{"danmu":true},"timeout":10},
 //B站系列
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/lib/drpy2.min.js",
-"ext":"https://gitee.com/youngxiayang/TVBOX/raw/master/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
+"ext":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
 {
             "key": "Bili",
             "name": "🅱️哔哔合集┃弹幕",
