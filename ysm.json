@@ -152,7 +152,7 @@
   "ext":{"danmu":true},"timeout":10},
 //B站系列
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/lib/drpy2.min.js",
-"ext":"https://gitee.com/youngxiayang/YJL/raw/master/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
+"ext":"https://gitee.com/youngxiayang/TVBOX/raw/master/js/B%e7%ab%99%e7%b2%be%e7%ae%80.js"},
 {
             "key": "Bili",
             "name": "🅱️哔哔合集┃弹幕",
@@ -168,7 +168,7 @@
             "changeable": 0,
 "jar": "https://gitee.com/youngxiayang/YJL/raw/master/JAR/ftyDM.jpg",
             "ext": {
-                "json": "https://gitee.com/youngxiayang/YJL/raw/master/Bilibili/BLHJ.json"}
+                "json": "https://gitee.com/youngxiayang/TVBOX/raw/main/Bilibili/BLHJ.json"}
         },
 {"key":"bilimd","name":"🆗🅱哔哩┃影视","type":3,"api":"csp_BilimdGuard","searchable":1,"quickSearch":0,"changeable":0,"filterable":1,
 "style":{"type":"rect","ratio":1.433},"timeout":10},
