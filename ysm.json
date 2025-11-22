@@ -374,8 +374,8 @@
     "parses": [
         {"name":"解析聚合","type":3,"url":"Demo"},
         {"name":"Web聚合","type":3,"url":"Web"},
-{"name": "Player-JY", "type": "0", "url": "https://jx.playerjy.com/?url="},
-{"name": "盘古", "type": "0", "url": "https://www.pangujiexi.com/jiexi/?url="},
+{"name": "Player-JY", "type":0,"url": "https://jx.playerjy.com/?url="},
+{"name": "盘古", "type":0,"url": "https://www.pangujiexi.com/jiexi/?url="},
 {"name":"ikun","type":0,"url":"https://jx.hls.one/?url="},
 {"name":"A6","type":0,"url":"https://pl.a6club.com/player/analysis.php?v="},
 {"name":"8090","type":0,"url":"https://www.8090g.cn/?url="},
