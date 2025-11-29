@@ -154,7 +154,7 @@
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/lib/drpy2.min.js",
 "ext":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
 {"key":"Bili","name":"🅱️哔哔合集┃弹幕","type":3,"api":"csp_BiliGuard","searchable":1,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.597},
-"ext":{"json":"https://codeberg.org/yjl/TVBOX/raw/branch/main/Bilibili/BLHJ.json"}},
+"ext":{"json":"https://gitee.com/youngxiayang/TVBOX/raw/main/Bilibili/BLHJ.json"}},
 {"key":"bilimd","name":"🆗🅱️哔哩┃影视","type":3,"api":"csp_BilimdGuard","searchable":1,"quickSearch":0,"changeable":0,"filterable":1,
 "style":{"type":"rect","ratio":1.433},"timeout":10},
         {"key":"JS哔哩直播","name":"哔哩直播[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","searchable": 0,"quickSearch": 0,"filterable": 1,"ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/哔哩直播.js"},
