@@ -381,12 +381,6 @@
     "parses": [
         {"name":"解析聚合","type":3,"url":"Demo"},
         {"name":"Web聚合","type":3,"url":"Web"},
-        {"name":"Json聚合","type":3,
-        "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
-        "url":"Demo"},
-{"name":"影视聚合","type":3,
-"jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
-"url":"影视"},
 {"name":"ikun","type":0,"url":"https://jx.hls.one/?url="},
 {"name":"A6","type":0,"url":"https://pl.a6club.com/player/analysis.php?v="},
 {"name":"8090","type":0,"url":"https://www.8090g.cn/?url="},
