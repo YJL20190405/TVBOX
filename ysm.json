@@ -177,7 +177,7 @@
 {"key": "鲸鱼","name": "🐋小米┃鲸鱼","quickSearch": 0,"searchable": 1,"type": 3,"api": "csp_AppQi",
             "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
 			"ext": "https://jingyu4k-1312635929.cos.ap-nanjing.myqcloud.com/1.json|AAdgrdghjfgswerA|okhttp/3.10.0"},
-                {"key":"AppQi1","name":"🍊橘子┃小米","type":3,"api":"csp_AppQi","changeable":"1","timeout":25,"quickSearch":0,"filterable":1,
+                {"key":"AppQi1","name":"🍊小米┃橘子","type":3,"api":"csp_AppQi","changeable":"1","timeout":25,"quickSearch":0,"filterable":1,
                 "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
                 "ext":"https://juziapp.tpmbt.cn|K3h6YvSU8BTUfEcb|okhttp/3.10.0"},
                 {"key":"顾我","name":"🎴小米┃顾我","type":3,"api":"csp_AppQi","changeable":"1","quickSearch":0,"filterable":1,
