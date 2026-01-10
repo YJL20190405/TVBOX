@@ -1,5 +1,4 @@
 {
-    "主页url": "https://shasha.hair.html",
     "请求头": "User-Agent$MOBILE_UA",
     "编码": "UTF-8",
 "分类url": "https://shasha.hair/p/{cateId}/{class}?year={year}&page={catePg}.html",
