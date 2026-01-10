@@ -1,5 +1,5 @@
 {
-    "主页url": "https://shasha.hair/p/1/c/33.html",
+    "主页url": "https://shasha.hair.html",
     "请求头": "User-Agent$MOBILE_UA",
     "编码": "UTF-8",
 "分类url": "https://shasha.hair/p/{cateId}/{class}?year={year}&page={catePg}.html",
@@ -28,7 +28,7 @@
 "name":"剧情",
 "value":[
 {"n":"全部","v":""},
-{"n":"喜剧","v":"喜剧"},
+{"n":"伦理","v":"c/33"},
 {"n":"爱情","v":"爱情"},
 {"n":"恐怖","v":"恐怖"},
 {"n":"动作","v":"动作"},
