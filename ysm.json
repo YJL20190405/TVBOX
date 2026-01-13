@@ -30,8 +30,6 @@
         "api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/lib/drpy2.min.js",
         "ext":"https://gitee.com/youngxiayang/YJL/raw/master/JS/%E8%8C%AB%E8%8C%AB.js"}, 
         {"key":"三六零","name":"🏖三六零┃潇洒","type":3,"api":"csp_SP360","jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar"}, 
-        {"key":"Wexconfig","name":"🐮王二小┃配置中心🐮","type":3,"api":"csp_WexconfigGuard","searchable":0,"changeable":0,"indexs":0,
-"jar":"https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaImage/434B57F_773_wex_20251205021657228newMediaImage.png;md5;172c5b6351ce1531deb3821c41a7d9a4"},
         {"key":"配置中心","name":"🆗‍OK配置┃中心","type":3,"api":"csp_ConfigGuard","searchable":0,"changeable":0,"indexs":0,
         //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
         "style":{"type":"rect","ratio":1.43}},
