@@ -163,7 +163,6 @@
 "ext":{"json":"https://gitee.com/youngxiayang/TVBOX/raw/main/Bilibili/BLHJ.json"}},
 {"key":"bilimd","name":"🆗🅱️哔哩┃影视","type":3,"api":"csp_BilimdGuard","searchable":1,"quickSearch":0,"changeable":0,"filterable":1,
 "style":{"type":"rect","ratio":1.433},"timeout":10},
-        {"key":"JS哔哩直播","name":"哔哩直播[js]","type":3,"api":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/libs/drpy2.min.js","searchable": 0,"quickSearch": 0,"filterable": 1,"ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/dr_py/js/哔哩直播.js"},
         //jar内置爬虫规则区
         {"key":"WexBDys","name":"🐮二小独播┃弹幕","type":3,"api":"csp_WexDuBoKuGuard","searchable":1,"changeable":1,
         "jar":"https://aisearch.cdn.bcebos.com/fileManager/40aicoLgDtklAyS8-ZZBrA/1768811682902KGwAcr.txt"},
@@ -186,9 +185,6 @@
 {"key": "鲸鱼","name": "🐋小米┃鲸鱼","quickSearch": 1,"searchable": 1,"type": 3,"api": "csp_AppQi",
             "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
 			"ext": "https://jingyu4k-1312635929.cos.ap-nanjing.myqcloud.com/1.json|AAdgrdghjfgswerA|okhttp/3.10.0"},
-                {"key":"顾我","name":"🎴小米┃顾我","type":3,"api":"csp_AppQi","changeable":"1","quickSearch":0,"filterable":1,
-                 "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
-                 "ext":"https://guwozj-1319364746.cos.ap-guangzhou.myqcloud.com/guwo.txt|ca94b06ca3c7d80e|okhttp/3.10.0"},
                  {"key":"AppQi1","name":"🎴小米┃爱盈","type":3,"api":"csp_AppQi","changeable":"1","quickSearch":0,"filterable":1,
                  "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
                  "ext":"https://aysappto.oss-cn-chengdu.aliyuncs.com/qj3.txt|sda1231sasddad21|okhttp/3.10.0"},
