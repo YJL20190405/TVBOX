@@ -33,11 +33,9 @@
             {"key": "Introduce","name": "🐠摸鱼┃设置中心","type": 3,
            "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/myDM.jar",   
             "api": "csp_Introduce"},
-        {"key":"配置中心","name":"🆗‍OK配置┃中心","type":3,"api":"csp_AweSomeGuard","searchable":0,"changeable":0,"indexs":0,
-        //"jar":"https://pan.qingyuji.cn/f/2qDVhA/kkk.png",
-        "style":{"type":"rect","ratio":1.43},
+{"key":"配置中心","name":"👨‍🍳‍配置┃中心","type":3,"api":"csp_AweSomeGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
+"ext":{"sp":"Config"}},
         //网盘资源区OK猫JAR
-
 {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_AweSomeGuard","searchable":1,"quickSearch":1,"changeable":1,"filterable":1,
   "ext":{"sp":"ErXiao","danmu":true},"timeout":25},
 {"key":"双星","name":"🆗双星┃4K弹幕","type":3,"api":"csp_AweSomeGuard","searchable":1,"filterable":1,"changeable":0,"style":{"type":"list"},
