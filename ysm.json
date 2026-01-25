@@ -33,7 +33,7 @@
             {"key": "Introduce","name": "🐠摸鱼┃设置中心","type": 3,
            "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/myDM.jar",   
             "api": "csp_Introduce"},
-{"key":"配置中心","name":"👨‍🍳‍配置┃中心","type":3,"api":"csp_AweSomeGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
+{"key":"配置中心","name":"🆗配置┃中心","type":3,"api":"csp_AweSomeGuard","searchable":0,"changeable":0,"indexs":0,"style":{"type":"rect","ratio":1.43},
 "ext":{"sp":"Config"}},
         //网盘资源区OK猫JAR
 {"key":"二小弹幕","name":"🆗二小┃4K弹幕","type":3,"api":"csp_AweSomeGuard","searchable":1,"quickSearch":1,"changeable":1,"filterable":1,
@@ -128,9 +128,6 @@
 "ext":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
 {"key":"Bili","name":"🅱️哔哔合集┃弹幕","type":3,"api":"csp_AweSomeGuard","searchable":1,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.433},
 "ext":{"sp":"Bili","json":"https://gitee.com/youngxiayang/TVBOX/raw/main/Bilibili/BLHJ.json"}},
-{"key":"哔哩合集","name":"哔哩｜合集","type":3,"api":"csp_Bili","searchable":1,"quickSearch":0,"filterable":0,"changeable":0,"style":{"type":"rect","ratio":1.433},
-  "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
-"ext":{"json":"https://gitee.com/youngxiayang/TVBOX/raw/main/Bilibili/BLHJ.json","cookie":"http://127.0.0.1:9978/file/TVBox/bili_cookie.txt"}},
 {"key":"bilimd","name":"🅱哔哩┃影视","type":3,"api":"csp_AweSomeGuard","searchable":1,"quickSearch":0,"changeable":0,"filterable":1,"style":{"type":"rect","ratio":1.433},
 "ext":{"sp":"Bilimd"},
 "timeout":10},
