@@ -1,5 +1,7 @@
 {
-"urls": [{"name": "诗曼","url": "https://gitee.com/youngxiayang/TVBOX/raw/main/DC.json"},
+"urls": [
+{"name": "诗曼","url": "https://gitee.com/youngxiayang/TVBOX/raw/main/ysm.json"},
+{"name": "诗曼","url": "https://gitee.com/youngxiayang/TVBOX/raw/main/DC.json"},
 {"name": "OK大佬","url": "http://ok321.top/tv"},
 {"name": "饭硬了","url": "http://www.饭太硬.com/tv"},
 {"name": "猫肥了","url": "http://hello.肥猫.com"},
@@ -16,5 +18,6 @@
 {"name": "虎斑弹幕弹窗","url": "http://hb.小虎斑.site:25252/仅供测试/hbtcr.json"}, 
 {"name": "诗曼测试即时","url": "https://codeberg.org/yjl/TVBOX/raw/branch/main/ysm.json"},
 {"name": "诗曼测试bgithub","url": "https://raw.bgithub.xyz/YJL20190405/TVBOX/refs/heads/main/ysm.json"},
+{"name": "更新","url": "https://gitee.com/youngxiayang/TVBOX/raw/main/DC.json"},
  {"name": "视频壁纸","url": "https://api.yujn.cn/api/pcfjsp.php"}]
 }
