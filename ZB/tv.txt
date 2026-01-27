@@ -254,7 +254,7 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐟龙吟虎斗鱼,http://jiandjh.51vip.biz:35455/douyu/8901218
 🐟顾二明斗鱼,https://live.ottiptv.cc/douyu/8759139
 🐟大龄马斗鱼,https://live.ottiptv.cc/douyu/7971641
-🐱YY-991,https://yylunbo.ottiptv.cc/yy/54880976
+🐱YY-991,http://cfss.cc/cdn/yy/991.m3u8
 🐱YY-991,https://live.ottiptv.cc/yy//54880976
 🐯虎牙小石榴,https://live.ottiptv.cc/huya/17091681
 🐟斗鱼音乐,https://live.ottiptv.cc/douyu/9674665
@@ -377,7 +377,7 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐯虎牙-奇领集美,https://live.ottiptv.cc/huya/24634408
 🐯虎牙-奇领老家,https://live.ottiptv.cc/huya/15069287
 🐯虎牙-快乐老家,https://live.ottiptv.cc/huya/880351
-🐱YY-993,https://yylunbo.ottiptv.cc/yy/22490906
+🐱YY-993,http://cfss.cc/cdn/yy/993.m3u8
 🐱YY-993,https://live.ottiptv.cc/yy/22490906
 https://vapi.cc.163.com/video_play_url/房间号
 👄CC-小燃燃~,http://alipullhdlptscopy.cc.netease.com/pushstation/edbf6d232631766aa867298788008.flv?src=web&auth_key=1676312463-06684732ae5141e9bb30203ff47249d3-0-1b5218e60c54d4d78113bd5f8bea386a
