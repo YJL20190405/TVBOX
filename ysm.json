@@ -332,7 +332,7 @@
 "ext":{"sp":"MyBaidu"},
 "timeout":30},
                     {"key": "Local","name": "🐠文件┃浏览","type": 3,"api": "csp_Local",
-           "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/myDM.jar",      
+           "jar":"https://open.wya6.com/d/fishbao/fish.jar",      
                 "searchable": 0,"changeable": 0},     
 {"key":"太极","name":"☯️太极┃搜索🆗","type":3,"api":"csp_AweSomeGuard","searchable":1,"filterable":1,"changeable":0,"ext":{"sp":"TaiChi","taichi":1},
 "timeout":25},
