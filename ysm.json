@@ -11,9 +11,9 @@
     "spider": "https://gitee.com/youngxiayang/YJL/raw/master/JAR/okDMS.png",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
-    "sites": [{"key":"豆豆","name":"🌈小米热播┃豆瓣","type":3,"searchable":1,"quickSearch":1,"filterable":0,
+    "sites": [{"key":"豆豆","name":"🌈热播","type":3,"quickSearch":1,"filterable":0,"changeable":0,
       "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xiaomDM.jar",
-      "api":"csp_Douban","changeable":0},
+      "api":"csp_Douban","searchable":1},
          {"key":"drpy_js_腾云驾雾","name":"🐧腾滕┃潇洒","type":3,
         "api":"https://gitee.com/youngxiayang/TVBOX/raw/main/js/lib/drpy2.min.js",
         "ext":"https://gitee.com/youngxiayang/YJL/raw/master/JS/TXSP.js"}, 
