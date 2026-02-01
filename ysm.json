@@ -174,6 +174,7 @@
   "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/myDM.jar",
         "ext": {"filter": "https://open.wya6.com/d/down/2026/json/360.json","fishjx": ["https://jx.xmflv.com/?url="]}},
       {"key":"鲸鱼","name":"🐋潇洒┃鲸鱼APP","type":3,"api":"csp_AppQi","searchable":1,"changeable":1,
+        "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
         "ext":{"site":"https://jingyu4k-1312635929.cos.ap-nanjing.myqcloud.com/juyu3.json","dataKey":"AAdgrdghjfgsABC1","dataIv":"AAdgrdghjfgsABC1","init":"initV122","ua":"okhttp/3.10.0"}},
       {"key":"荐片","name":"⚡潇洒┃荐片磁力","api":"csp_JianPian","searchable":1,"quickSearch":1,
         "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
