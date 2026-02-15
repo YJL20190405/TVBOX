@@ -307,9 +307,8 @@ NOW新闻,http://bxtv.3a.ink/api.php?id=now
 🐟斗鱼电影19,https://goodiptv.club/douyu/6582435
 🐟斗鱼电影20,https://goodiptv.club/douyu/323876
 🇨🇳｜经典老片,#genre#
-🐯周星驰粤语,http://cfss.cc/cdn/hy/11336587.m3u8
+🐯周星驰粤语,https://live.ottiptv.cc/huya/11336587
 🐯周星驰,https://live.ottiptv.cc/huya/11342412
-🐯周星驰,http://cfss.cc/cdn/hy/11342412.m3u8
 🐟经典港剧,https://goodiptv.club/douyu/315457
 🐯港台电影,https://live.ottiptv.cc/huya/880261
 🐯香港警匪,https://live.ottiptv.cc/huya/11352886
