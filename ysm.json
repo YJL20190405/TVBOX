@@ -351,6 +351,7 @@
 "timeout":25}],
     "lives": [
 {"name":"峻睿","type":0,"url":"https://gh-proxy.com/https://raw.githubusercontent.com/YJL20190405/TVBOX/main/ZB/tv.txt","playerType":2,"ua":"okhttp/3.15","timeout":10},
+{"name":"峻睿1","type":0,"url":"https://codeberg.org/yjl/TVBOX/raw/branch/main/ZB/tv.txt","playerType":2,"ua":"okhttp/3.15","timeout":10},
 {"name":"三宝","type":0,"url":"https://iptvindex.com/tv.txt","playerType":2,"ua":"okhttp/3.15","timeout":10},
 {"name":"AI直播","type":0,"url":"https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt","playerType":2,"timeout":10},
 {"name":"多多电视","type":0,"url":"https://hub.gitmirror.com/raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u","epg":"http://epg.51zmt.top:8000/e.xml","logo":"https://epg.112114.xyz/logo/{name}.png","timeout":10},
