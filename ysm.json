@@ -72,9 +72,6 @@
         "jar":"https://nos.netease.com/ysf/858bdee43c91d50ebc32c0064f25fd34.txt;md5;bd30c2690ef97e79ddfe843c1efa6105"},
         {"key":"WexikanbotGuard","name":"🐮二小爱看┃弹幕","type":3,"api":"csp_WexIkanBotGuard","searchable":1,"changeable":1,
         "jar":"https://nos.netease.com/ysf/858bdee43c91d50ebc32c0064f25fd34.txt;md5;bd30c2690ef97e79ddfe843c1efa6105"},
-        {"key": "荐片","name": "🥝荐片┃不卡","type": 3,"api": "csp_JPJGuard","timeout": 10,"playerType": 2,
-         "jar":" https://file.icve.com.cn/file_doc/573/593/8F59443D53D73EF5E34581B77E3C5A15.jpg;md5;8f59443d53d73ef5e34581b77e3c5a15",
-          "searchable": 1,"quickSearch": 1,"changeable": 0},
 {"key":"原创","name":"☀饭太硬┃修罗","type":3,"api":"csp_YCyzGuard","timeout":30,"playerType":1,"searchable":1,"quickSearch":1,
 "jar":"https://file.icve.com.cn/file_doc/905/76/E25131330E48E729864434147C857F41.jpg;md5;e25131330e48e729864434147c857f41",
 "changeable":1},
@@ -87,6 +84,12 @@
  {"key":"奥特","name":"🏝饭太硬┃奥特","type":3,"api":"csp_AueteGuard",
    "jar": "https://file.icve.com.cn/file_doc/905/76/E25131330E48E729864434147C857F41.jpg;md5;e25131330e48e729864434147c857f41",
    "timeout":10,"searchable":1,"quickSearch":1,"changeable":1},
+            {"key": "播客","name": "🦊饭太硬┃播客","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
+              
+              "ext": "rfOb1uAWbkRHp7hdxprG9un3+SPC3Nbv1SI/b5LtAUhbYkFU/DFvsLBvd/oV3cA4uGiCZNFRz3ln6nh5Q+AgDZiM5KrCAiO7S7SVzv31EG78jVB4JEMNrMPzTgWqRZdMTdR1smBWWwru"},
+        {"key": "柚子","name": "🍋饭太硬┃柚子","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
+          
+          "ext": "rfOb1uAWbkRHp7hdxprG9un3+T3C3N68kGpjJMC8VQJRawVBonE2s7EhOq5X1M8s5yLMdsFXyX4lzV9ZNNh6RJzNuvLCVGCiCPOCweLv"},
       {"key":"鲸鱼","name":"🐋潇洒┃鲸鱼APP","type":3,"api":"csp_AppQi","searchable":1,"changeable":1,
         "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
         "ext":{"site":"https://jingyu4k-1312635929.cos.ap-nanjing.myqcloud.com/juyu3.json","dataKey":"AAdgrdghjfgsABC1","dataIv":"AAdgrdghjfgsABC1","init":"initV122","ua":"okhttp/3.10.0"}},
