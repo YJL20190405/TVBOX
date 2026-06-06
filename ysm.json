@@ -85,10 +85,10 @@
    "jar": "https://file.icve.com.cn/file_doc/905/76/E25131330E48E729864434147C857F41.jpg;md5;e25131330e48e729864434147c857f41",
    "timeout":10,"searchable":1,"quickSearch":1,"changeable":1},
             {"key": "播客","name": "🦊饭太硬┃播客","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
-              
+             "jar":"https://file.icve.com.cn/file_doc/905/76/E25131330E48E729864434147C857F41.jpg;md5;e25131330e48e729864434147c857f41", 
               "ext": "rfOb1uAWbkRHp7hdxprG9un3+SPC3Nbv1SI/b5LtAUhbYkFU/DFvsLBvd/oV3cA4uGiCZNFRz3ln6nh5Q+AgDZiM5KrCAiO7S7SVzv31EG78jVB4JEMNrMPzTgWqRZdMTdR1smBWWwru"},
-        {"key": "柚子","name": "🍋饭太硬┃柚子","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
-          
+        {"key": "柚子","name": "🍈饭太硬┃柚子","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
+          "jar":"https://file.icve.com.cn/file_doc/905/76/E25131330E48E729864434147C857F41.jpg;md5;e25131330e48e729864434147c857f41",
           "ext": "rfOb1uAWbkRHp7hdxprG9un3+T3C3N68kGpjJMC8VQJRawVBonE2s7EhOq5X1M8s5yLMdsFXyX4lzV9ZNNh6RJzNuvLCVGCiCPOCweLv"},
       {"key":"鲸鱼","name":"🐋潇洒┃鲸鱼APP","type":3,"api":"csp_AppQi","searchable":1,"changeable":1,
         "jar":"https://gitee.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
