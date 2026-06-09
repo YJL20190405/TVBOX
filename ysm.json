@@ -62,7 +62,7 @@
 "jar":"https://file.icve.com.cn/file_doc/573/593/8F59443D53D73EF5E34581B77E3C5A15.jpg;md5;8f59443d53d73ef5e34581b77e3c5a15",
   "ext":{"sp":"Bili","json":"https://codeberg.org/yjl/TVBOX/raw/branch/main/Bilibili/BLHJ.json"}},
         //jar内置爬虫规则区
-      {"key":"天天","name":"💯小米┃秒播💯","type":3,"quickSearch":1,"searchable":1,
+      {"key":"天天","name":"💯小米┃秒播","type":3,"quickSearch":1,"searchable":1,
       "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
       "api":"csp_AppRJ","ext":"vxw35/hHSj07Q+maxQzOVMq1rjRCOTXpUCx8iKu5jIg="},
       		{"key": "新首发","name": "🐷小米┃小猪","type": 3,"api": "csp_AppGet",
@@ -77,6 +77,9 @@
 		{"key": "3QQQ","name": "🍅小米┃大鹅","type": 3,"timeout": 15,"api": "csp_App3Q",
           "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
           "ext":"https://asd123sx23xdacsx.top"},
+      		{"key": "csp_Jpys","name": "🏆小米┃金牌","type": 3,"timeout": 12,"searchable": 1,"quickSearch": 0,"api": "csp_Jpys",
+              
+              "ext": "https://y2s52n7.com"},
         {"key":"WexBDys","name":"🐮二小独播┃弹幕","type":3,"api":"csp_WexDuBoKuGuard","searchable":1,"changeable":1,
         "jar":"https://nos.netease.com/ysf/858bdee43c91d50ebc32c0064f25fd34.txt;md5;bd30c2690ef97e79ddfe843c1efa6105"},
         {"key":"csp_Nmys","name":"🐮二小伯伯┃弹幕","type":3,"api":"csp_WexBoBoGuard","searchable":1,"changeable":1,
@@ -95,7 +98,7 @@
  {"key":"奥特","name":"🏝饭太硬┃奥特","type":3,"api":"csp_AueteGuard",
    "jar": "https://file.icve.com.cn/file_doc/573/593/8F59443D53D73EF5E34581B77E3C5A15.jpg;md5;8f59443d53d73ef5e34581b77e3c5a15",
    "timeout":10,"searchable":1,"quickSearch":1,"changeable":1},
-            {"key": "播客","name": "🦊饭太硬┃播客","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
+            {"key": "播客","name": "📽饭太硬┃播客","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
              "jar":"https://file.icve.com.cn/file_doc/573/593/8F59443D53D73EF5E34581B77E3C5A15.jpg;md5;8f59443d53d73ef5e34581b77e3c5a15", 
               "ext": "rfOb1uAWbkRHp7hdxprG9un3+SPC3Nbv1SI/b5LtAUhbYkFU/DFvsLBvd/oV3cA4uGiCZNFRz3ln6nh5Q+AgDZiM5KrCAiO7S7SVzv31EG78jVB4JEMNrMPzTgWqRZdMTdR1smBWWwru"},
         {"key": "柚子","name": "🍈饭太硬┃柚子","type": 3,"api": "csp_AppSxGuard","timeout": 10,"searchable": 1,"quickSearch": 1,"changeable": 1,
