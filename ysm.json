@@ -69,7 +69,7 @@
              "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar", 
               "ext": "https://yun-1316442804.cos.ap-guangzhou.myqcloud.com/601.txt|FTgP4Gq8zPiqbt7M|V122|okhttp/3.10.0"},
       		{"key": "荐片","name": "✨小米┃荐片","quickSearch": 0,"changeable": "0","searchable": 1,"timeout": 15,"type": 3,
-             "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar" 
+             "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
               "api": "csp_Jianpian","style": {	"type": "rect",	"ratio": 1.333},"ext": "https://api.ztcgi.com"},
 {"key": "爱营","name": "💥小米┃爱影","type": 3,"searchable": 1,"changeable": 1,"api": "csp_AppGet",
   "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
