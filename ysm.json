@@ -80,7 +80,7 @@
       		{"key": "csp_Jpys","name": "🏆小米┃金牌","type": 3,"timeout": 12,"searchable": 1,"quickSearch": 0,"api": "csp_Jpys",
               "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
               "ext": "https://y2s52n7.com"},
-      		{"key": "葫芦","name": "🎥小米┃葫芦","type": 3,"api": "csp_AppGet",
+      		{"key": "葫芦","name": "🥕小米┃葫芦","type": 3,"api": "csp_AppGet",
               "jar":"https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/jar/xmDM.jar",
               "ext": "https://mobile-1251126973.cos.ap-guangzhou.myqcloud.com/maccos_config.txt|8R33VQSxzmCaHpEX|V122|okhttp/3.10.0"},
         {"key":"WexBDys","name":"🐮二小独播┃弹幕","type":3,"api":"csp_WexDuBoKuGuard","searchable":1,"changeable":1,
