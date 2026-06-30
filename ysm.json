@@ -159,7 +159,7 @@
        "ext":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/HZDM.js"},
        {"key":"去看吧","name":"🔭潇洒js┃去看吧动漫","type":3,"api":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
          "searchable":1,"quickSearch":1,"filterable":1,
-       "ext":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/QKB.js"},
+       "ext":"https://wget.la/https://raw.githubusercontent.com/PizazzGY/NewTVBox/main/anime/js/QKB.js"},
        {"key":"NT动漫","name":"👯‍♀️潇洒js┃NT动漫","type":3,"api":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
          "searchable":1,"quickSearch":1,"filterable":1,
        "ext":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/NTDM.js"},
