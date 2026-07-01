@@ -172,27 +172,6 @@
               {"key": "爱看机器人","name": "👁潇洒┃爱看影视","type": 3,
                 "jar":"https://img.51shazhu.com/autoupload/gE6Y0Af2tjXBCNig6CtNDI12_FRYNb81z6UPhMWD8iI/20260701/ruqk/0X0/07011344.png;md5;feb3dd35be7c31aa2a39bea423961279",
                 "api": "csp_Ikanbot","searchable": 1,"quickSearch": 1,"filterable": 1},
-       {
-            "key": "天堂",
-            "name": "🏖潇洒┃电影天堂",
-            "type": 3,
-            "api": "csp_AppDrama",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-         "jar":"https://img.51shazhu.com/autoupload/gE6Y0Af2tjXBCNig6CtNDI12_FRYNb81z6UPhMWD8iI/20260701/ruqk/0X0/07011344.png;md5;feb3dd35be7c31aa2a39bea423961279",
-            "ext": {
-                "appName": "电影天堂",
-                "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCduNEnfxGaLuQRk5ABzXHhPV43zi00sCHjLo8BYc+Wi6xXm2b4v0i28Sq4WlNCKhseft9fz8kO/qLr6/022o1RcuOU7e4GFL3U9WnNODwRBYSYWd+K8nqpI/tAUDmZEBGRWqjrc7x6aMl3A+xpnWkLbPCLsuhbuuUE3tv09oeOpwIDAQAB",
-                "dataKey": "D2KREWRIBVNAUJJYEDL4VFHOY2Q0PQ==",
-                "dataIv": "OC1A06E197EF10CF3F6058CA7A803B5E",
-                "pkg": "com.dytiantang.one",
-                "host": "",
-                "site": "https://dyttandroid04-1372779881.cos.ap-shanghai.myqcloud.com/app_dyttandroid.txt",
-                "version": "3.0.0.7",
-                "decrypt": "0"
-            }
-        },
               {"key": "农民影视","name": "🏖潇洒┃农民影视","type": 3,"api": "csp_Wwys",
           "jar":"https://img.51shazhu.com/autoupload/gE6Y0Af2tjXBCNig6CtNDI12_FRYNb81z6UPhMWD8iI/20260701/ruqk/0X0/07011344.png;md5;feb3dd35be7c31aa2a39bea423961279",      
                 "ext": "https://vip.wwgz.cn:5200"},
