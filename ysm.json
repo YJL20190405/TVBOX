@@ -61,9 +61,9 @@
       "ext": {"url": "http://我不是.摸鱼儿.com/api/yyutx.php","token": "moyufucking"}},
 {"key":"jsB站精简","name":"🅱️哔哩合集大全","type":3,"api":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/lib/drpy2.min.js",
 "ext":"https://codeberg.org/yjl/TVBOX/raw/branch/main/js/B%E7%AB%99%E7%B2%BE%E7%AE%80.js"},
-{"key":"Bili","name":"🅱️哔哔合集┃弹幕","type":3,"api":"csp_BiliGuard","searchable":1,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.433},
-"jar":"https://zl.wpscdn.cn/2026/07/01/space_img/78ab9a28-61c9-435b-9847-a2e08b42db5b.jpg;md5;9ab472a9b588f9e5f45b67ca53d67d90",
-  "ext":{"sp":"Bili","json":"https://wget.la/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"}},
+//{"key":"Bili","name":"🅱️哔哔合集┃弹幕","type":3,"api":"csp_BiliGuard","searchable":1,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.433},
+//"jar":"https://zl.wpscdn.cn/2026/07/01/space_img/78ab9a28-61c9-435b-9847-a2e08b42db5b.jpg;md5;9ab472a9b588f9e5f45b67ca53d67d90",
+  //"ext":{"sp":"Bili","json":"https://wget.la/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"}},
         //jar内置爬虫规则区
    {"name":"🧩金牌|快速","key":"JinPai","type":3,"api":"csp_JinPaiAmns",
 	   
