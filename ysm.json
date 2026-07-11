@@ -254,6 +254,17 @@
         {"key":"美剧天堂","name":"⚡潇洒磁力┃美剧天堂","type":3,"api":"csp_MeijuTT",
         "jar":"http://pan.0076sf.cn/f/dPbHG/07101403.png;md5;4e485fbd3b8a48b61e0a90774dd58b9d",
         "searchable":1,"quickSearch":1,"filterable":1},
+		        {
+            "name": "🎬嗷嗚|漫剧",
+            "key": "MjHggg",
+            "type": 3,
+            "api": "csp_HgggAmns",
+            "searchable": 0,
+            "quickSearch": 0,
+            "changeable": 0,
+			"jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",					
+            "ext": "comic_series"
+        },
         {"key": "csp_XYQHiker_兔小贝","name":"🐰兔小贝(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/兔小贝.json"},
