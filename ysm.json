@@ -61,7 +61,26 @@
 {"key":"Bili","name":"🅱️哔哔合集┃弹幕","type":3,"api":"csp_BiliGuard","searchable":1,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.433},
 "jar":"https://zl.wpscdn.cn/2026/07/10/space_img/c052a0ca-8851-46c5-becc-d84abf064930.jpg;md5;22b7154a36907cabc183fcc53044d025",
   "ext":{"sp":"Bili","json":"https://wget.la/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"}},
-        //jar内置爬虫规则区
+          {
+            "name": "🅱️Bili|合集",
+            "key": "BiliHeji",
+            "type": 3,
+            "api": "csp_BiliAmns",
+            "searchable": 1,
+            "quickSearch": 1,
+            "changeable": 0,
+			  "jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",
+            "ext": {
+                "home": "1",
+                "json": "https://wget.la/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json",
+                "cookie": ""
+            },
+            "style": {
+                "type": "rect",
+                "ratio": 1.433
+            }
+        },
+		//jar内置爬虫规则区
 	  {
             "name": "🐩嗷呜┃夏天秒播",
             "key": "NewGrV2",
