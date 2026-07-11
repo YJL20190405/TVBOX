@@ -121,13 +121,13 @@
                 "filters": ""
             }
         },
-   {"name":"🐕‍🦺嗷呜┃金牌快速","key":"JinPai","type":3,"api":"csp_JinPaiAmns",
+   {"name":"🦮嗷呜┃金牌快速","key":"JinPai","type":3,"api":"csp_JinPaiAmns",
 	 "jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",	  
 	   "searchable":1,"quickSearch":1,"changeable":0},
 		{"name":"🐩嗷呜┃杜北快速","key":"Dubk","type":3,"api":"csp_DubkAmns","searchable":1,"quickSearch":1,"changeable":0,
 		"jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",	
 			"ext":"https://nos.netease.com/youdata-netease/public-utilUpload-dETsDhhkydVym6T7qzn7WB.gz"},
-		{"name":"🐶嗷呜┃伊外快速","key":"YIys","type":3,"api":"csp_YIysAmns",
+		{"name":"🐕嗷呜┃伊外快速","key":"YIys","type":3,"api":"csp_YIysAmns",
 		"jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",	
 			"searchable":1,"quickSearch":1,"changeable":0},
 		{"name":"🐻嗷呜┃爱看采集","key":"AiBot","type":3,"api":"csp_AiBotAmns",
