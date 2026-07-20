@@ -126,6 +126,7 @@
         "jar":"https://www.lnjubao.cn/minio-jbpt/upload/20260717/5829d919fb4c5697c5e882205771f2c9.jpg;md5;d4b90caf39f26ffe54006225c273e0da",
         "ext": "http://172.247.227.203:25321/mtys.php"},
         {"key":"WexBDys","name":"🐮二小独播┃弹幕","type":3,"api":"csp_WexDuBoKuGuard","searchable":1,"changeable":1,
+        //"jar":"https://nos.netease.com/ysf/0b4f27394aaa1e7c3a2e543a6c4d89ff.jar;md5;1262dc40ed916e6d67c9015e6b4af2bd"},
         "jar":"https://nos.netease.com/ysf/bd630429a515df48ad3573ea1d4e7426.jar;md5;80286bf6d6ffbadfb4559f098e2847ce"},
        {"key":"csp_Nmys","name":"🐮二小伯伯┃弹幕","type":3,"api":"csp_WexBoBoGuard","searchable":1,"changeable":1,
        "jar":"https://nos.netease.com/ysf/bd630429a515df48ad3573ea1d4e7426.jar;md5;80286bf6d6ffbadfb4559f098e2847ce"},
