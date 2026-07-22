@@ -199,6 +199,8 @@
 		        {"name": "🐻嗷呜┃漫剧","key": "MjHggg","type": 3,"api": "csp_HgggAmns","searchable": 0,"quickSearch": 0,"changeable": 0,
 			"jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",			
             "ext": "comic_series"},
+            {"key": "wddj","name": "🐬海豚┃黄豆py","type": 3,
+            "api": "https://ghfast.tophttps://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/%E9%BB%84%E8%B1%86%E7%9F%AD%E5%89%A7.py"},
         {"key": "csp_XYQHiker_兔小贝","name":"🐰兔小贝(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/兔小贝.json"},
