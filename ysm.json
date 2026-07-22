@@ -1,7 +1,7 @@
 {   
     "logo": "https://codeberg.org/yjl/TVBOX/raw/branch/main/ysm20260131012405.jpg",
-  "wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
-    //"wallpaper": "https://api.yujn.cn/api/pcfjsp.php",//动漫视频壁纸
+  //"wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
+    "wallpaper": "https://api.yujn.cn/api/pcfjsp.php",//动漫视频壁纸
     //"wallpaper": "https://wp.upx8.com/api.php?content=风景",//自定关键字
     //"wallpaper": "http://qej6c.716888.xyz/fenlei/api/beijing.php",//动态壁纸
     
