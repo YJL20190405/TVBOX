@@ -101,8 +101,9 @@
 		{"key":"天天","name":"💯小米┃秒播","type":3,"quickSearch":1,"searchable":1,
       "jar":"https://www.lnjubao.cn/minio-jbpt/upload/20260717/5829d919fb4c5697c5e882205771f2c9.jpg;md5;d4b90caf39f26ffe54006225c273e0da",
       "api":"csp_AppRJ","ext":"vxw35/hHSj07Q+maxQzOVMq1rjRCOTXpUCx8iKu5jIg="},
-        {"key": "橙子","name": "🍊橙子┃高清影视","type": 3,"api": "csp_App99","ext": {
-                "host": "http://113.31.180.218:19987/app/bn",
+        {"key": "橙子","name": "🍊小米┃橙子高清","type": 3,"api": "csp_App99",
+        "jar":"https://www.lnjubao.cn/minio-jbpt/upload/20260717/5829d919fb4c5697c5e882205771f2c9.jpg;md5;d4b90caf39f26ffe54006225c273e0da",
+        "ext": {"host": "http://113.31.180.218:19987/app/bn",
                 "LoginPath": "/app/log",
                 "appkey": "6e8f3764a0644f3686ab5cdd57bcdf48",
                 "versionName": "4.3.1",
