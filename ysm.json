@@ -1,7 +1,6 @@
 {   
-     "wallpaper": "https://www.yumus.cn/api/?target=img&brand=360&type=0",//4k=0,meinv=1，aiqing=2，风景=3，动漫=5，mingxing=6，萌宠动物=7，游戏=8，汽车=9，炫酷=10，剧照=11，junshi=12，体育壁纸=13，wenzi=14
     "logo": "https://codeberg.org/yjl/TVBOX/raw/branch/main/ysm20260131012405.jpg",
-  //"wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
+  "wallpaper": "https://api.yujn.cn/api/gzl_ACG.php",//动漫壁纸
     //"wallpaper": "https://api.yujn.cn/api/pcfjsp.php",//动漫视频壁纸
     //"wallpaper": "https://wp.upx8.com/api.php?content=风景",//自定关键字
     //"wallpaper": "http://qej6c.716888.xyz/fenlei/api/beijing.php",//动态壁纸
@@ -200,7 +199,7 @@
 			"jar":"https://cdn.waimaimingtang.com/file/images/bwc/20260710134123-31654126d0.ong;md5;d9d9860d4e1e16888fbf06b510978542",			
             "ext": "comic_series"},
             {"key": "wddj","name": "🐬海豚┃黄豆py","type": 3,
-            "api": "https://ghfast.tophttps://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/%E9%BB%84%E8%B1%86%E7%9F%AD%E5%89%A7.py"},
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/%E9%BB%84%E8%B1%86%E7%9F%AD%E5%89%A7.py"},
         {"key": "csp_XYQHiker_兔小贝","name":"🐰兔小贝(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/兔小贝.json"},
