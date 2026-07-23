@@ -3,6 +3,12 @@
 "spider":"https://gitee.com/lwlxh/tvhome/raw/master/o.jar",
 //"spider":"https://fs-im-kefu.7moor-fs2.com/im/2768a390-5474-11ea-afc9-7b323e3e16c0/YT6QM5eC.png;md5;b3249d225e1e720653fc6dbf6fde21e6",
 "sites":[
+    {
+			"key": "wddj",
+			"name": "🐬黄豆短剧.py 有🔞[短剧]",
+			"type": 3,
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄豆短剧.py"
+		},
 {
 			"key": "shjb",
 			"name": "🐬色播聚合.py｜🔞[成人直播]",
