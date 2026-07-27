@@ -18,8 +18,14 @@
             ],
             "titleMappingsUrl": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/yins.json",
             "filter": "./lib/douban.json"
-         }
-    },
+         }},
+         {
+    "key": "dr_腾讯影视[官]",
+    "name": "腾讯影视[官]",
+    "type": 3,
+    "api": "https://gh.jasonzeng.dev/https://raw.githubusercontent.com/jak0099/dr/refs/heads/master/libs/drpy2.min.js",
+    "ext": "http://corper.cn/down.php/e8c3972f096e03de98bb7e4904f87893.js"
+},
     		{
 			"key": "djjh",
 			"name": "🐬短剧聚合.py",
