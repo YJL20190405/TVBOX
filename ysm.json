@@ -175,6 +175,8 @@
         {"key":"美剧天堂","name":"⚡潇洒磁力┃美剧天堂","type":3,"api":"csp_MeijuTT",
         "jar":"https://raw.giteeusercontent.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
         "searchable":1,"quickSearch":1,"filterable":1},
+                {"key": "HonHon","name": "🐠摸鱼┃红红短剧","type": 3,"api": "csp_HonHon","searchable": 1,"quickSearch": 1,"genre": "shortdrama","filterable": 1,  
+            "ext": {"host": "https://short.fishcloud.top","quality": "1080p","danmu": false}},
                 {"name": "🐕嗷呜┃短剧推荐","key": "Hgdh","type": 3,"api": "csp_HgdhAmns","searchable": 1,"quickSearch": 1,"changeable": 0,
                 "jar":"https://nos.netease.com/ysf/4652a697b8920e82984344246bc0fc44.png;md5;ce2bea1c0f749392c9062a4fec6b010c",
                 "genre":"shortdrama","ext": "https://nos.netease.com/ysf/dac0101040005285380ee886e6e6c660.aowu"},
