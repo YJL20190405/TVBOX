@@ -132,8 +132,6 @@
         {"key": "麦田","name": "🌾小米┃麦田AI短剧","type": 3,"api": "csp_AppV6",
         "jar":"https://zkaicc.huilan.com/aicc/api/aicc-file/miniofile/preViewPicture/aicc/1CqpaRCV_1784884059047.jpg;md5;db2c1c3ef8d2d5d3481303f21f80593c",
         "ext": "http://172.247.227.203:25321/mtys.php"},
-    {"key": "賤賤","name": "🐮二小贱片┃秒播","type": 3,"api": "csp_WexJianPianGuard","searchable": 1,"quickSearch":1,"changeable": 0,
-    "jar":"https://zl.wpscdn.cn/2026/07/29/space_img/3a24811b-1e67-44f4-ac86-21660c46841b.png;md5;48534c2903b56915217484979218701c"},
         {"key":"WexBDys","name":"🐮二小独播┃弹幕","type":3,"api":"csp_WexDuBoKuGuard","searchable":1,"changeable":1,
         //"jar":"https://nos.netease.com/ysf/0b4f27394aaa1e7c3a2e543a6c4d89ff.jar;md5;1262dc40ed916e6d67c9015e6b4af2bd"},
         "jar":"https://zl.wpscdn.cn/2026/07/29/space_img/3a24811b-1e67-44f4-ac86-21660c46841b.png;md5;48534c2903b56915217484979218701c"},
