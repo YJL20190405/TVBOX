@@ -18,12 +18,12 @@ from base.spider import Spider
 
 class Spider(Spider):
     session = requests.Session()
-    host = 'https://g3h4i5j6.ybhz51.cc'
+    host = 'https://o1p2q3r4.ybhz44.cc/yb/'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'zh-CN,zh;q=0.9',
-        'Referer': 'https://g3h4i5j6.ybhz51.cc/',
+        'Referer': 'https://o1p2q3r4.ybhz44.cc/yb/',
     }
 
     def getName(self): return "ybhz51"
