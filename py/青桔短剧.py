@@ -52,7 +52,7 @@ class _AESCBC:
 
 class Spider(BaseSpider):
     def __init__(self):
-        self.host = "https://xqjzvcvt.top"
+        self.host = "https://lzlukvca.cc"
         self.api = self.host + "/api"
         self.name = "黄豆短剧"
         # -------- 可配置参数（可从extend中覆盖） --------
