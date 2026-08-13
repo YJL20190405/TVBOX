@@ -2,9 +2,8 @@
 # coding=utf-8
 import re, json, requests, base64, hashlib
 from urllib.parse import quote, unquote
-from base.spider import Spider
 
-class Spider(Spider):
+class Spider(object):
     def init(self, extend=""):
         self.name = "AcFan"
         self.hosts = ["https://acf.f76typd0.work"]
@@ -143,7 +142,7 @@ class Spider(Spider):
         ps = sid.split("@@@")
         url = ps[1] if len(ps) > 1 else sid
         if self.isVideoFormat(url):
-            return {"parse": 0, "url": url, "header": json.dumps(self.headers)}
+            return {"parse": 0, "url": url, "header": self.headers}
         html = self.get(self.host + "/watch/" + ps[0])
         m3u8 = ""
         for jm in re.finditer(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S):
@@ -157,8 +156,8 @@ class Spider(Spider):
             except:
                 pass
         if m3u8:
-            return {"parse": 0, "url": m3u8, "header": json.dumps(self.headers)}
-        return {"parse": 1, "url": url, "header": json.dumps(self.headers)}
+            return {"parse": 0, "url": m3u8, "header": self.headers}
+        return {"parse": 1, "url": url, "header": self.headers}
 
     def localProxy(self, param):
         return [200, "video/MP2T", {}, ""]
@@ -185,27 +184,60 @@ class Spider(Spider):
         except:
             return ""
 
+    def extractVideoData(self, html):
+        data_map = {}
+        if not html:
+            return data_map
+        for pb in re.finditer(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html, re.S):
+            content = pb.group(1)
+            if 'coverUrl' not in content:
+                continue
+            ids = re.findall(r'(?:\\"id\\"|\\"contentCode\\"):\\"(CNT\d+)\\"', content)
+            titles = re.findall(r'\\"title\\":\\"(.*?)\\",\\"(?:authorName|subTitle)', content)
+            durations = re.findall(r'\\"duration\\":\\"(.*?)\\"', content)
+            covers = re.findall(r'\\"coverUrl\\":\\"(https?://[^\\"]*)\\"', content)
+            for i in range(min(len(ids), len(covers))):
+                vid = ids[i]
+                title = titles[i].replace("\\/", "/").replace('\\"', '"') if i < len(titles) else ""
+                duration = durations[i] if i < len(durations) and durations[i] != "$undefined" else ""
+                cover = covers[i].replace("\\/", "/")
+                data_map[vid] = {"title": title, "cover": cover, "duration": duration}
+        return data_map
+
     def parseList(self, html):
         res = []
         if not html:
             return res
+        video_data = self.extractVideoData(html)
         seen = set()
         for m in re.finditer(r'href="/watch/(CNT\d+)"', html):
             vid = m.group(1)
             if vid in seen:
                 continue
             seen.add(vid)
-            pos = m.start()
-            block = html[pos:pos + 6000]
-            name = (self.match(block, r'<img[^>]*alt="([^"]*)"')
-                    or self.match(block, r'title="([^"]*)"')
-                    or self.match(block, r'<h3[^>]*>([^<]+)')
-                    or vid)
-            duration = self.match(block, r'data-video-card-stat="duration"[^>]*>([^<]+)') or self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>')
-            pic = self.match(block, r'property="og:image"[^>]*content="([^"]*)"') or self.match(block, r'thumbnailUrl"?\s*:\s*"([^"]+)"')
+            vd = video_data.get(vid, {})
+            name = vd.get("title", "")
+            if not name:
+                block = html[m.start():m.start() + 6000]
+                name = (self.match(block, r'<img[^>]*alt="([^"]*)"')
+                        or self.match(block, r'title="([^"]*)"')
+                        or self.match(block, r'<h3[^>]*>([^<]+)')
+                        or vid)
+            duration = vd.get("duration", "")
+            if not duration:
+                block = html[m.start():m.start() + 6000]
+                duration = self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>')
+            pic = vd.get("cover", "")
             if not pic:
-                pic = self.host + "/images/default-cover.svg"
-            play = self.extractM3u8FromBlock(block, vid)
+                block = html[m.start():m.start() + 6000]
+                pic = self.match(block, r'srcSet="[^"]*media-proxy[^"]*url=([^&"]+)') or ""
+                if pic:
+                    pic = unquote(unquote(pic))
+                    if pic.startswith("/"):
+                        pic = self.host + pic
+                if not pic:
+                    pic = self.host + "/images/default-cover.svg"
+            play = ""
             sid = vid + "@@@" + play + "@@@" + quote(name) + "@@@" + quote(pic)
             res.append({
                 "vod_id": sid,
