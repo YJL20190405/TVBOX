@@ -52,6 +52,11 @@ class Spider(BaseSpider):
     def init(self, extend=""):
         pass
 
+    def proxy_img(self, url):
+        if not url or not url.startswith("http") or "127.0.0.1" in url or "/media-proxy" in url:
+            return url
+        return self.host + "/media-proxy?url=" + quote(url, safe="")
+
     def getName(self):
         return self.name
 
@@ -103,7 +108,7 @@ class Spider(BaseSpider):
         pic = unquote(ps[3]) if len(ps) > 3 else ""
         if play:
             return {"list": [{
-                "vod_id": sid, "vod_name": name, "vod_pic": pic,
+                "vod_id": sid, "vod_name": name, "vod_pic": self.proxy_img(pic),
                 "vod_content": name, "vod_play_from": "AcFan",
                 "vod_play_url": "播放$" + play
             }]}
@@ -139,7 +144,7 @@ class Spider(BaseSpider):
             vod_content = "分类: " + cat_name + "\n" + vod_content
         play_url = ("播放$" + m3u8) if m3u8 else ""
         return {"list": [{
-            "vod_id": sid, "vod_name": vod_name, "vod_pic": vod_pic,
+            "vod_id": sid, "vod_name": vod_name, "vod_pic": self.proxy_img(vod_pic),
             "vod_content": vod_content, "vod_play_from": "AcFan",
             "vod_play_url": play_url
         }]}
@@ -175,7 +180,7 @@ class Spider(BaseSpider):
         return {"parse": 1, "url": url, "header": self.headers}
 
     def localProxy(self, param):
-        return [200, "video/MP2T", {}, ""]
+        return [200, "text/plain", b""]
 
     def destroy(self):
         return "success"
@@ -208,7 +213,7 @@ class Spider(BaseSpider):
             res.append({
                 "vod_id": sid,
                 "vod_name": self.clean(name),
-                "vod_pic": pic,
+                "vod_pic": self.proxy_img(pic),
                 "vod_remarks": self.clean(duration) if duration else ""
             })
         if not res:
@@ -220,17 +225,20 @@ class Spider(BaseSpider):
         if not html:
             return m
         try:
-            for pb in re.finditer(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html, re.S):
-                content = pb.group(1)
-                if "coverUrl" not in content:
+            for cm in re.finditer(r'coverUrl', html):
+                pos = cm.end()
+                rest = html[pos:pos + 200]
+                um = re.search(r'https?://[^\s"\\]+', rest)
+                if not um:
                     continue
-                pairs = re.findall(r'coverUrl"[^h]*(https?://[^"]+)', content)
-                vids = re.findall(r'(CNT\d+)', content)
-                for i in range(min(len(vids), len(pairs))):
-                    if vids[i] not in m:
-                        m[vids[i]] = pairs[i]
-                if m:
-                    break
+                cover = um.group(0)
+                back = html[max(0, cm.start() - 300):cm.start()]
+                im = re.findall(r'CNT\d+', back)
+                if not im:
+                    continue
+                vid = im[-1]
+                if vid not in m:
+                    m[vid] = cover
         except:
             pass
         return m
@@ -240,28 +248,32 @@ class Spider(BaseSpider):
         if not html:
             return res
         try:
-            for pb in re.finditer(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html, re.S):
-                content = pb.group(1)
-                if "coverUrl" not in content:
+            cover_map = self.getCoverMap(html)
+            seen = set()
+            for cm in re.finditer(r'coverUrl', html):
+                pos = cm.end()
+                rest = html[pos:pos + 200]
+                um = re.search(r'https?://[^\s"\\]+', rest)
+                if not um:
                     continue
-                vids = re.findall(r'(CNT\d+)', content)
-                covers = re.findall(r'coverUrl"[^h]*(https?://[^"]+)', content)
-                titles = re.findall(r'title"[^:]*:"([^"]+)', content)
-                durations = re.findall(r'duration"[^:]*:"([^"]+)', content)
-                for i in range(min(len(vids), len(covers))):
-                    vid = vids[i]
-                    name = titles[i] if i < len(titles) else vid
-                    cover = covers[i]
-                    duration = durations[i] if i < len(durations) else ""
-                    sid = vid + "@@@" + "" + "@@@" + quote(name) + "@@@" + quote(cover)
-                    res.append({
-                        "vod_id": sid,
-                        "vod_name": self.clean(name),
-                        "vod_pic": cover,
-                        "vod_remarks": self.clean(duration) if duration else ""
-                    })
-                if res:
-                    break
+                cover = um.group(0)
+                back = html[max(0, cm.start() - 300):cm.start()]
+                ids = re.findall(r'CNT\d+', back)
+                if not ids:
+                    continue
+                vid = ids[-1]
+                if vid in seen:
+                    continue
+                seen.add(vid)
+                tm = re.search(r'title[^h]*([^\s"\\]{2,})', back)
+                name = tm.group(1) if tm else vid
+                sid = vid + "@@@" + "" + "@@@" + quote(name) + "@@@" + quote(cover)
+                res.append({
+                    "vod_id": sid,
+                    "vod_name": self.clean(name),
+                    "vod_pic": self.proxy_img(cover),
+                    "vod_remarks": ""
+                })
         except:
             pass
         return res
