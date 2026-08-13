@@ -2,6 +2,7 @@
 # coding=utf-8
 import re, json, requests, base64, hashlib
 from urllib.parse import quote, unquote
+from datetime import datetime, timedelta, timezone
 
 class Spider(object):
     def init(self, extend=""):
@@ -31,6 +32,61 @@ class Spider(object):
             "mmd": {"name": "MMD", "path": "MMD/2072655243595792385"},
             "cosplay": {"name": "Cosplay", "path": "COSPLAY/2075576278568513538"},
         }
+        self.tag_list = [
+            {"n": "全部", "v": ""},
+            {"n": "中文字幕", "v": "ITEM_FFX_K1Z_I1J_IMT"},
+            {"n": "无码", "v": "ITEM_K4G_NPD"},
+            {"n": "JK", "v": "JK"},
+            {"n": "近亲", "v": "ITEM_SEP_FJM"},
+            {"n": "巨乳", "v": "ITEM_IJS_FHV"},
+            {"n": "内射", "v": "ITEM_G3P_I6C"},
+            {"n": "口交", "v": "ITEM_GKJ_FJ8"},
+            {"n": "强奸", "v": "ITEM_IT6_HO8"},
+            {"n": "调教", "v": "ITEM_RNN_K0P"},
+            {"n": "颜射", "v": "ITEM_U58_I6C"},
+            {"n": "处女", "v": "ITEM_HL0_HO3"},
+            {"n": "后宫", "v": "ITEM_GLQ_I3V"},
+            {"n": "萝莉", "v": "ITEM_Q3H_PZD"},
+            {"n": "熟女", "v": "ITEM_MFZ_HO3"},
+            {"n": "人妻", "v": "ITEM_FJU_HQ3"},
+            {"n": "纯爱", "v": "ITEM_GLO_FJU_FOC_GQP"},
+            {"n": "校园", "v": "ITEM_K0P_I3O"},
+            {"n": "NTR", "v": "NTR"},
+            {"n": "魅魔", "v": "ITEM_UO5_UOK"},
+            {"n": "魔物娘", "v": "ITEM_UOK_MLL_HSO"},
+            {"n": "触手", "v": "ITEM_R8M_JEZ"},
+            {"n": "百合", "v": "ITEM_NEM_GLK"},
+            {"n": "正太", "v": "ITEM_L7N_HM2"},
+            {"n": "3D", "v": "3D"},
+            {"n": "AI", "v": "AI"},
+        ]
+        self.sort_list = [
+            {"n": "综合排序", "v": "score"},
+            {"n": "最新", "v": "latest"},
+            {"n": "最热", "v": "hot"},
+            {"n": "观看量", "v": "playCount"},
+        ]
+        self.time_list = [
+            {"n": "全部时间", "v": "all"},
+            {"n": "24小时", "v": "24h"},
+            {"n": "一周", "v": "7d"},
+            {"n": "一月", "v": "30d"},
+        ]
+        self.dur_list = [
+            {"n": "全部时长", "v": "all"},
+            {"n": "1分钟+", "v": "1m"},
+            {"n": "5分钟+", "v": "5m"},
+            {"n": "10分钟+", "v": "10m"},
+            {"n": "20分钟+", "v": "20m"},
+        ]
+        self.filters_config = {}
+        for k in self.cat_map:
+            self.filters_config[k] = [
+                {"key": "sort", "name": "排序", "value": self.sort_list},
+                {"key": "time", "name": "时间", "value": self.time_list},
+                {"key": "dur", "name": "时长", "value": self.dur_list},
+                {"key": "tag", "name": "标签", "value": self.tag_list},
+            ]
 
     def getName(self):
         return self.name
@@ -52,18 +108,27 @@ class Spider(object):
                 self.host = h
                 data = lst
                 break
-        return {"class": classes, "filters": {}, "list": data, "type": "影视"}
+        return {"class": classes, "filters": self.filters_config, "list": data, "type": "影视"}
 
     def homeVideoContent(self):
         html = self.get(self.host + "/")
         return {"list": self.parseList(html)[:24]}
 
     def categoryContent(self, tid, pg, filter, extend):
+        extend = extend or {}
         page = int(pg) if pg and str(pg).isdigit() else 1
         cat = self.cat_map.get(tid)
         if not cat:
             return {"page": page, "pagecount": 1, "limit": 24, "total": 0, "list": []}
         path = cat["path"]
+        tag = extend.get("tag", "")
+        if tag:
+            url = self.host + "/search?tag=" + quote(tag) + ("&page=" + str(page) if page > 1 else "")
+            html = self.get(url)
+            pages = [int(p) for p in re.findall(r"/search\?page=(\d+)", html)]
+            pc = max(pages) if pages else 1
+            data = self.parseList(html)
+            return {"page": page, "pagecount": pc, "limit": 24, "total": pc * 24, "list": data}
         if page > 1:
             url = self.host + "/category/" + path + "/page/" + str(page)
         else:
@@ -71,7 +136,9 @@ class Spider(object):
         html = self.get(url)
         pages = [int(p) for p in re.findall(r"/category/[^\"']+/page/(\d+)", html)]
         pc = max(pages) if pages else 1
-        return {"page": page, "pagecount": pc, "limit": 24, "total": pc * 24, "list": self.parseList(html)}
+        data = self.parseListWithMeta(html)
+        data = self.applyFilters(data, extend)
+        return {"page": page, "pagecount": pc, "limit": 24, "total": pc * 24, "list": data}
 
     def detailContent(self, ids):
         sid = ids[0] if ids else ""
@@ -194,14 +261,20 @@ class Spider(object):
                 continue
             ids = re.findall(r'(?:\\"id\\"|\\"contentCode\\"):\\"(CNT\d+)\\"', content)
             titles = re.findall(r'\\"title\\":\\"(.*?)\\",\\"(?:authorName|subTitle)', content)
-            durations = re.findall(r'\\"duration\\":\\"(.*?)\\"', content)
+            durations = [d for d in re.findall(r'\\"duration\\":\\"([^\\"]*)\\"', content) if re.match(r'\d{1,3}:\d{2}', d) or d == '$undefined']
             covers = re.findall(r'\\"coverUrl\\":\\"(https?://[^\\"]*)\\"', content)
+            pub_times = re.findall(r'\\"publishedTime\\":\\"([^\\"]*)\\"', content)
+            play_counts = re.findall(r'\\"playCount\\":(\d+)', content)
+            like_counts = re.findall(r'\\"likeCount\\":(\d+)', content)
             for i in range(min(len(ids), len(covers))):
                 vid = ids[i]
                 title = titles[i].replace("\\/", "/").replace('\\"', '"') if i < len(titles) else ""
                 duration = durations[i] if i < len(durations) and durations[i] != "$undefined" else ""
                 cover = covers[i].replace("\\/", "/")
-                data_map[vid] = {"title": title, "cover": cover, "duration": duration}
+                pub_time = pub_times[i] if i < len(pub_times) else ""
+                play_count = int(play_counts[i]) if i < len(play_counts) else 0
+                like_count = int(like_counts[i]) if i < len(like_counts) else 0
+                data_map[vid] = {"title": title, "cover": cover, "duration": duration, "pub_time": pub_time, "play_count": play_count, "like_count": like_count}
         return data_map
 
     def parseList(self, html):
@@ -226,7 +299,7 @@ class Spider(object):
             duration = vd.get("duration", "")
             if not duration:
                 block = html[m.start():m.start() + 6000]
-                duration = self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>')
+                duration = self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>') or ""
             pic = vd.get("cover", "")
             if not pic:
                 block = html[m.start():m.start() + 6000]
@@ -246,6 +319,121 @@ class Spider(object):
                 "vod_remarks": self.clean(duration) if duration else ""
             })
         return res
+
+    def parseListWithMeta(self, html):
+        res = []
+        if not html:
+            return res
+        video_data = self.extractVideoData(html)
+        seen = set()
+        for m in re.finditer(r'href="/watch/(CNT\d+)"', html):
+            vid = m.group(1)
+            if vid in seen:
+                continue
+            seen.add(vid)
+            vd = video_data.get(vid, {})
+            name = vd.get("title", "")
+            if not name:
+                block = html[m.start():m.start() + 6000]
+                name = (self.match(block, r'<img[^>]*alt="([^"]*)"')
+                        or self.match(block, r'title="([^"]*)"')
+                        or self.match(block, r'<h3[^>]*>([^<]+)')
+                        or vid)
+            duration = vd.get("duration", "")
+            if not duration:
+                block = html[m.start():m.start() + 6000]
+                duration = self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>') or ""
+            pic = vd.get("cover", "")
+            if not pic:
+                block = html[m.start():m.start() + 6000]
+                pic = self.match(block, r'srcSet="[^"]*media-proxy[^"]*url=([^&"]+)') or ""
+                if pic:
+                    pic = unquote(unquote(pic))
+                    if pic.startswith("/"):
+                        pic = self.host + pic
+                if not pic:
+                    pic = self.host + "/images/default-cover.svg"
+            play = ""
+            sid = vid + "@@@" + play + "@@@" + quote(name) + "@@@" + quote(pic)
+            res.append({
+                "vod_id": sid,
+                "vod_name": self.clean(name),
+                "vod_pic": pic,
+                "vod_remarks": self.clean(duration) if duration else "",
+                "_pub_time": vd.get("pub_time", ""),
+                "_play_count": vd.get("play_count", 0),
+                "_like_count": vd.get("like_count", 0),
+                "_duration": duration,
+            })
+        return res
+
+    def applyFilters(self, data, extend):
+        if not data:
+            return data
+        time_filter = extend.get("time", "all")
+        dur_filter = extend.get("dur", "all")
+        sort = extend.get("sort", "score")
+        if time_filter and time_filter != "all":
+            now = datetime.now(timezone(timedelta(hours=8)))
+            if time_filter == "24h":
+                cutoff = now - timedelta(hours=24)
+            elif time_filter == "7d":
+                cutoff = now - timedelta(days=7)
+            elif time_filter == "30d":
+                cutoff = now - timedelta(days=30)
+            else:
+                cutoff = None
+            if cutoff:
+                filtered = []
+                for item in data:
+                    pt = item.get("_pub_time", "")
+                    if pt:
+                        try:
+                            dt = datetime.fromisoformat(pt)
+                            if dt.tzinfo is None:
+                                dt = dt.replace(tzinfo=timezone(timedelta(hours=8)))
+                            if dt >= cutoff:
+                                filtered.append(item)
+                        except:
+                            filtered.append(item)
+                    else:
+                        filtered.append(item)
+                data = filtered
+        if dur_filter and dur_filter != "all":
+            thresholds = {"1m": 60, "5m": 300, "10m": 600, "20m": 1200}
+            threshold = thresholds.get(dur_filter, 0)
+            if threshold:
+                filtered = []
+                for item in data:
+                    dur_str = item.get("_duration", "")
+                    secs = self.durationToSeconds(dur_str)
+                    if secs >= threshold:
+                        filtered.append(item)
+                data = filtered
+        if sort:
+            if sort == "latest":
+                data.sort(key=lambda x: x.get("_pub_time", ""), reverse=True)
+            elif sort == "playCount":
+                data.sort(key=lambda x: x.get("_play_count", 0), reverse=True)
+            elif sort == "hot":
+                data.sort(key=lambda x: (x.get("_play_count", 0) + x.get("_like_count", 0) * 10), reverse=True)
+            elif sort == "score":
+                data.sort(key=lambda x: (x.get("_play_count", 0) * 0.5 + x.get("_like_count", 0) * 5), reverse=True)
+        for item in data:
+            item.pop("_pub_time", None)
+            item.pop("_play_count", None)
+            item.pop("_like_count", None)
+            item.pop("_duration", None)
+        return data
+
+    def durationToSeconds(self, dur_str):
+        if not dur_str:
+            return 0
+        parts = dur_str.split(":")
+        try:
+            return sum(int(p) * (60 ** (len(parts) - 1 - i)) for i, p in enumerate(parts))
+        except:
+            return 0
 
     def extractM3u8FromBlock(self, block, vid):
         m = re.search(r'"contentUrl"\s*:\s*"(https?://[^"]+\.m3u8[^"]*)"', block)
