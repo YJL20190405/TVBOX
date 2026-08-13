@@ -2,7 +2,6 @@
 # coding=utf-8
 import re, json, requests, base64, hashlib
 from urllib.parse import quote, unquote
-from datetime import datetime, timedelta, timezone
 
 class Spider(object):
     def init(self, extend=""):
@@ -136,8 +135,23 @@ class Spider(object):
         html = self.get(url)
         pages = [int(p) for p in re.findall(r"/category/[^\"']+/page/(\d+)", html)]
         pc = max(pages) if pages else 1
-        data = self.parseListWithMeta(html)
-        data = self.applyFilters(data, extend)
+        data = self.parseList(html)
+        try:
+            meta = self.extractVideoData(html)
+            for item in data:
+                vid = item.get("vod_id", "").split("@@@")[0]
+                vd = meta.get(vid, {})
+                item["_pt"] = vd.get("pub_time", "")
+                item["_pc"] = vd.get("play_count", 0)
+                item["_lc"] = vd.get("like_count", 0)
+                item["_dur"] = vd.get("duration", "")
+            data = self.applyFilters(data, extend)
+        except:
+            for item in data:
+                item.pop("_pt", None)
+                item.pop("_pc", None)
+                item.pop("_lc", None)
+                item.pop("_dur", None)
         return {"page": page, "pagecount": pc, "limit": 24, "total": pc * 24, "list": data}
 
     def detailContent(self, ids):
@@ -320,110 +334,48 @@ class Spider(object):
             })
         return res
 
-    def parseListWithMeta(self, html):
-        res = []
-        if not html:
-            return res
-        video_data = self.extractVideoData(html)
-        seen = set()
-        for m in re.finditer(r'href="/watch/(CNT\d+)"', html):
-            vid = m.group(1)
-            if vid in seen:
-                continue
-            seen.add(vid)
-            vd = video_data.get(vid, {})
-            name = vd.get("title", "")
-            if not name:
-                block = html[m.start():m.start() + 6000]
-                name = (self.match(block, r'<img[^>]*alt="([^"]*)"')
-                        or self.match(block, r'title="([^"]*)"')
-                        or self.match(block, r'<h3[^>]*>([^<]+)')
-                        or vid)
-            duration = vd.get("duration", "")
-            if not duration:
-                block = html[m.start():m.start() + 6000]
-                duration = self.match(block, r'>(\d{1,3}:\d{2}(?::\d{2})?)</span>') or ""
-            pic = vd.get("cover", "")
-            if not pic:
-                block = html[m.start():m.start() + 6000]
-                pic = self.match(block, r'srcSet="[^"]*media-proxy[^"]*url=([^&"]+)') or ""
-                if pic:
-                    pic = unquote(unquote(pic))
-                    if pic.startswith("/"):
-                        pic = self.host + pic
-                if not pic:
-                    pic = self.host + "/images/default-cover.svg"
-            play = ""
-            sid = vid + "@@@" + play + "@@@" + quote(name) + "@@@" + quote(pic)
-            res.append({
-                "vod_id": sid,
-                "vod_name": self.clean(name),
-                "vod_pic": pic,
-                "vod_remarks": self.clean(duration) if duration else "",
-                "_pub_time": vd.get("pub_time", ""),
-                "_play_count": vd.get("play_count", 0),
-                "_like_count": vd.get("like_count", 0),
-                "_duration": duration,
-            })
-        return res
-
     def applyFilters(self, data, extend):
         if not data:
             return data
-        time_filter = extend.get("time", "all")
-        dur_filter = extend.get("dur", "all")
-        sort = extend.get("sort", "score")
-        if time_filter and time_filter != "all":
-            now = datetime.now(timezone(timedelta(hours=8)))
-            if time_filter == "24h":
-                cutoff = now - timedelta(hours=24)
-            elif time_filter == "7d":
-                cutoff = now - timedelta(days=7)
-            elif time_filter == "30d":
-                cutoff = now - timedelta(days=30)
-            else:
-                cutoff = None
-            if cutoff:
+        time_f = extend.get("time", "all")
+        dur_f = extend.get("dur", "all")
+        sort = extend.get("sort", "")
+        if time_f and time_f != "all":
+            cutoffs = {"24h": 1, "7d": 7, "30d": 30}
+            days = cutoffs.get(time_f, 0)
+            if days:
+                import time as _t
+                now_str = _t.strftime("%Y-%m-%dT%H:%M:%S", _t.localtime(_t.time() - days * 86400))
                 filtered = []
                 for item in data:
-                    pt = item.get("_pub_time", "")
-                    if pt:
-                        try:
-                            dt = datetime.fromisoformat(pt)
-                            if dt.tzinfo is None:
-                                dt = dt.replace(tzinfo=timezone(timedelta(hours=8)))
-                            if dt >= cutoff:
-                                filtered.append(item)
-                        except:
-                            filtered.append(item)
-                    else:
+                    pt = item.get("_pt", "")
+                    if not pt or pt >= now_str:
                         filtered.append(item)
                 data = filtered
-        if dur_filter and dur_filter != "all":
+        if dur_f and dur_f != "all":
             thresholds = {"1m": 60, "5m": 300, "10m": 600, "20m": 1200}
-            threshold = thresholds.get(dur_filter, 0)
+            threshold = thresholds.get(dur_f, 0)
             if threshold:
                 filtered = []
                 for item in data:
-                    dur_str = item.get("_duration", "")
-                    secs = self.durationToSeconds(dur_str)
+                    secs = self.durationToSeconds(item.get("_dur", ""))
                     if secs >= threshold:
                         filtered.append(item)
                 data = filtered
         if sort:
             if sort == "latest":
-                data.sort(key=lambda x: x.get("_pub_time", ""), reverse=True)
+                data.sort(key=lambda x: x.get("_pt", ""), reverse=True)
             elif sort == "playCount":
-                data.sort(key=lambda x: x.get("_play_count", 0), reverse=True)
+                data.sort(key=lambda x: x.get("_pc", 0), reverse=True)
             elif sort == "hot":
-                data.sort(key=lambda x: (x.get("_play_count", 0) + x.get("_like_count", 0) * 10), reverse=True)
+                data.sort(key=lambda x: (x.get("_pc", 0) + x.get("_lc", 0) * 10), reverse=True)
             elif sort == "score":
-                data.sort(key=lambda x: (x.get("_play_count", 0) * 0.5 + x.get("_like_count", 0) * 5), reverse=True)
+                data.sort(key=lambda x: (x.get("_pc", 0) * 0.5 + x.get("_lc", 0) * 5), reverse=True)
         for item in data:
-            item.pop("_pub_time", None)
-            item.pop("_play_count", None)
-            item.pop("_like_count", None)
-            item.pop("_duration", None)
+            item.pop("_pt", None)
+            item.pop("_pc", None)
+            item.pop("_lc", None)
+            item.pop("_dur", None)
         return data
 
     def durationToSeconds(self, dur_str):
