@@ -2,8 +2,8 @@ import re,json,requests,os
 from urllib.parse import quote,unquote
 from base.spider import Spider
 
-AUTH_EMAIL=os.environ.get("DRAMA_EMAIL","")
-AUTH_PASS=os.environ.get("DRAMA_PASS","")
+AUTH_EMAIL=os.environ.get("DRAMA_EMAIL","test12345678@gmail.com")
+AUTH_PASS=os.environ.get("DRAMA_PASS","Test123456!")
 
 class Spider(Spider):
     def getName(self):return "狂飙短剧"
@@ -16,10 +16,8 @@ class Spider(Spider):
         if self._logged_in:return True
         if not AUTH_EMAIL or not AUTH_PASS:return False
         try:
-            r=self.session.post(self.host+"/api/auth/sign-in/email",json={"email":AUTH_EMAIL,"password":AUTH_PASS},headers=self.headers,timeout=10)
-            if r.status_code==200 and r.json().get("token"):self._logged_in=True;return True
-            r=self.session.post(self.host+"/api/auth/sign-up/email",json={"email":AUTH_EMAIL,"password":AUTH_PASS,"name":"user"+AUTH_EMAIL.split("@")[0][-4:]},headers=self.headers,timeout=10)
-            if r.status_code==200 and r.json().get("token"):self._logged_in=True;return True
+            r=self.session.post(self.host+"/api/auth/sign-in/email",json={"email":AUTH_EMAIL,"password":AUTH_PASS},headers={**self.headers,"Content-Type":"application/json"},timeout=10)
+            if r.status_code==200:self._logged_in=True;return True
         except Exception:pass
         return False
     def _post_api(self,name,data):
