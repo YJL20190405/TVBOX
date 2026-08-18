@@ -80,7 +80,7 @@ class Spider(Spider):
     def _list(self,cache_key="t-5jxcit",pg=1,extra=None):
         pg=int(pg)
         tid=extra.get("tid",cache_key) if extra else cache_key
-        ck_map={"t-eb9c3c":"MOVIE","t-k1gwip":"LONG_DRAMA","t-5jxcit":"SHORT_DRAMA","t-hebbu9":"VARIETY"}
+        ck_map={"t-eb9c3c":"MOVIE","t-k1gwip":"SERIES","t-5jxcit":"SHORT_DRAMA","t-hebbu9":"VARIETY","t-k3onqj":"ANIME"}
         mp={"t-5jxcit":{"contentKind":"SHORT_DRAMA"},"adult_short":{"tagSlug":"adult"},"normal_short":{"contentKind":"SHORT_DRAMA"},"short_kind":{"contentKind":"SHORT_DRAMA"}}
         if tid in ck_map:mp[tid]={"contentKind":ck_map[tid]}
         if pg==1:self.cursor[cache_key]={};self.seen_page[cache_key]=set()
@@ -96,10 +96,13 @@ class Spider(Spider):
             base=mp.get(tid,{"categorySlug":tid})
             cat=extra.get("cat","") if extra else ""
             region=extra.get("region","") if extra else ""
+            kind=base.get("contentKind","")
             if cat:
                 data=dict({"limit":12,"categorySlug":cat})
+                if kind:data["contentKind"]=kind
             elif region:
                 data=dict({"limit":12,"categorySlug":region})
+                if kind:data["contentKind"]=kind
             else:
                 data=dict({"limit":12},**base)
             if cur:data["cursor"]=cur
@@ -107,6 +110,10 @@ class Spider(Spider):
             for _ in range(loops):
                 d=self._api("feed.browse",data);nxt=d.get("nextCursor") if isinstance(d,dict) else ""
                 li=self._items(d,mode,tid=="normal_short")
+                if not li and (cat or region) and d and not d.get("items"):
+                    fb=dict({"limit":12,"categorySlug":cat or region})
+                    d=self._api("feed.browse",fb);nxt=d.get("nextCursor") if isinstance(d,dict) else ""
+                    li=self._items(d,mode,tid=="normal_short")
                 for x in li:
                     k=x.get("vod_id") or re.sub(r"\s+","",x.get("vod_name",""))
                     if k and k not in seen:seen.add(k);out.append(x)
@@ -124,98 +131,112 @@ class Spider(Spider):
             {"type_id":"t-eb9c3c","type_name":"电影"},
             {"type_id":"t-hebbu9","type_name":"综艺"},
             {"type_id":"t-k3onqj","type_name":"动漫"},
-            {"type_id":"t-zuvois","type_name":"国产剧"},
-            {"type_id":"t-3m25gq","type_name":"欧美剧"},
-            {"type_id":"t-ue8oql","type_name":"日剧"},
-            {"type_id":"hktwdrama","type_name":"港台剧"},
-            {"type_id":"kdrama","type_name":"韩剧"},
-            {"type_id":"thaidrama","type_name":"泰剧"},
-            {"type_id":"globaldrama","type_name":"海外剧"},
             {"type_id":"t-mqnyjd","type_name":"创作者"},
         ]
         ft={
-            "t-5jxcit":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"逆袭","v":"revenge"},{"n":"霸总","v":"ceo"},
-                {"n":"豪门","v":"hidden-marriage"},{"n":"重生","v":"rebirth"},
-                {"n":"甜宠","v":"romance"},{"n":"甜虐","v":"romanceangst"},
-                {"n":"男频爽剧","v":"malepower"},{"n":"复仇爽剧","v":"revengedrama"},
-                {"n":"系统","v":"t-kv5ena"},{"n":"古装","v":"ancient"},
-                {"n":"玄幻","v":"fantasy"},{"n":"奇幻","v":"fantasydrama"},
-                {"n":"都市","v":"urban"},{"n":"职场","v":"workplace"},
-                {"n":"校园","v":"campus"},{"n":"青春","v":"youth"},
-                {"n":"双男主","v":"bldrama"},{"n":"双女主","v":"gldrama"},
-                {"n":"女性向","v":"femalelead"},
-            ]}],
-            "t-k1gwip":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"古装","v":"ancient"},{"n":"玄幻","v":"fantasy"},
-                {"n":"奇幻","v":"fantasydrama"},{"n":"科幻","v":"scifi"},
-                {"n":"都市","v":"urban"},{"n":"职场","v":"workplace"},
-                {"n":"校园","v":"campus"},{"n":"青春","v":"youth"},
-                {"n":"家庭","v":"family"},{"n":"宫廷权谋","v":"palacepower"},
-                {"n":"家族商战","v":"familybusiness"},{"n":"医疗","v":"medical"},
-                {"n":"悬疑恋爱","v":"mysteryromance"},{"n":"女性向","v":"femalelead"},
-                {"n":"双男主","v":"bldrama"},{"n":"双女主","v":"gldrama"},
-                {"n":"悬疑","v":"mystery"},{"n":"喜剧","v":"comedy"},
-                {"n":"犯罪","v":"crime"},
-            ]}],
-            "t-eb9c3c":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"动作","v":"action"},{"n":"冒险","v":"adventure"},
-                {"n":"喜剧","v":"comedy"},{"n":"犯罪","v":"crime"},
-                {"n":"悬疑","v":"mystery"},{"n":"惊悚","v":"thriller"},
-                {"n":"恐怖","v":"horror"},{"n":"战争","v":"war"},
-                {"n":"末世灾难","v":"disaster"},{"n":"科幻","v":"scifi"},
-                {"n":"爱情","v":"romance"},{"n":"古装","v":"ancient"},
-            ]}],
+            "t-5jxcit":[
+                {"key":"cat","name":"题材","value":[
+                    {"n":"全部","v":""},
+                    {"n":"逆袭","v":"revenge"},
+                    {"n":"霸总","v":"ceo"},
+                    {"n":"豪门","v":"hidden-marriage"},
+                    {"n":"重生","v":"rebirth"},
+                    {"n":"甜宠","v":"romance"},
+                    {"n":"甜虐","v":"romanceangst"},
+                    {"n":"男频爽剧","v":"malepower"},
+                    {"n":"复仇爽剧","v":"revengedrama"},
+                    {"n":"系统","v":"t-kv5ena"},
+                ]},
+                {"key":"cat","name":"题材","value":[
+                    {"n":"古装","v":"ancient"},
+                    {"n":"玄幻","v":"fantasy"},
+                    {"n":"奇幻","v":"fantasydrama"},
+                    {"n":"都市","v":"urban"},
+                    {"n":"职场","v":"workplace"},
+                    {"n":"校园","v":"campus"},
+                    {"n":"青春","v":"youth"},
+                    {"n":"双男主","v":"bldrama"},
+                    {"n":"双女主","v":"gldrama"},
+                    {"n":"女性向","v":"femalelead"},
+                ]},
+            ],
+            "t-k1gwip":[
+                {"key":"cat","name":"题材","value":[
+                    {"n":"全部","v":""},
+                    {"n":"古装","v":"ancient"},
+                    {"n":"玄幻","v":"fantasy"},
+                    {"n":"奇幻","v":"fantasydrama"},
+                    {"n":"科幻","v":"scifi"},
+                    {"n":"都市","v":"urban"},
+                    {"n":"职场","v":"workplace"},
+                    {"n":"校园","v":"campus"},
+                    {"n":"青春","v":"youth"},
+                    {"n":"家庭","v":"family"},
+                    {"n":"宫廷权谋","v":"palacepower"},
+                    {"n":"家族商战","v":"familybusiness"},
+                ]},
+                {"key":"cat","name":"题材","value":[
+                    {"n":"医疗","v":"medical"},
+                    {"n":"悬疑恋爱","v":"mysteryromance"},
+                    {"n":"女性向","v":"femalelead"},
+                    {"n":"双男主","v":"bldrama"},
+                    {"n":"双女主","v":"gldrama"},
+                    {"n":"悬疑","v":"mystery"},
+                    {"n":"喜剧","v":"comedy"},
+                    {"n":"犯罪","v":"crime"},
+                    {"n":"爱情","v":"romance"},
+                    {"n":"甜虐","v":"romanceangst"},
+                    {"n":"惊悚","v":"thriller"},
+                    {"n":"动作","v":"action"},
+                ]},
+            ],
+            "t-eb9c3c":[
+                {"key":"cat","name":"题材","value":[
+                    {"n":"全部","v":""},
+                    {"n":"动作","v":"action"},
+                    {"n":"喜剧","v":"comedy"},
+                    {"n":"犯罪","v":"crime"},
+                    {"n":"悬疑","v":"mystery"},
+                    {"n":"惊悚","v":"thriller"},
+                    {"n":"恐怖","v":"horror"},
+                    {"n":"末世灾难","v":"disaster"},
+                    {"n":"科幻","v":"scifi"},
+                    {"n":"爱情","v":"romance"},
+                ]},
+                {"key":"cat","name":"题材","value":[
+                    {"n":"古装","v":"ancient"},
+                    {"n":"玄幻","v":"fantasy"},
+                    {"n":"都市","v":"urban"},
+                    {"n":"家庭","v":"family"},
+                    {"n":"职场","v":"workplace"},
+                    {"n":"宫廷权谋","v":"palacepower"},
+                    {"n":"双男主","v":"bldrama"},
+                    {"n":"甜虐","v":"romanceangst"},
+                    {"n":"校园","v":"campus"},
+                ]},
+            ],
             "t-hebbu9":[{"key":"cat","name":"类型","value":[
-                {"n":"全部","v":""},{"n":"脱口秀","v":"talkshow"},
-                {"n":"真人秀","v":"realityshow"},{"n":"体育","v":"sports"},
+                {"n":"全部","v":""},
+                {"n":"真人秀","v":"realityshow"},
+                {"n":"体育","v":"sports"},
             ]}],
-            "t-k3onqj":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"玄幻","v":"fantasy"},
-                {"n":"奇幻","v":"fantasydrama"},{"n":"冒险","v":"adventure"},
-                {"n":"双男主","v":"bldrama"},{"n":"双女主","v":"gldrama"},
-                {"n":"热血","v":"malepower"},{"n":"系统","v":"t-kv5ena"},
-            ]}],
-            "t-zuvois":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"古装","v":"ancient"},{"n":"都市","v":"urban"},
-                {"n":"家庭","v":"family"},{"n":"宫廷权谋","v":"palacepower"},
-                {"n":"悬疑","v":"mystery"},{"n":"喜剧","v":"comedy"},
-                {"n":"双男主","v":"bldrama"},
-            ]}],
-            "t-3m25gq":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"悬疑","v":"mystery"},
-                {"n":"犯罪","v":"crime"},{"n":"惊悚","v":"thriller"},
-                {"n":"科幻","v":"scifi"},{"n":"动作","v":"action"},
-                {"n":"冒险","v":"adventure"},
-            ]}],
-            "t-ue8oql":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"悬疑","v":"mystery"},
-                {"n":"犯罪","v":"crime"},{"n":"喜剧","v":"comedy"},
-                {"n":"爱情","v":"romance"},{"n":"职场","v":"workplace"},
-                {"n":"家庭","v":"family"},
-            ]}],
-            "hktwdrama":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"悬疑","v":"mystery"},
-                {"n":"犯罪","v":"crime"},{"n":"喜剧","v":"comedy"},
-                {"n":"都市","v":"urban"},{"n":"职场","v":"workplace"},
-            ]}],
-            "kdrama":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"爱情","v":"romance"},
-                {"n":"甜虐","v":"romanceangst"},{"n":"古装","v":"ancient"},
-                {"n":"悬疑","v":"mystery"},{"n":"喜剧","v":"comedy"},
-                {"n":"家庭","v":"family"},
-            ]}],
-            "thaidrama":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"爱情","v":"romance"},
-                {"n":"双男主","v":"bldrama"},{"n":"校园","v":"campus"},
-            ]}],
-            "globaldrama":[{"key":"cat","name":"题材","value":[
-                {"n":"全部","v":""},{"n":"悬疑","v":"mystery"},
-                {"n":"犯罪","v":"crime"},{"n":"科幻","v":"scifi"},
-                {"n":"惊悚","v":"thriller"},{"n":"战争","v":"war"},
-                {"n":"动作","v":"action"},
-            ]}],
+            "t-k3onqj":[
+                {"key":"cat","name":"题材","value":[
+                    {"n":"全部","v":""},
+                    {"n":"玄幻","v":"fantasy"},
+                    {"n":"奇幻","v":"fantasydrama"},
+                    {"n":"双男主","v":"bldrama"},
+                ]},
+                {"key":"cat","name":"题材","value":[
+                    {"n":"双女主","v":"gldrama"},
+                    {"n":"热血","v":"malepower"},
+                    {"n":"系统","v":"t-kv5ena"},
+                ]},
+            ],
         }
+        regions={"key":"region","name":"地区","value":[{"n":"全部","v":""},{"n":"国产剧","v":"t-zuvois"},{"n":"日剧","v":"t-ue8oql"},{"n":"港台剧","v":"hktwdrama"},{"n":"韩剧","v":"kdrama"},{"n":"泰剧","v":"thaidrama"},{"n":"海外剧","v":"globaldrama"}]}
+        for tid in ["t-5jxcit","t-k1gwip","t-eb9c3c","t-hebbu9","t-k3onqj"]:
+            ft.setdefault(tid,[]).append(regions)
         li=self._list("recommend") or self._list("t-5jxcit") or self._fallback_items()
         return {"class":cls,"list":li,"filters":ft}
     def categoryContent(self,tid,pg,filter,extend):
