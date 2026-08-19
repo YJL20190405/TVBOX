@@ -42,7 +42,12 @@ def _verify(host, ip, port):
         ss = ctx.wrap_socket(s, server_hostname=host)
         ss.settimeout(8)
         ss.sendall(b"GET / HTTP/1.1\r\nHost: " + host.encode() + b"\r\nConnection: close\r\nUser-Agent: Mozilla/5.0\r\n\r\n")
-        head = ss.recv(512)
+        head = b""
+        while b"\r\n\r\n" not in head:
+            chunk = ss.recv(512)
+            if not chunk:
+                break
+            head += chunk
         ss.close()
         return head.startswith(b"HTTP/")
     except Exception:
@@ -82,9 +87,10 @@ def _doh_resolve(host, port=443):
 
 def _pinned_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
     if isinstance(host, str) and host not in _DOH_HOSTS:
-        ip = _doh_resolve(host)
+        pnum = int(port) if isinstance(port, int) else 443
+        ip = _doh_resolve(host, pnum)
         if ip:
-            return [(socket.AF_INET, socket.SOCK_STREAM, 6, "", (host, port))]
+            return [(socket.AF_INET, socket.SOCK_STREAM, 6, "", (ip, port))]
     return _orig_getaddrinfo(host, port, family, type, proto, flags)
 
 socket.getaddrinfo = _pinned_getaddrinfo
