@@ -13,6 +13,8 @@ from base.spider import Spider
 _PIN_MAP = {}
 _PIN_INSTALLED = [False]
 _POISON_IP_PREFIX = ('31.13.94.', '31.13.95.', '75.126.', '157.240.')
+_PIN_CACHE_TTL = [1800]
+_PIN_TIME = {}
 
 
 def _install_pin():
@@ -59,11 +61,16 @@ def _doh_resolve(hostname):
 
 def _doh_pin_domain(hostname, fallback=None):
     """国内 DNS 污染时,通过 DoH 获取真实 IP,并钉扎域名解析,绕过被劫持的系统 DNS。
-    仅对指定 hostname 生效,不影响其他域名解析。DoH 失败时可用 fallback IP 兜底。"""
+    仅对指定 hostname 生效,不影响其他域名解析。DoH 失败时可用 fallback IP 兜底。
+    已钉扎的域名在缓存期内直接复用,避免每个分片请求都重复 DoH 查询拖慢播放。"""
     try:
         if not hostname:
             return
         _install_pin()
+        import time
+        _now = time.time()
+        if hostname in _PIN_MAP and _now - _PIN_TIME.get(hostname, 0) < _PIN_CACHE_TTL[0]:
+            return
         picked = _doh_resolve(hostname)
         if not picked and fallback:
             picked = list(fallback)
@@ -71,6 +78,7 @@ def _doh_pin_domain(hostname, fallback=None):
             picked = list(dict.fromkeys(list(fallback) + picked))
         if picked:
             _PIN_MAP[hostname] = picked
+            _PIN_TIME[hostname] = _now
     except Exception:
         pass
 
@@ -182,9 +190,43 @@ class Spider(Spider):
         except Exception:
             return ""
 
+    def _img_proxy_url(self, url):
+        if not url:
+            return ""
+        pic_b64 = base64.b64encode(url.encode("utf-8")).decode("utf-8")
+        b = self._proxy_base()
+        return b + "type=tbr_img&url=" + quote(pic_b64, safe="")
+
     def _parse_list_cards(self, html):
         videos = []
         seen = set()
+        arr = self._nuxt_payload(html)
+        if arr:
+            deref = self._make_deref(arr)
+            root = deref(arr)
+
+            def collect(o):
+                if isinstance(o, dict):
+                    vid = o.get("video_id")
+                    if isinstance(vid, (str, int)) and o.get("title") and o.get("cover"):
+                        vid = str(vid)
+                        if vid not in seen:
+                            seen.add(vid)
+                            videos.append({
+                                "vod_id": vid,
+                                "vod_name": o["title"],
+                                "vod_pic": self._img_proxy_url(o["cover"]),
+                                "vod_remarks": "",
+                            })
+                    for v in o.values():
+                        collect(v)
+                elif isinstance(o, list):
+                    for v in o:
+                        collect(v)
+
+            collect(root)
+        if videos:
+            return videos
         pat = re.compile(r'<a href="/drama-play\?id=(\d+)[^"]*"')
         for m in pat.finditer(html or ""):
             pid = m.group(1)
@@ -228,7 +270,7 @@ class Spider(Spider):
             videos.append({
                 "vod_id": pid,
                 "vod_name": title,
-                "vod_pic": cover,
+                "vod_pic": self._img_proxy_url(cover),
                 "vod_remarks": "",
             })
         return videos
@@ -293,7 +335,7 @@ class Spider(Spider):
         vod = {
             "vod_id": pid,
             "vod_name": d.get("video_title") or "",
-            "vod_pic": d.get("cover_img") or "",
+            "vod_pic": self._img_proxy_url(d.get("cover_img") or ""),
             "vod_play_from": "51短剧",
             "vod_play_url": vod_play_url,
             "vod_content": d.get("description") or "",
@@ -362,6 +404,7 @@ class Spider(Spider):
             if pad != 4:
                 img_b64 += "=" * pad
             img_url = base64.b64decode(img_b64).decode("utf-8")
+            _pin_url_host(img_url)
             img_headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
                 "Referer": self.host + "/",
