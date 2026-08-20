@@ -18,7 +18,7 @@
 		},
         {
 			"key": "社区",
-			"name": "💞玩物社区（可做模板） 🔞[短听漫说][成人]",
+			"name": "💞玩物社区 🔞[短听漫说[🔞短剧][成人]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/玩物社区.py"
 		},
@@ -29,30 +29,30 @@
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/艾旦影视🔞.py"
 		},
         {"key": "狂飙短剧",
-         "name": "🐬狂飙短剧.py｜🔞[成人短剧]",
+         "name": "🐬狂飙短剧.py｜[🔞短剧]",
           "type": 3, 
           "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/狂飙短剧.py"    },
         {
       "key": "黄果短剧",
-      "name": "🐬黄果短剧.py🔞[成人短剧]",
+      "name": "🐬黄果短剧.py[🔞短剧]",
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/黄果短剧.py"
     },
            {
       "key": "51短剧",
-      "name": "🐬51短剧.py🔞[成人短剧]",
+      "name": "🐬51短剧.py[🔞短剧]",
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/51短剧.py"
     },
     {
 			"key": "wddj",
-			"name": "🐬黄豆短剧.py🔞[成人短剧]",
+			"name": "🐬黄豆短剧.py[🔞短剧]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/黄豆短剧.py"
 		},
     {
       "key": "夜社",
-      "name": "🐬夜社.py[成人短剧][短听漫说][成人]｜🔞",
+      "name": "🐬夜社.py[🔞短剧][短听漫说][成人]｜🔞",
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/uuy988/fgh998/refs/heads/main/py/夜社🔞TG @hshsjk9.py"
     },
@@ -104,31 +104,31 @@
 		},
 {
 			"key": "shjb",
-			"name": "🐬色播聚合.py｜🔞[成人直播]",
+			"name": "🐬色播聚合.py[🔞直播]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/色播聚合.py"
 		},
 		{
 			"key": "stripchat",
-			"name": "🐬stripchat直播.py｜🔞[成人直播]",
+			"name": "🐬stripchat直播.py[🔞直播]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/stripchat.py"
 		},
 		{
 			"key": "Cam4",
-			"name": "🐬Cam4直播.py｜🔞[成人直播]",
+			"name": "🐬Cam4直播.py[🔞直播]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Cam4直播.py"
 		},
 		{
 			"key": "Pandalive",
-			"name": "🐬韩国Pandalive直播.py｜🔞[成人直播]",
+			"name": "🐬韩国Pandalive直播.py[🔞直播]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Pandalive直播.py"
 		},
             {
       "key": "myfreecams直播",
-      "name": "🐬myfreecams直播.py｜🔞[成人直播]",
+      "name": "🐬myfreecams直播.py[🔞直播]",
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/uuy988/fgh998/refs/heads/main/py/myfreecams直播🔞TG @hshsjk9.py"
     },
@@ -141,7 +141,7 @@
 		},
 		{
 			"key": "采集聚合成人",
-			"name": "🐬采集聚合成人.py｜🔞[采集成人]",
+			"name": "🐬采集聚合成人.py｜🔞[成人]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/采集聚合成人.py"
 		},
