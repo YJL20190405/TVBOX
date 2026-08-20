@@ -18,7 +18,7 @@
 		},
         {
 			"key": "社区",
-			"name": "💞玩物社区（可做模板） 🔞[成人]",
+			"name": "💞玩物社区（可做模板） 🔞[短听漫说][成人]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/玩物社区.py"
 		},
@@ -50,6 +50,12 @@
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/黄豆短剧.py"
 		},
+    {
+      "key": "夜社",
+      "name": "🐬夜社.py[成人短剧][短听漫说][成人]｜🔞",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/uuy988/fgh998/refs/heads/main/py/夜社🔞TG @hshsjk9.py"
+    },
            {
       "key": "UU视视APP",
       "name": "🐬UU视视APP.py[成人]｜🔞",
