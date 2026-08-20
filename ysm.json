@@ -175,17 +175,17 @@
         {"key":"美剧天堂","name":"⚡[潇洒]磁力┃美剧天堂","type":3,"api":"csp_MeijuTT",
         "jar":"https://raw.giteeusercontent.com/youngxiayang/YJL/raw/master/JAR/xsDM.jar",
         "searchable":1,"quickSearch":1,"filterable":1},
-        {"key": "HonHon","name": "🐠[摸鱼]┃红红短剧","type": 3,"api": "csp_HonHon","searchable": 1,"quickSearch": 1,"genre": "shortdrama","filterable": 1,"ext": {"host": "https://short.fishcloud.top","quality": "1080p","danmu": false}},
-        {"key": "csp_XYQHiker_兔小贝","name":"🐰兔小贝动漫(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
+        {"key": "HonHon","name": "🐠[摸鱼]┃红红[短剧]","type": 3,"api": "csp_HonHon","searchable": 1,"quickSearch": 1,"genre": "shortdrama","filterable": 1,"ext": {"host": "https://short.fishcloud.top","quality": "1080p","danmu": false}},
+        {"key": "csp_XYQHiker_兔小贝","name":"🐰兔小贝[动漫](XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,
         "jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
         "ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/兔小贝.json"},
-         {"key": "番薯动漫","name": "🐠[摸鱼]┃番薯动漫","type": 3,"quickSearch": 1,"api": "csp_FanShu","ext":
+         {"key": "番薯动漫","name": "🐠[摸鱼]┃番薯[动漫]","type": 3,"quickSearch": 1,"api": "csp_FanShu","ext":
            "https://max.moyu666666.top/fanshu.php"},
-    {"key": "Manbo","name": "🐠[摸鱼]┃曼波动漫","type": 3,"api": "csp_AppGet","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":
+    {"key": "Manbo","name": "🐠[摸鱼]┃曼波[动漫]","type": 3,"api": "csp_AppGet","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":
       "AUzH3yIWvgQkyhQw17uONTsfuN8PupZ/LJdr5C31Y/CWlzSNmarYI5kaJYN5c0p6+Oq0tXuTutQo9MHHytxulL5kmapDuAK5+2NTlpsUgBnr0tOamm69Fwb+jFDQ7VW46qf5EFY+Ea3PHzkpfeObKPM="},
-    {"key": "Gugu","name": "🐠[摸鱼]┃咕咕动漫","type": 3,"api": "csp_AppGet","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":
+    {"key": "Gugu","name": "🐠[摸鱼]┃咕咕[动漫]","type": 3,"api": "csp_AppGet","searchable": 1,"quickSearch": 1,"filterable": 1,"ext":
       "ARKK6LQnl4dB2QciLugEzZ8QD2WdbeK23tPAre1QOEbbL5BfB8cV39JNfSd2+Xhcqr/z+V5To0krLYHUX7NtRtwYBC44/9ayncZMomdbv4ZCBNOUsBEedUQx7SWf1J0pE0BsLG9QlR8tURwRwx/sqT0="},
-       {"key":"异世界","name":"💒[潇洒]js┃异世界动漫","type":3,
+       {"key":"异世界","name":"💒[潇洒]js┃异世界[动漫]","type":3,
        "api":"https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
          "searchable":1,"quickSearch":1,"filterable":1,
        "ext":"https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/js/YSJ.js"},   
@@ -199,7 +199,7 @@
       		{"key": "cjjh","name": "🐬采集聚合.py[追剧]","type": 3,
               "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/采集聚合.py"},
         //{"key": "csp_XYQHiker_九八剧","name":"🍷九八剧(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar","ext":"https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/XYQHiker/九八剧.json"},
-                {"key": "Wexconfig","name": "🐮牛二┃配置中心🐮","type": 3,"api": "csp_WexConfigGuard","searchable": 0,"changeable": 0,"indexs": 0,
+                {"key": "Wexconfig","name": "🐮[二小]┃配置中心🐮","type": 3,"api": "csp_WexConfigGuard","searchable": 0,"changeable": 0,"indexs": 0,
                 "jar":"https://zl.wpscdn.cn/2026/07/29/space_img/3a24811b-1e67-44f4-ac86-21660c46841b.png;md5;48534c2903b56915217484979218701c",
                 "style": {"type": "list"}},
       {"key":"配置","name":"🏖[潇洒]┃配置中心","type":3,"api":"csp_Config","searchable":0,"changeable":0,"indexs":0,
@@ -212,7 +212,7 @@
      {"key":"LiveDouYu","name":"🐳斗鱼┃[直播]🐳","type":3,"api":"csp_LiveDouYuGuard",
        "jar":"https://zl.wpscdn.cn/2026/07/29/space_img/3a24811b-1e67-44f4-ac86-21660c46841b.png;md5;48534c2903b56915217484979218701c",
        "searchable":1,"changeable":1},
-          {"key": "ALLLive","name": "[🐠直播]┃聚合","type": 3,"api": "csp_ALLLive","searchable": 1},
+          {"key": "ALLLive","name": "🐠[摸鱼][直播]┃聚合","type": 3,"api": "csp_ALLLive","searchable": 1},
 {"key": "Market","name": "🐠[摸鱼]网盘┃市场","type": 3,"api": "csp_Market","searchable": 0,"indexs": 0,"style": {  "type": "list"},
   "ext": "AWmNzXUj5sW3E9cmHg7HzJYgcAvvRz30uYzOo5s+V+dNu26wvhfMrZXAaq9RcngbFaXU6gtq9etJ6nql9shxXjY567AyaX/mLQYkQNARHNfUnsxZ3sLFpUWallggHoCuAf0dAiLFsgi3T9KAB9sPHpuYrBF26N3YZX6a62CsVtBgqMXEP0Apg8s12I6R7dUOT0F6+Cr0+P3JmOcA98Ir/RkGi0AaWDwQSPtVOarYdbvhy1WzXn//N9hGjuXYhRnJgOmBiWPZAacCyxbFHLV0G/vjjbEXMK7fLa1KLdJ9RWWz9/Z0UevEdx2CEqTKsJFjD7WOxrsubZps5ylQj3ZQqBF0m9A8wBDhz2oksq5VrXsUolAHAKrNaz0t8K13IRbkxA3fYUH6v2YTzcz5HYrAz7McDNJyDfXLIw3bVwH+FU97"},
     {"key": "Local","name": "📁┃文件┃浏览","type": 3,"api": "csp_Local","searchable": 0,"changeable": 0,"indexs": 0,
