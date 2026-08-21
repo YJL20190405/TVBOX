@@ -26,7 +26,7 @@ _DOH_SERVERS = (
     "https://cloudflare-dns.com/dns-query?name=%s&type=A",
 )
 _DOH_HOSTS = {"doh.pub", "dns.alidns.com", "dns.google", "cloudflare-dns.com"}
-_FALLBACK_IPS = {"lzlukvca.cc": "104.21.12.21", "d3rorc0p4i1kyz.cloudfront.net": "52.222.206.47"}
+_FALLBACK_IPS = {"lzlukvca.cc": "104.21.12.21", "d3rorc0p4i1kyz.cloudfront.net": "52.222.206.47", "d2uz9pk0dgek0p.cloudfront.net": "18.64.16.48"}
 _IP_RE = re.compile(r"^\d{1,3}(?:\.\d{1,3}){3}$")
 _doh_cache = {}
 _orig_getaddrinfo = socket.getaddrinfo
@@ -220,9 +220,9 @@ class Spider(BaseSpider):
         if eps:
             for i, ep in enumerate(eps, 1):
                 seq = ep.get("seq") or ep.get("episode") or ep.get("ep") or i
-                play.append("%s$%s" % (ep.get("name") or ep.get("title") or "第%s集" % seq, self._proxy_url("m3u8", "%s|%s" % (vod_id, seq))))
+                play.append("%s$%s|%s" % (ep.get("name") or ep.get("title") or "第%s集" % seq, vod_id, seq))
         else:
-            play = ["第%s集$%s" % (i, self._proxy_url("m3u8", "%s|%s" % (vod_id, i))) for i in range(1, count + 1)]
+            play = ["第%s集$%s|%s" % (i, vod_id, i) for i in range(1, count + 1)]
         vod = {"vod_id": vod_id, "vod_name": name, "vod_pic": self._pic(data), "type_name": data.get("category") or data.get("type") or "", "vod_year": "", "vod_area": "", "vod_remarks": data.get("update_label") or "全%s集" % count, "vod_actor": "", "vod_director": "", "vod_content": data.get("description") or data.get("summary") or name, "vod_play_from": self.name, "vod_play_url": "#".join(play)}
         return {"list": [vod], "parse": 0, "jx": 0}
 
@@ -234,12 +234,27 @@ class Spider(BaseSpider):
     def playerContent(self, flag, id, vipFlags):
         s = str(id)
         if s.startswith("proxy?") or s.startswith("/proxy?") or s.startswith("/local/") or s.startswith("local://") or s.startswith("http://127.0.0.1"):
-            return {"parse": 0, "playUrl": "", "url": s, "jx": 0, "header": self.media_header}
-        vid, seq = self._split(s)
+            p = self._param(s)
+            inner = unquote(p.get("url", ""))
+            if inner.startswith("http://") or inner.startswith("https://"):
+                vid, seq = "", "1"
+            else:
+                vid, seq = self._split(inner)
+        else:
+            vid, seq = self._split(s)
+        if not vid:
+            return {"parse": 0, "playUrl": "", "url": s, "jx": 0, "header": json.dumps(self.media_header)}
         obj = self._api("/drama/play", {"id": vid, "seq": str(seq)}, True)
         data = obj.get("data", {}) if isinstance(obj, dict) else {}
         url = data.get("m3u8") or data.get("url") or self._hls(vid, seq)
-        return {"parse": 0, "playUrl": "", "url": self._proxy_url("m3u8", url), "jx": 0, "header": self.media_header}
+        try:
+            text = self._media_get(url).content.decode("utf-8", "ignore")
+            if "#EXTM3U" in text:
+                import base64
+                return {"parse": 0, "playUrl": "", "url": "data:application/vnd.apple.mpegurl;base64," + base64.b64encode(text.encode("utf-8")).decode("ascii"), "jx": 0, "header": ""}
+        except Exception:
+            pass
+        return {"parse": 0, "playUrl": "", "url": self._proxy_url("m3u8", url), "jx": 0, "header": json.dumps(self.media_header)}
 
     def localProxy(self, param):
         p = self._param(param)
