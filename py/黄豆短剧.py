@@ -386,21 +386,56 @@ class Spider(BaseSpider):
         return json.loads(plain.decode("utf-8"))
 
     _FALLBACK_CLASSES = [
-        {"type_id": "all", "type_name": "全部短剧"},
-        {"type_id": "recommend", "type_name": "推荐"},
-        {"type_id": "xuanhuan", "type_name": "玄幻"},
-        {"type_id": "dushi", "type_name": "都市"},
-        {"type_id": "chuanyue", "type_name": "穿越"},
-        {"type_id": "yanqing", "type_name": "言情"},
-        {"type_id": "zongcai", "type_name": "总裁"},
-        {"type_id": "shenhao", "type_name": "神豪"},
-        {"type_id": "kangzhan", "type_name": "抗战"},
-        {"type_id": "gufeng", "type_name": "古风"},
-        {"type_id": "xiaoyuan", "type_name": "校园"},
-        {"type_id": "tuili", "type_name": "推理"},
-        {"type_id": "jizhang", "type_name": "逆袭"},
-        {"type_id": "yuandou", "type_name": "圆豆专区"},
+        {"type_id": "all", "type_name": "全部短剧(兜底)"},
+        {"type_id": "huangdouyuanchuang", "type_name": "黄豆原创(兜底)"},
+        {"type_id": "mogai", "type_name": "魔改短剧(兜底)"},
+        {"type_id": "aiman", "type_name": "AI漫剧(兜底)"},
+        {"type_id": "dongman", "type_name": "动漫(兜底)"},
+        {"type_id": "cabian", "type_name": "擦边短剧(兜底)"},
+        {"type_id": "xianzhe", "type_name": "贤者(兜底)"},
+        {"type_id": "heiliao", "type_name": "黑料(兜底)"},
+        {"type_id": "chuanmei", "type_name": "传媒(兜底)"},
+        {"type_id": "oumei", "type_name": "欧美(兜底)"},
+        {"type_id": "zhenren", "type_name": "真人短剧(兜底)"},
+        {"type_id": "yuandou", "type_name": "圆豆专区(兜底)"},
     ]
+
+    def _cache_file(self):
+        try:
+            d = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".huangdou_cache")
+            os.makedirs(d, exist_ok=True)
+            return os.path.join(d, "classes.json")
+        except Exception:
+            return ""
+
+    def _load_cache(self, key):
+        try:
+            f = self._cache_file()
+            if f and os.path.exists(f):
+                with open(f, "r", encoding="utf-8") as fp:
+                    obj = json.load(fp)
+                return obj.get(key)
+        except Exception:
+            pass
+        return None
+
+    def _save_cache(self, key, value):
+        try:
+            f = self._cache_file()
+            if f:
+                obj = {}
+                if os.path.exists(f):
+                    try:
+                        with open(f, "r", encoding="utf-8") as fp:
+                            obj = json.load(fp)
+                    except Exception:
+                        pass
+                obj[key] = value
+                obj["_time_" + key] = int(time.time())
+                with open(f, "w", encoding="utf-8") as fp:
+                    json.dump(obj, fp, ensure_ascii=False)
+        except Exception:
+            pass
 
     def _classes(self):
         if self.class_cache:
@@ -415,8 +450,17 @@ class Spider(BaseSpider):
                 if tid and name:
                     arr.append({"type_id": tid, "type_name": name})
             self.class_cache = arr
+            self._save_cache("classes", arr)
         else:
-            arr = [dict(c) for c in self._FALLBACK_CLASSES]
+            cached = self._load_cache("classes")
+            if cached and isinstance(cached, list) and len(cached) > 1:
+                arr = [dict(c) for c in cached]
+                arr[0]["type_name"] = arr[0].get("type_name", "") + "(缓存)"
+                for i in range(1, len(arr)):
+                    if "(" not in arr[i].get("type_name", ""):
+                        arr[i]["type_name"] = arr[i]["type_name"] + "(缓存)"
+            else:
+                arr = [dict(c) for c in self._FALLBACK_CLASSES]
         return arr
 
     def _filters(self, classes):
