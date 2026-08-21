@@ -346,23 +346,30 @@ class Spider(BaseSpider):
             pass
         return {k: v for k, v in parse_qsl(s)}
 
-    def _api(self, path, data=None, silent=False):
+    def _api(self, path, data=None, silent=False, max_retry=3):
         path = "/" + path.lstrip("/")
-        rid = str(uuid.uuid4())
-        key = self._key(rid)
-        iv = os.urandom(16)
-        raw = json.dumps({"token": self.token or "", "deviceId": self.device_id, "data": data or {}}, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-        body = iv + _AESCBC.encrypt(gzip.compress(raw), key, iv)
-        ts = int(time.time())
-        sign = hashlib.sha256(("Dart|%s|%s|%s|%s" % (self.session_id, rid, ts, path)).encode("utf-8")).hexdigest() + "-" + str(ts)
-        h = dict(self.headers)
-        h.update({"version": self.version, "deviceType": self.device_type, "time": str(ts), "sign": sign, "requestId": rid, "sessionId": self.session_id, "deviceBrand": "", "deviceModel": "", "systemName": "", "systemVersion": ""})
-        try:
-            r = self.session.post(self.api + path, data=body, headers=h, timeout=20, verify=False)
-            r.raise_for_status()
-            return self._decode(r.content, rid)
-        except Exception:
-            return {}
+        last_err = None
+        for attempt in range(max_retry):
+            try:
+                rid = str(uuid.uuid4())
+                key = self._key(rid)
+                iv = os.urandom(16)
+                raw = json.dumps({"token": self.token or "", "deviceId": self.device_id, "data": data or {}}, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+                body = iv + _AESCBC.encrypt(gzip.compress(raw), key, iv)
+                ts = int(time.time())
+                sign = hashlib.sha256(("Dart|%s|%s|%s|%s" % (self.session_id, rid, ts, path)).encode("utf-8")).hexdigest() + "-" + str(ts)
+                h = dict(self.headers)
+                h.update({"version": self.version, "deviceType": self.device_type, "time": str(ts), "sign": sign, "requestId": rid, "sessionId": self.session_id, "deviceBrand": "", "deviceModel": "", "systemName": "", "systemVersion": ""})
+                r = self.session.post(self.api + path, data=body, headers=h, timeout=20, verify=False)
+                r.raise_for_status()
+                result = self._decode(r.content, rid)
+                if result or attempt == max_retry - 1:
+                    return result
+            except Exception as e:
+                last_err = e
+            if attempt < max_retry - 1:
+                time.sleep(1 + attempt)
+        return {}
 
     def _key(self, rid):
         return hmac.new(self.platform_key.encode("utf-8"), bytes.fromhex(str(rid).replace("-", "")), hashlib.sha256).digest()
@@ -378,17 +385,38 @@ class Spider(BaseSpider):
             plain = gzip.decompress(plain)
         return json.loads(plain.decode("utf-8"))
 
+    _FALLBACK_CLASSES = [
+        {"type_id": "all", "type_name": "全部短剧"},
+        {"type_id": "recommend", "type_name": "推荐"},
+        {"type_id": "xuanhuan", "type_name": "玄幻"},
+        {"type_id": "dushi", "type_name": "都市"},
+        {"type_id": "chuanyue", "type_name": "穿越"},
+        {"type_id": "yanqing", "type_name": "言情"},
+        {"type_id": "zongcai", "type_name": "总裁"},
+        {"type_id": "shenhao", "type_name": "神豪"},
+        {"type_id": "kangzhan", "type_name": "抗战"},
+        {"type_id": "gufeng", "type_name": "古风"},
+        {"type_id": "xiaoyuan", "type_name": "校园"},
+        {"type_id": "tuili", "type_name": "推理"},
+        {"type_id": "jizhang", "type_name": "逆袭"},
+        {"type_id": "yuandou", "type_name": "圆豆专区"},
+    ]
+
     def _classes(self):
         if self.class_cache:
             return self.class_cache
         arr = [{"type_id": "all", "type_name": "全部短剧"}]
         data = self._api("/drama/navList", {})
-        for item in self._list(data.get("data", data) if isinstance(data, dict) else data):
-            tid = str(item.get("code") or item.get("id") or item.get("cat_id") or "")
-            name = item.get("name") or item.get("title") or tid
-            if tid and name:
-                arr.append({"type_id": tid, "type_name": name})
-        self.class_cache = arr
+        items = self._list(data.get("data", data) if isinstance(data, dict) else data)
+        if items:
+            for item in items:
+                tid = str(item.get("code") or item.get("id") or item.get("cat_id") or "")
+                name = item.get("name") or item.get("title") or tid
+                if tid and name:
+                    arr.append({"type_id": tid, "type_name": name})
+            self.class_cache = arr
+        else:
+            arr = [dict(c) for c in self._FALLBACK_CLASSES]
         return arr
 
     def _filters(self, classes):
