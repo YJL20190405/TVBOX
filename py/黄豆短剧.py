@@ -237,14 +237,24 @@ class Spider(BaseSpider):
             p = self._param(s)
             inner = unquote(p.get("url", ""))
             if inner.startswith("http://") or inner.startswith("https://"):
-                return {"parse": 0, "playUrl": "", "url": inner, "jx": 0, "header": json.dumps(self.media_header)}
-            vid, seq = self._split(inner)
+                vid, seq = "", "1"
+            else:
+                vid, seq = self._split(inner)
         else:
             vid, seq = self._split(s)
+        if not vid:
+            return {"parse": 0, "playUrl": "", "url": s, "jx": 0, "header": json.dumps(self.media_header)}
         obj = self._api("/drama/play", {"id": vid, "seq": str(seq)}, True)
         data = obj.get("data", {}) if isinstance(obj, dict) else {}
         url = data.get("m3u8") or data.get("url") or self._hls(vid, seq)
-        return {"parse": 0, "playUrl": "", "url": url, "jx": 0, "header": json.dumps(self.media_header)}
+        try:
+            text = self._media_get(url).content.decode("utf-8", "ignore")
+            if "#EXTM3U" in text:
+                import base64
+                return {"parse": 0, "playUrl": "", "url": "data:application/vnd.apple.mpegurl;base64," + base64.b64encode(text.encode("utf-8")).decode("ascii"), "jx": 0, "header": ""}
+        except Exception:
+            pass
+        return {"parse": 0, "playUrl": "", "url": self._proxy_url("m3u8", url), "jx": 0, "header": json.dumps(self.media_header)}
 
     def localProxy(self, param):
         p = self._param(param)
