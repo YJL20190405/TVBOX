@@ -67,11 +67,8 @@ CHILD_CATS = {
     "6": [("25", "都市生活"), ("26", "学生校园"), ("27", "家庭乱伦"),
           ("28", "玄幻武侠"), ("29", "系统穿越"), ("30", "同人改编")],
 }
-# 完整分类列表 (主分类 + 子分类, 顺序即分组顺序)
-CATS = []
-for _mtid, _mname in MAIN_CATS:
-    CATS.append((_mtid, _mname))
-    CATS.extend(CHILD_CATS[_mtid])
+# 完整分类列表仅保留主分类, 子分类经主分类的"分类"筛选栏进入
+CATS = MAIN_CATS
 
 # 类型判定
 NOVEL_TIDS = set(["6"]) | {t for t, _ in CHILD_CATS["6"]}
@@ -560,3 +557,4 @@ class Spider(object):
             except Exception:
                 pass
         return [200, mime, raw, {}]
+
