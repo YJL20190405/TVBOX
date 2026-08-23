@@ -352,7 +352,7 @@ class Spider(object):
                     episodes.append((ep_url, ep_name))
         return episodes
 
-    def _detail_common(self, page_url, vod_from):
+    def _detail_common(self, page_url, vod_from, vod_player="", vod_tag=""):
         """抓详情页并解析标题/简介/封面/选集, 返回 detail 或 None"""
         t = self._fetch_page(page_url)
         if not t:
@@ -416,6 +416,10 @@ class Spider(object):
             "vod_play_from": vod_from,
             "vod_play_url": vod_play_url,
         }
+        if vod_player:
+            detail["vod_player"] = vod_player
+        if vod_tag:
+            detail["vod_tag"] = vod_tag
         return detail
 
     def detailContent(self, ids):
@@ -426,10 +430,12 @@ class Spider(object):
         raw = str(raw or "")
         if "/novel/" in raw:
             detail = self._detail_common(
-                "%s/novel/%s.html" % (BASE, vid), "夜社小说")
+                "%s/novel/%s.html" % (BASE, vid), "夜社小说",
+                vod_player="书", vod_tag="text")
         elif "/detail/" in raw or str(vid) in GALLERY_TIDS:
             detail = self._detail_common(
-                "%s/detail/%s.html" % (BASE, vid), "夜社漫画")
+                "%s/detail/%s.html" % (BASE, vid), "夜社漫画",
+                vod_player="画", vod_tag="image")
         else:
             detail = self._detail_common(
                 "%s/play/%s/1/1.html" % (BASE, vid), "夜社")
@@ -473,11 +479,31 @@ class Spider(object):
     # ---------- 播放 ----------
     def playerContent(self, flag, ids, vipFlags=None):
         ids = str(ids or "")
-        # 小说章节: 直接以 HTML 方式交给壳 WebView 渲染
+        # 小说章节: novel:// 协议交给壳的小说阅读器
         if "/nchpter/" in ids:
             url = ids if ids.startswith("http") else BASE + ids
-            return {"parse": 0, "url": url, "format": "text/html",
-                    "header": {"User-Agent": UA, "Referer": BASE}}
+            t = self._fetch_page(url)
+            title = ""
+            m = re.search(r'module-novel-detail.*?class="title">([^<]+)<', t or "", re.S)
+            if m:
+                title = m.group(1).strip()
+            content = ""
+            if t:
+                ci = t.find('class="content"')
+                if ci != -1:
+                    mc = re.search(r'<div class="content">(.*?)</div>',
+                                   t[ci:ci + 100000], re.S)
+                    if mc:
+                        content = re.sub(r"<[^>]+>", "", mc.group(1))
+                        content = re.sub(r"&nbsp;", " ", content)
+                        content = re.sub(r"\s+", " ", content).strip()
+            if content:
+                if len(content) > 3000:
+                    content = content[:3000] + "..."
+                data = json.dumps({"title": title, "content": content},
+                                  ensure_ascii=False)
+                return {"parse": 0, "url": "novel://" + data}
+            return {"parse": 0, "url": ""}
         if not re.search(r"/play/\d+/\d+/\d+\.html", ids):
             m = re.search(r"(\d+)", ids)
             if not m:
@@ -509,14 +535,30 @@ class Spider(object):
                 return {"parse": 0, "url": u,
                         "header": {"User-Agent": UA, "Referer": BASE},
                         "format": "application/x-mpegURL"}
-        # 图库话页: 提取 module-player-cartoon-list 内全部图片
-        ci = t.find('module-player-cartoon-list')
-        if ci != -1:
-            seg = t[ci:ci + 200000]
+        # 图库话页: 提取图集容器内全部图片, pics:// 多图浏览
+        for cls in ("module-player-cartoon-list", "module-player-pics-list"):
+            ci = t.find(cls)
+            if ci == -1:
+                continue
+            start = t.find('>', ci) + 1
+            depth = 1
+            j = start
+            while j < len(t) and depth > 0:
+                o = t.find('<div', j)
+                c = t.find('</div>', j)
+                if o == -1 and c == -1:
+                    break
+                if o != -1 and (c == -1 or o < c):
+                    depth += 1
+                    j = o + 4
+                else:
+                    depth -= 1
+                    j = c + 6
+            seg = t[start:j]
             imgs = [u for u in re.findall(r'<img[^>]*src="([^"]+)"', seg)
                     if u.startswith("http") and "load.gif" not in u]
             if imgs:
-                return {"parse": 0, "url": imgs[0],
+                return {"parse": 0, "url": "pics://" + "&&".join(imgs),
                         "header": {"User-Agent": UA, "Referer": BASE}}
         return {"parse": 0, "url": ""}
 
@@ -557,4 +599,3 @@ class Spider(object):
             except Exception:
                 pass
         return [200, mime, raw, {}]
-
