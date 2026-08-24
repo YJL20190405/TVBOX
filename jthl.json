@@ -62,6 +62,12 @@
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/夜社.py"
     },
+	        {
+      "key": "牛牛视频",
+      "name": "牛牛视频.py[🔞短剧][短听图说][成人]｜🔞",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/牛牛视频.py"
+    },
            {
       "key": "UU视视APP",
       "name": "🐬UU视视APP.py[成人]｜🔞",
@@ -214,9 +220,9 @@
     },
     {
       "key": "91大赛",
-      "name": "🐬91大赛(无封面).py｜🔞[吃瓜]",
+      "name": "🐬91大赛.py｜🔞[吃瓜]",
       "type": 3,
-      "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/91大赛.py"
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/91大赛.py"
     },
 
         {
@@ -254,6 +260,18 @@
       "name": "🐬黑料网.py｜🔞[吃瓜]",
       "type": 3,
       "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料网.py"
+    },
+		        {
+      "key": "牛牛视频",
+      "name": "🐬牛牛视频.py[🔞短剧][短听图说][成人]｜🔞",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/牛牛视频.py"
+    },
+	    {
+      "key": "河马影视",
+      "name": "🐬河马影视.py[成人]｜🔞",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/uuy988/fgh998/refs/heads/main/py/河马影视🔞TG @hshsjk9.py"
     },
         {
       "key": "草榴社区",
