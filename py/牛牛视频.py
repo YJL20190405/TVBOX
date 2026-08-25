@@ -17,31 +17,31 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import quote, urljoin
 from Crypto.Cipher import DES3
 from Crypto.Util.Padding import pad, unpad
- 
+
 try:
     from base.spider import Spider as BaseSpider
 except Exception:
     class BaseSpider:
         pass
- 
- 
+
+
 class _Crypto:
     """3DES-CBC 加解密 (src2: iv=51518888, key=ZT8g6QH2kS3Xj7G5wG4JtU1F)"""
- 
+
     @staticmethod
     def des3_encrypt(data, key, iv):
         cipher = DES3.new(key.encode("utf-8"), DES3.MODE_CBC, iv.encode("utf-8"))
         ct = cipher.encrypt(pad(data.encode("utf-8"), DES3.block_size))
         return base64.b64encode(ct).decode("ascii")
- 
+
     @staticmethod
     def des3_decrypt(data, key, iv):
         raw = base64.b64decode(data)
         cipher = DES3.new(key.encode("utf-8"), DES3.MODE_CBC, iv.encode("utf-8"))
         pt = unpad(cipher.decrypt(raw), DES3.block_size)
         return pt.decode("utf-8")
- 
- 
+
+
 class Spider(BaseSpider):
     def __init__(self):
         self.host = "https://dy.wnhyjc.com"
@@ -79,7 +79,7 @@ class Spider(BaseSpider):
             "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 abab/113eyhy5u7lhz52p1owi",
             "cookie": "device=113eyhy5u7lhz52p1owi",
         }
- 
+
     def init(self, extend=""):
         if extend:
             try:
@@ -99,12 +99,12 @@ class Spider(BaseSpider):
             except Exception:
                 pass
         self._get_token()
- 
+
     def getName(self):
         return self.name
- 
+
     # ========== Token管理 ==========
- 
+
     def _get_token(self):
         if self.token and time.time() - self.token_time < 3600:
             return
@@ -125,7 +125,7 @@ class Spider(BaseSpider):
                 self.token_time = time.time()
         except Exception:
             pass
- 
+
     def _decrypt(self, enc_str):
         if not enc_str:
             return {}
@@ -137,7 +137,7 @@ class Spider(BaseSpider):
                 return json.loads(enc_str)
             except Exception:
                 return {}
- 
+
     def _api_post(self, path, params=None):
         self._get_token()
         url = self.host + path if path.startswith("/") else path
@@ -156,7 +156,7 @@ class Spider(BaseSpider):
             if attempt == 0:
                 time.sleep(1)
         return {}
- 
+
     def _xxcjpt_decode(self, text):
         """xxcjpt.com响应: 反转字符串 → base64解码 → JSON"""
         if not text or text.startswith("Error"):
@@ -170,7 +170,7 @@ class Spider(BaseSpider):
             return json.loads(raw.decode("utf-8"))
         except Exception:
             return None
- 
+
     def _xxcjpt_get(self, vid):
         """调用xxcjpt.com获取视频数据"""
         url = "https://sixth.xxcjpt.com/java/show/%s" % vid
@@ -180,7 +180,7 @@ class Spider(BaseSpider):
             return self._xxcjpt_decode(r.text)
         except Exception:
             return None
- 
+
     # ========== 自动获取分类 (参照黄豆短剧 _classes) ==========
     # APK内置tab_list分类 + 实际数据源修正:
     #   短剧(tid=5) 实际在src2为 pid=31 (id簇 155000-155600)
@@ -197,7 +197,7 @@ class Spider(BaseSpider):
         {"type_id": "10", "type_name": "午夜"},
         {"type_id": "11", "type_name": "热舞"},
     ]
- 
+
     # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞)
     _SRC2_CLUSTERS = {
         "1": [(1, 7000), (100000, 101000)],
@@ -206,14 +206,14 @@ class Spider(BaseSpider):
         "4": [(100000, 103000), (155000, 155600)],
         "5": [(155000, 155600)],
     }
- 
+
     # 分类tid → src2 type_pid 映射 (短剧实际为 pid=31)
     _PID_MAP = {"1": "1", "2": "2", "3": "3", "4": "4", "5": "31"}
- 
+
     # 每分类每页扫描的 id 数 (按实测密度定制: 短剧80%只需30, 电影15%需140)
     # 实际每页扫描 step*2 个 id, 控制在 src2 限流阈值内
     _SRC2_STEP = {"1": 70, "2": 30, "3": 60, "4": 60, "5": 15}
- 
+
     # xxcjpt.com 各分类的关键词过滤 (传媒按子分类, 其余按整分类)
     _XC_KEYWORDS = {
         "7": {
@@ -229,10 +229,10 @@ class Spider(BaseSpider):
         "10": ["午夜", "深夜", "夜色", "凌晨", "夜间", "夜夜"],
         "11": ["舞蹈", "热舞", "秀场", "直播", "扭腰", "钢管"],
     }
- 
+
     # xxcjpt index 的 spm 参数, 不同分类使用不同 spm 以增加内容差异
     _XC_SPM = {"7": "home.latest", "8": "home.hot", "9": "home.new", "10": "home.recommend", "11": "latest"}
- 
+
     _FALLBACK_FILTERS = {
         "1": {
             "class": "剧情,武侠,战争,奇幻,犯罪,同性,动作,喜剧,爱情,科幻,悬疑,恐怖,动画,纪录片",
@@ -265,12 +265,12 @@ class Spider(BaseSpider):
             "class": "探花偷拍,剧情人妻,丝袜制服,萝莉调教,熟女阿姨,国产自拍",
         },
     }
- 
+
     def _classes(self):
         """自动获取分类 — 参照黄豆短剧: 优先API获取, 失败回退内置"""
         if self.class_cache:
             return self.class_cache
- 
+
         arr = []
         # 1) 尝试从src2 API获取分类列表 (API无分类端点, 会失败)
         try:
@@ -286,14 +286,14 @@ class Spider(BaseSpider):
                         arr.append({"type_id": tid, "type_name": name})
         except Exception:
             pass
- 
+
         # 2) API失败 → 回退APK内置分类 (等同黄豆短剧的 _FALLBACK_CLASSES)
         if not arr:
             arr = [dict(c) for c in self._FALLBACK_CLASSES]
- 
+
         self.class_cache = arr
         return arr
- 
+
     def _filters(self, classes):
         """生成筛选 — 参照黄豆短剧 _filters, 从APK tab_list的type_extend提取"""
         fs = {}
@@ -315,9 +315,9 @@ class Spider(BaseSpider):
                 filters.append({"key": "year", "name": "年份", "value": vals})
             fs[tid] = filters
         return fs
- 
+
     # ========== TVBox Spider 接口 ==========
- 
+
     def _fetch_batch(self, vid_list, max_workers=10):
         """并发获取多个vod_id的详情"""
         results = {}
@@ -334,7 +334,7 @@ class Spider(BaseSpider):
                 if result:
                     results[vid] = result
         return results
- 
+
     def homeContent(self, filter):
         classes = self._classes()
         batch = self._fetch_batch(range(1, 13))
@@ -344,30 +344,30 @@ class Spider(BaseSpider):
             "filters": self._filters(classes),
             "list": items,
         }
- 
+
     def homeVideoContent(self):
         batch = self._fetch_batch(range(1, 7))
         items = [self._vod_from_detail(batch[vid]) for vid in sorted(batch.keys())]
         return {"list": items}
- 
+
     def categoryContent(self, tid, pg, filter, extend):
         extend = extend or {}
         pg = int(pg) if str(pg).isdigit() else 1
- 
+
         # 传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (关键词分类)
         if str(tid) in ("7", "8", "9", "10", "11"):
             return self._xxcjpt_category(tid, pg, extend)
- 
+
         # 电影/剧集/综艺/动漫/短剧: src2 API 按 id 簇扫描过滤 type_pid
         return self._src2_category(tid, pg, extend)
- 
+
     def _src2_pool(self, tid):
         """拼接该分类的候选 id 簇 (src2内容按id段聚集, 段间有空洞)"""
         pool = []
         for lo, hi in self._SRC2_CLUSTERS.get(str(tid), []):
             pool.extend(range(lo, hi))
         return pool
- 
+
     def _cache_dir(self):
         try:
             d = os.path.join(tempfile.gettempdir(), "niuniu_py")
@@ -375,14 +375,14 @@ class Spider(BaseSpider):
             return d
         except Exception:
             return tempfile.gettempdir()
- 
+
     def _src2_category(self, tid, pg, extend):
         """src2分类: 从候选id簇中扫描, 过滤 type_pid (控制扫描量避免触发限流)"""
         want_pid = self._PID_MAP.get(str(tid), str(tid))
         pool = self._src2_pool(tid)
         if not pool:
             return {"page": pg, "pagecount": pg, "limit": self.page_size, "total": 0, "list": []}
- 
+
         # 分类页缓存: 降低 src2 请求压力, 规避限流
         cache_key = "cat_%s_%s_%s" % (tid, pg, extend.get("class") or "")
         cache_path = os.path.join(self._cache_dir(), cache_key + ".json")
@@ -394,7 +394,7 @@ class Spider(BaseSpider):
                     return cached
         except Exception:
             pass
- 
+
         total = len(pool)
         step = self._SRC2_STEP.get(str(tid), 100)
         start = ((pg - 1) * step) % total
@@ -406,14 +406,14 @@ class Spider(BaseSpider):
                 if v not in seen:
                     seen.add(v)
                     picked.append(v)
- 
+
         batch = self._fetch_batch(picked, max_workers=12)
- 
+
         # src2 有请求速率限制: 批量请求成功率过低时等待后重试一次
         if len(batch) < max(1, len(picked) * 0.3):
             time.sleep(3)
             batch = self._fetch_batch(picked, max_workers=12)
- 
+
         items = []
         for vid in sorted(batch.keys()):
             result = batch[vid]
@@ -422,7 +422,7 @@ class Spider(BaseSpider):
                     items.append(self._vod_from_detail(result))
             if len(items) >= self.page_size:
                 break
- 
+
         pagecount = pg + 1 if items else pg
         result = {
             "page": pg,
@@ -438,7 +438,7 @@ class Spider(BaseSpider):
             except Exception:
                 pass
         return result
- 
+
     def _xxcjpt_index(self, spm, page, pages=4):
         """翻页获取 xxcjpt index 内容列表 [{id,title,image,duration}]"""
         out = []
@@ -461,7 +461,7 @@ class Spider(BaseSpider):
             if len(out) >= pages * 20:
                 break
         return out
- 
+
     def _xx_item(self, it):
         return {
             "vod_id": "x_%s" % it.get("id"),
@@ -469,22 +469,22 @@ class Spider(BaseSpider):
             "vod_pic": it.get("image", "") or "",
             "vod_remarks": self._format_duration(it.get("duration", 0)),
         }
- 
+
     def _xxcjpt_category(self, tid, pg, extend):
         """xxcjpt.com分类: 传媒(tid=7, 按子分类关键词) / 吃瓜(8) / 福利(9) / 午夜(10) / 热舞(11)"""
         page_size = self.page_size
         tid = str(tid)
         spm = self._XC_SPM.get(tid, "home.latest")
- 
+
         kws = []
         if tid == "7":
             sub = extend.get("class") or ""
             kws = self._XC_KEYWORDS["7"].get(sub, [])
         elif tid in self._XC_KEYWORDS:
             kws = self._XC_KEYWORDS[tid]
- 
+
         items = []
- 
+
         # 吃瓜分类: 优先枚举探花真实段 (id 10000+) 补充真实事件内容
         if tid == "8":
             x_start = 10000 + (pg - 1) * 10
@@ -504,7 +504,7 @@ class Spider(BaseSpider):
                         items.append(r)
                     if len(items) >= page_size:
                         break
- 
+
         feed = self._xxcjpt_index(spm, pg, pages=4)
         picked = []
         for it in feed:
@@ -513,13 +513,13 @@ class Spider(BaseSpider):
                 continue
             if not kws or any(k in title for k in kws):
                 picked.append(it)
- 
+
         if len(items) < page_size:
             for it in picked:
                 items.append(self._xx_item(it))
                 if len(items) >= page_size:
                     break
- 
+
         # 关键词命中不足 → 用最新流兜底, 保证分类有内容
         if len(items) < page_size:
             for it in feed:
@@ -528,7 +528,7 @@ class Spider(BaseSpider):
                 items.append(self._xx_item(it))
                 if len(items) >= page_size:
                     break
- 
+
         pagecount = pg + 1 if items else pg
         return {
             "page": pg,
@@ -537,14 +537,14 @@ class Spider(BaseSpider):
             "total": 99999,
             "list": items[:page_size],
         }
- 
+
     def detailContent(self, ids):
         vid = str(ids[0])
- 
+
         # xxcjpt源 (id以x_开头)
         if vid.startswith("x_"):
             return self._xxcjpt_detail(vid[2:])
- 
+
         # src2源
         data = {}
         for _ in range(3):
@@ -553,10 +553,10 @@ class Spider(BaseSpider):
                 break
             time.sleep(2)
         result = data.get("result")
- 
+
         if not result or not isinstance(result, dict):
             return {"list": []}
- 
+
         name = result.get("title") or vid
         pic = result.get("pic") or ""
         year = result.get("year") or ""
@@ -566,7 +566,7 @@ class Spider(BaseSpider):
         director = result.get("director") or ""
         content = result.get("intro") or ""
         remarks = result.get("remarks") or ""
- 
+
         map_list = result.get("map_list") or []
         eps = []
         for m in map_list:
@@ -578,9 +578,9 @@ class Spider(BaseSpider):
                     eps.append("第%s集$%s_%s" % (i, vid, mid))
             else:
                 eps.append("%s$%s_%s" % (title, vid, mid))
- 
+
         play_url = "#".join(eps) if eps else "高清$%s_1" % vid
- 
+
         vod = {
             "vod_id": vid,
             "vod_name": name,
@@ -596,27 +596,27 @@ class Spider(BaseSpider):
             "vod_play_url": play_url,
         }
         return {"list": [vod]}
- 
+
     def _xxcjpt_detail(self, vid):
         """xxcjpt.com视频详情"""
         data = self._xxcjpt_get(vid)
         if not data or data.get("code") != 1:
             return {"list": []}
- 
+
         d = data.get("data", {})
         video = d.get("video", {})
         if not video:
             return {"list": []}
- 
+
         title = video.get("title") or vid
         pic = video.get("image") or ""
         duration = self._format_duration(video.get("duration", 0))
         content = " ".join(video.get("content", []))
         src = video.get("src") or ""
- 
+
         guess = d.get("guess", [])
         play_url = "高清$x_%s" % vid
- 
+
         vod = {
             "vod_id": "x_%s" % vid,
             "vod_name": title,
@@ -632,10 +632,10 @@ class Spider(BaseSpider):
             "vod_play_url": play_url,
         }
         return {"list": [vod]}
- 
+
     def searchContent(self, key, quick, pg="1"):
         pg = int(pg) if str(pg).isdigit() else 1
- 
+
         # 1) src2 API: 并发枚举多个id簇, 匹配标题/演员/导演
         #    (电影簇1-100 + 剧集/综艺/动漫簇100000-100060 + 短剧簇155000-155040)
         search_segments = [
@@ -657,7 +657,7 @@ class Spider(BaseSpider):
                 items.append(self._vod_from_detail(result))
             if len(items) >= 20:
                 break
- 
+
         # 2) xxcjpt.com: 并发枚举 10000 段, 匹配标题
         if len(items) < 10:
             x_vids = list(range(10000, 10060))
@@ -681,7 +681,7 @@ class Spider(BaseSpider):
                         items.append(r)
                     if len(items) >= 20:
                         break
- 
+
         pagecount = pg + 1 if len(items) >= self.page_size else pg
         return {
             "page": pg,
@@ -690,10 +690,10 @@ class Spider(BaseSpider):
             "total": 99999,
             "list": items,
         }
- 
+
     def playerContent(self, flag, id, vipFlags):
         s = str(id)
- 
+
         # xxcjpt源 (id以x_开头)
         if s.startswith("x_"):
             vid = s[2:]
@@ -712,19 +712,19 @@ class Spider(BaseSpider):
                         "header": json.dumps(header),
                     }
             return {"parse": 1, "playUrl": "", "url": ""}
- 
+
         # src2源: id格式 vod_id_vod_map_id
         parts = s.split("_")
         vid = parts[0]
         vod_map_id = parts[1] if len(parts) > 1 else "1"
- 
+
         data = self._api_post(self.play_url, {"vod_id": vid, "vod_map_id": vod_map_id})
         result = data.get("result", {})
         url = result.get("vod_url") or ""
- 
+
         if not url:
             return {"parse": 1, "playUrl": "", "url": ""}
- 
+
         header = {
             "User-Agent": "Mozilla/5.0 (Linux; Android 11) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
             "Referer": self.host,
@@ -735,12 +735,12 @@ class Spider(BaseSpider):
             "url": url,
             "header": json.dumps(header),
         }
- 
+
     def isVideoContent(self):
         return True
- 
+
     # ========== 内部方法 ==========
- 
+
     def _list(self, data):
         if isinstance(data, list):
             return data
@@ -753,7 +753,7 @@ class Spider(BaseSpider):
             if isinstance(val, dict):
                 return self._list(val)
         return []
- 
+
     def _vod_from_detail(self, result):
         return {
             "vod_id": str(result.get("vod_id") or result.get("id") or ""),
@@ -761,7 +761,7 @@ class Spider(BaseSpider):
             "vod_pic": result.get("pic") or "",
             "vod_remarks": result.get("remarks") or "",
         }
- 
+
     def _match_filter(self, result, extend):
         if extend.get("class") and extend["class"] not in (result.get("tags") or ""):
             return False
@@ -770,7 +770,7 @@ class Spider(BaseSpider):
         if extend.get("year") and extend["year"] != (result.get("year") or ""):
             return False
         return True
- 
+
     def _format_duration(self, seconds):
         if not seconds:
             return ""
