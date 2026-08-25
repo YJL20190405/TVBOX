@@ -2,13 +2,16 @@
 # -*- coding: utf-8 -*-
 """
 牛牛视频 爬虫 (from APK _1.6.2.apk)
-分类参照黄豆短剧的自动获取方式: 优先从API获取, 失败回退APK内置tab_list
-API: src2 (3DES-CBC加密, dy.wnhyjc.com) + xxcjpt.com (反转base64)
+分类固定 10 个: 电影/剧集/综艺/动漫走 src2 (3DES-CBC, dy.wnhyjc.com);
+短剧走 acFanh5 AI成人短剧 (classifyId=60, 封面整文件XOR key=2020-zq3-888);
+传媒/吃瓜/福利/午夜/热舞走 xxcjpt.com (反转base64, 封面AES-128-ECB)
 """
 import base64
+import hashlib
 import json
 import os
 import re
+import socket
 import tempfile
 import time
 import uuid
@@ -40,6 +43,72 @@ class _Crypto:
         cipher = DES3.new(key.encode("utf-8"), DES3.MODE_CBC, iv.encode("utf-8"))
         pt = unpad(cipher.decrypt(raw), DES3.block_size)
         return pt.decode("utf-8")
+
+
+# ========== DNS DoH Pin (acFanh5 域名被系统 DNS 污染解析到 127.0.0.2, 用 DoH 获取真实 IP) ==========
+_PIN_MAP = {}
+_PIN_INSTALLED = [False]
+
+
+def _install_pin():
+    if _PIN_INSTALLED[0]:
+        return
+    _PIN_INSTALLED[0] = True
+    _orig = socket.getaddrinfo
+
+    def _pinned(host, port, *args, **kwargs):
+        _ips = _PIN_MAP.get(host)
+        if _ips:
+            return [(socket.AF_INET, socket.SOCK_STREAM, 6, "", (ip, port)) for ip in _ips]
+        return _orig(host, port, *args, **kwargs)
+
+    socket.getaddrinfo = _pinned
+
+
+def _doh_resolve(hostname):
+    _doh_list = [
+        "https://doh.pub/dns-query",
+        "https://dns.alidns.com/resolve",
+        "https://dns.google/resolve",
+        "https://cloudflare-dns.com/dns-query",
+    ]
+    picked = []
+    for _u in _doh_list:
+        try:
+            _r = requests.get(_u, params={"name": hostname, "type": "A"},
+                              headers={"accept": "application/dns-json"}, timeout=6, verify=False)
+            _j = _r.json()
+            for _a in _j.get("Answer", []):
+                if _a.get("type") == 1 and _a.get("data"):
+                    _d = _a["data"]
+                    if _d and not _d.startswith("0."):
+                        picked.append(_d)
+            if picked:
+                break
+        except Exception:
+            continue
+    return picked
+
+
+def _doh_pin_domain(hostname):
+    try:
+        if not hostname or hostname in _PIN_MAP:
+            return
+        _install_pin()
+        picked = _doh_resolve(hostname)
+        if picked:
+            _PIN_MAP[hostname] = picked
+    except Exception:
+        pass
+
+
+def _pin_url_host(url):
+    try:
+        _m = re.match(r"https?://([^/:]+)", url or "")
+        if _m:
+            _doh_pin_domain(_m.group(1))
+    except Exception:
+        pass
 
 
 class Spider(BaseSpider):
@@ -79,6 +148,13 @@ class Spider(BaseSpider):
             "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 abab/113eyhy5u7lhz52p1owi",
             "cookie": "device=113eyhy5u7lhz52p1owi",
         }
+        # acFanh5 (AI成人短剧源, classifyId=60=AI影剧)
+        self.acf_host = "https://accfanan.x18c87so.work"
+        self.acf_token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTgxMjQ2NyIsImlhdCI6MTc4NjY0NjkwOCwibmJmIjoxNzg2NjY0OTIyLCJleHAiOjE5NDQzNDQ5MjJ9.7poZoAttovGH_UnkM0ZKYVjExOVGc8Uh5U62TVVQNuE"
+        self.acf_device_id = "h5_7c768c18bd97473c9f9d23b25c21f"
+        self.acf_ua = "Mozilla/5.0 (Linux; Android 12; SM-G9750 Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 Mobile Safari/537.36"
+        self._acf_domain = "https://79eq2aouwhf6.asigoo.com/"
+        self._acf_key = b"2020-zq3-888"
 
     def init(self, extend=""):
         if extend:
@@ -98,6 +174,7 @@ class Spider(BaseSpider):
                     self._xxcjpt_token = cfg["xxcjpt_token"]
             except Exception:
                 pass
+        _pin_url_host(self.acf_host)
         self._get_token()
 
     def getName(self):
@@ -181,7 +258,7 @@ class Spider(BaseSpider):
         except Exception:
             return None
 
-    # ========== 固定分类 (短剧在src2为pid=31, 传媒/吃瓜/福利/午夜/热舞来自xxcjpt) ==========
+    # ========== 固定分类 (电影/剧集/综艺/动漫=src2, 短剧=acFanh5, 传媒/吃瓜/福利/午夜/热舞=xxcjpt) ==========
     _FALLBACK_CLASSES = [
         {"type_id": "1", "type_name": "电影"},
         {"type_id": "2", "type_name": "剧集"},
@@ -195,7 +272,7 @@ class Spider(BaseSpider):
         {"type_id": "11", "type_name": "热舞"},
     ]
 
-    # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞; 短剧已改xxcjpt源)
+    # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞)
     _SRC2_CLUSTERS = {
         "1": [(1, 7000), (100000, 101000)],
         "2": [(100000, 103000), (155000, 155600)],
@@ -203,13 +280,13 @@ class Spider(BaseSpider):
         "4": [(100000, 103000), (155000, 155600)],
     }
 
-    # 分类tid → src2 type_pid 映射 (短剧已改xxcjpt源)
+    # 分类tid → src2 type_pid 映射 (仅 电影/剧集/综艺/动漫 走src2)
     _PID_MAP = {"1": "1", "2": "2", "3": "3", "4": "4"}
 
     # 每分类每页扫描的 id 数 (按实测密度定制; 实际每页扫描 step*2 个 id, 控制在 src2 限流阈值内)
     _SRC2_STEP = {"1": 70, "2": 30, "3": 60, "4": 60}
 
-    # xxcjpt.com 各分类的关键词过滤 (短剧按剧情类, 传媒按子分类, 其余按整分类)
+    # xxcjpt.com 各分类的关键词过滤 (传媒按子分类, 其余按整分类; 短剧已改用acFanh5)
     _XC_KEYWORDS = {
         "5": ["剧情", "人妻", "二次元", "JK", "女仆", "制服", "cos", "nana", "狐不妖"],
         "7": {
@@ -260,7 +337,7 @@ class Spider(BaseSpider):
     }
 
     def _classes(self):
-        """固定分类列表 (短剧tid=5映射src2 pid=31, 成人分类来自xxcjpt)"""
+        """固定分类列表 (短剧=acFanh5 AI成人短剧, 成人分类来自xxcjpt)"""
         if self.class_cache:
             return self.class_cache
         self.class_cache = [dict(c) for c in self._FALLBACK_CLASSES]
@@ -326,8 +403,12 @@ class Spider(BaseSpider):
         extend = extend or {}
         pg = int(pg) if str(pg).isdigit() else 1
 
-        # 短剧/传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (短剧按剧情类, 传媒按子分类)
-        if str(tid) in ("5", "7", "8", "9", "10", "11"):
+        # 短剧: acFanh5 AI成人短剧源 (classifyId=60=AI影剧)
+        if str(tid) == "5":
+            return self._acf_category(pg, extend)
+
+        # 传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (传媒按子分类关键词)
+        if str(tid) in ("7", "8", "9", "10", "11"):
             return self._xxcjpt_category(tid, pg, extend)
 
         # 电影/剧集/综艺/动漫: src2 API 按 id 簇扫描过滤 type_pid
@@ -447,7 +528,7 @@ class Spider(BaseSpider):
             return url
 
     def localProxy(self, param):
-        """本地代理: 解密xxcjpt封面 (整图AES-128-ECB, key=976f97d638360cde)"""
+        """本地代理: 解密xxcjpt封面(AES-128-ECB) / acFanh5封面(整文件XOR)"""
         try:
             if not isinstance(param, dict):
                 param = {}
@@ -462,6 +543,53 @@ class Spider(BaseSpider):
                 if m:
                     img = base64.b64decode(m.group(2))
                     return [200, m.group(1).decode("ascii"), img]
+            if pt == "acfimg" and u:
+                _pin_url_host(u)
+                r = requests.get(unquote(u), headers={"User-Agent": self.acf_ua, "Referer": self.acf_host + "/"},
+                                 timeout=15, verify=False)
+                data = bytearray(r.content)
+                key = self._acf_key
+                for i in range(len(data)):
+                    data[i] ^= key[i % len(key)]
+                if data[:4] == b"\x89PNG":
+                    ct = "image/png"
+                elif data[:3] == b"GIF":
+                    ct = "image/gif"
+                elif data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+                    ct = "image/webp"
+                else:
+                    ct = "image/jpeg"
+                return [200, ct, bytes(data)]
+            if pt == "m3u8" and u:
+                _pin_url_host(u)
+                r = requests.get(unquote(u), headers=self._acf_hdr(), timeout=20, verify=False)
+                if r.status_code != 200:
+                    return [404, "text/plain", b"nf"]
+                body = r.text
+                b = self.getProxyUrl()
+                if "?" not in b:
+                    b += "?do=py"
+
+                def _proxy(url):
+                    return b + "&type=ts&url=" + quote(url, safe="")
+
+                body = re.sub(r'(URI=")([^"]+)(")',
+                              lambda m: m.group(1) + _proxy(m.group(2)) + m.group(3), body)
+                lines = []
+                for line in body.splitlines():
+                    s = line.strip()
+                    if s.startswith("http://") or s.startswith("https://"):
+                        line = _proxy(s)
+                    lines.append(line)
+                body = "\n".join(lines)
+                return [200, "application/vnd.apple.mpegurl;charset=UTF-8", body.encode("utf-8")]
+            if pt == "ts" and u:
+                _pin_url_host(u)
+                r = requests.get(unquote(u), headers={"User-Agent": self.acf_ua, "Referer": self.acf_host + "/"},
+                                 timeout=20, verify=False)
+                if r.status_code != 200:
+                    return [404, "text/plain", b"nf"]
+                return [200, "video/mp2t", r.content]
             return [404, "text/plain", b"nf"]
         except Exception:
             return [500, "text/plain", b"err"]
@@ -542,8 +670,194 @@ class Spider(BaseSpider):
             "list": items[:page_size],
         }
 
+    # ========== acFanh5 (AI成人短剧) ==========
+
+    def _acf_hdr(self):
+        t = str(int(time.time() * 1000))
+        s = hashlib.md5(t[3:8].encode()).hexdigest()
+        sid = hashlib.md5(str(int(time.time() * 1000)).encode()).hexdigest()[:16]
+        return {
+            "User-Agent": self.acf_ua,
+            "Accept": "application/json, text/plain, */*",
+            "Referer": self.acf_host + "/",
+            "Origin": self.acf_host,
+            "device": "Android",
+            "appVersion": "1.9.6",
+            "User-Mark": "xhp",
+            "deviceId": self.acf_device_id,
+            "aut": self.acf_token,
+            "t": t,
+            "s": s,
+            "sid": sid,
+        }
+
+    def _acf_dec(self, enc):
+        if not enc:
+            return None
+        try:
+            k = self.acf_token[2:18].encode("utf-8")
+            raw = base64.b64decode(enc)
+            d = AES.new(k, AES.MODE_CBC, k).decrypt(raw)
+            d = unpad(d, AES.block_size).decode("utf-8")
+            return json.loads(d) if d and d[0] in "[{" else d
+        except Exception:
+            return None
+
+    def _acf_api(self, path, params=None):
+        """acFanh5 GET接口: encData AES-CBC解密 + 301刷新token"""
+        for _ in range(5):
+            h = self._acf_hdr()
+            p = dict(params or {})
+            url = self.acf_host + "/api" + path
+            try:
+                _pin_url_host(url)
+                r = self.session.get(url, params=p, headers=h, timeout=20, verify=False, allow_redirects=False)
+                if not r.text:
+                    continue
+                nt = r.headers.get("refresh-authorization", "") or r.headers.get("Refresh-Authorization", "")
+                if nt:
+                    self.acf_token = nt
+                j = r.json()
+                code = j.get("code", 0)
+                if code == 301:
+                    continue
+                if code != 200:
+                    return None
+                if j.get("encData"):
+                    return self._acf_dec(j["encData"])
+                return j.get("data") if "data" in j else j
+            except Exception:
+                continue
+        return None
+
+    def _acf_img(self, path):
+        """acFanh5封面: 返回本地代理URL, 由localProxy整文件XOR解密(key=2020-zq3-888)"""
+        if not path:
+            return ""
+        try:
+            url = path if path.startswith("http") else (self._acf_domain + path)
+            _pin_url_host(url)
+            b = self.getProxyUrl()
+            if "?" not in b:
+                b += "?do=py"
+            return b + "&type=acfimg&url=" + quote(url, safe="")
+        except Exception:
+            return path
+
+    def _acf_category(self, pg, extend):
+        """acFanh5短剧分类: classifyId=60(AI影剧/成人短剧)"""
+        page_size = self.page_size
+        params = {"page": pg, "pageSize": page_size, "sortType": 0, "restricted": 0, "classifyId": 60}
+        if extend.get("videoTag"):
+            params = {"tagsTitle": extend["videoTag"], "page": pg, "pageSize": page_size, "sortType": 0, "restricted": 0}
+            data = self._acf_api("/video/tagTitleList", params)
+        else:
+            data = self._acf_api("/video/getByClassify", params)
+        if not isinstance(data, dict):
+            return {"page": pg, "pagecount": 1, "limit": page_size, "total": 0, "list": []}
+
+        domain = data.get("domain") or self._acf_domain
+        if domain and domain.endswith("/") is False:
+            domain += "/"
+        self._acf_domain = domain
+
+        items = []
+        lst = data.get("data") or data.get("list") or []
+        for it in lst:
+            if not isinstance(it, dict) or not it.get("videoId"):
+                continue
+            cover = it.get("coverImg") or it.get("verticalImg") or ""
+            if isinstance(cover, list):
+                cover = cover[0] if cover else ""
+            items.append({
+                "vod_id": "a_%s" % it["videoId"],
+                "vod_name": it.get("title") or "",
+                "vod_pic": self._acf_img(cover),
+                "vod_remarks": self._format_duration(it.get("playTime", 0)),
+            })
+            if len(items) >= page_size:
+                break
+
+        pagecount = pg + 1 if items else pg
+        return {
+            "page": pg,
+            "pagecount": pagecount,
+            "limit": page_size,
+            "total": 99999,
+            "list": items,
+        }
+
+    def _acf_detail(self, vid):
+        """acFanh5详情: /video/getVideoById 返回 playPath 与 m3u8 decode"""
+        data = self._acf_api("/video/getVideoById", {"videoId": vid})
+        if not isinstance(data, dict) or not data.get("videoId"):
+            return {"list": []}
+
+        title = data.get("title") or vid
+        cover = data.get("coverImg") or data.get("verticalImg") or ""
+        if isinstance(cover, list):
+            cover = cover[0] if cover else ""
+        play_time = self._format_duration(data.get("playTime", 0))
+        tags = data.get("tagTitles") or []
+        content = ""
+        if tags:
+            content = "标签: " + " ".join(tags)
+        if play_time:
+            content = (content + "\n" if content else "") + "时长: " + play_time
+
+        video_url = data.get("videoUrl") or ""
+        if video_url:
+            play_url = "高清$" + self._acf_m3u8_proxy(video_url)
+        else:
+            play_url = "高清$a_%s" % vid
+
+        vod = {
+            "vod_id": "a_%s" % vid,
+            "vod_name": title,
+            "vod_pic": self._acf_img(cover),
+            "vod_year": "",
+            "vod_area": "",
+            "type_name": "",
+            "vod_actor": "",
+            "vod_director": "",
+            "vod_content": content,
+            "vod_remarks": play_time,
+            "vod_play_from": self.name,
+            "vod_play_url": play_url,
+        }
+        return {"list": [vod]}
+
+    def _acf_m3u8_proxy(self, video_url):
+        """构造本地m3u8代理URL (localProxy请求decode接口并重写ts/key为本地代理)"""
+        m3u8_url = self.acf_host + "/api/m3u8/h5/decode?path=" + quote(video_url, safe="")
+        try:
+            b = self.getProxyUrl()
+            if "?" not in b:
+                b += "?do=py"
+            return b + "&type=m3u8&url=" + quote(m3u8_url, safe="")
+        except Exception:
+            return m3u8_url
+
+    def _acf_play(self, url):
+        """acFanh5播放: 本地m3u8代理, ts/key经本地代理带Referer获取"""
+        header = {
+            "User-Agent": self.acf_ua,
+            "Referer": self.acf_host + "/",
+            "Origin": self.acf_host,
+        }
+        return {
+            "parse": 0,
+            "playUrl": "",
+            "url": url,
+            "header": json.dumps(header),
+        }
+
     def detailContent(self, ids):
         vid = str(ids[0])
+
+        # acFanh5源 (id以a_开头)
+        if vid.startswith("a_"):
+            return self._acf_detail(vid[2:])
 
         # xxcjpt源 (id以x_开头)
         if vid.startswith("x_"):
@@ -686,6 +1000,32 @@ class Spider(BaseSpider):
                     if len(items) >= 20:
                         break
 
+        # 3) acFanh5: AI成人短剧搜索
+        if len(items) < 10:
+            data = self._acf_api("/search/keyWordV2", {"searchWord": key, "page": int(pg), "pageSize": 20})
+            if isinstance(data, dict):
+                domain = data.get("domain") or self._acf_domain
+                if domain and domain.endswith("/") is False:
+                    domain += "/"
+                self._acf_domain = domain
+                slist = data.get("videoList") or []
+                if isinstance(slist, dict):
+                    slist = slist.get("data") or []
+                for it in slist:
+                    if not isinstance(it, dict) or not it.get("videoId"):
+                        continue
+                    cover = it.get("coverImg") or ""
+                    if isinstance(cover, list):
+                        cover = cover[0] if cover else ""
+                    items.append({
+                        "vod_id": "a_%s" % it["videoId"],
+                        "vod_name": it.get("title") or "",
+                        "vod_pic": self._acf_img(cover),
+                        "vod_remarks": self._format_duration(it.get("playTime", 0)),
+                    })
+                    if len(items) >= 20:
+                        break
+
         pagecount = pg + 1 if len(items) >= self.page_size else pg
         return {
             "page": pg,
@@ -697,6 +1037,19 @@ class Spider(BaseSpider):
 
     def playerContent(self, flag, id, vipFlags):
         s = str(id)
+
+        # acFanh5源 (id以a_开头, 或直接是decode m3u8 URL)
+        if s.startswith("a_"):
+            vid = s[2:]
+            data = self._acf_api("/video/getVideoById", {"videoId": vid})
+            if isinstance(data, dict) and data.get("videoUrl"):
+                return self._acf_play(self._acf_m3u8_proxy(data["videoUrl"]))
+            return {"parse": 1, "playUrl": "", "url": ""}
+        if s.startswith(self.acf_host):
+            return self._acf_play(s)
+        # 本地代理URL (acFanh5 m3u8/ts/封面) 直接透传
+        if s.startswith("http://") or s.startswith("https://"):
+            return {"parse": 0, "playUrl": "", "url": s, "header": "{}"}
 
         # xxcjpt源 (id以x_开头)
         if s.startswith("x_"):
