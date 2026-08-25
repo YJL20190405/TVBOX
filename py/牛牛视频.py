@@ -14,8 +14,8 @@ import time
 import uuid
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from urllib.parse import quote, urljoin
-from Crypto.Cipher import DES3
+from urllib.parse import quote, unquote, urljoin
+from Crypto.Cipher import DES3, AES
 from Crypto.Util.Padding import pad, unpad
 
 try:
@@ -181,10 +181,7 @@ class Spider(BaseSpider):
         except Exception:
             return None
 
-    # ========== 自动获取分类 (参照黄豆短剧 _classes) ==========
-    # APK内置tab_list分类 + 实际数据源修正:
-    #   短剧(tid=5) 实际在src2为 pid=31 (id簇 155000-155600)
-    #   传媒/吃瓜/福利/午夜/热舞 来自 xxcjpt.com 成人源
+    # ========== 固定分类 (短剧在src2为pid=31, 传媒/吃瓜/福利/午夜/热舞来自xxcjpt) ==========
     _FALLBACK_CLASSES = [
         {"type_id": "1", "type_name": "电影"},
         {"type_id": "2", "type_name": "剧集"},
@@ -198,24 +195,23 @@ class Spider(BaseSpider):
         {"type_id": "11", "type_name": "热舞"},
     ]
 
-    # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞)
+    # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞; 短剧已改xxcjpt源)
     _SRC2_CLUSTERS = {
         "1": [(1, 7000), (100000, 101000)],
         "2": [(100000, 103000), (155000, 155600)],
         "3": [(100000, 103000), (155000, 155600)],
         "4": [(100000, 103000), (155000, 155600)],
-        "5": [(155000, 155600)],
     }
 
-    # 分类tid → src2 type_pid 映射 (短剧实际为 pid=31)
-    _PID_MAP = {"1": "1", "2": "2", "3": "3", "4": "4", "5": "31"}
+    # 分类tid → src2 type_pid 映射 (短剧已改xxcjpt源)
+    _PID_MAP = {"1": "1", "2": "2", "3": "3", "4": "4"}
 
-    # 每分类每页扫描的 id 数 (按实测密度定制: 短剧80%只需30, 电影15%需140)
-    # 实际每页扫描 step*2 个 id, 控制在 src2 限流阈值内
-    _SRC2_STEP = {"1": 70, "2": 30, "3": 60, "4": 60, "5": 15}
+    # 每分类每页扫描的 id 数 (按实测密度定制; 实际每页扫描 step*2 个 id, 控制在 src2 限流阈值内)
+    _SRC2_STEP = {"1": 70, "2": 30, "3": 60, "4": 60}
 
-    # xxcjpt.com 各分类的关键词过滤 (传媒按子分类, 其余按整分类)
+    # xxcjpt.com 各分类的关键词过滤 (短剧按剧情类, 传媒按子分类, 其余按整分类)
     _XC_KEYWORDS = {
+        "5": ["剧情", "人妻", "二次元", "JK", "女仆", "制服", "cos", "nana", "狐不妖"],
         "7": {
             "探花偷拍": ["探花", "偷拍", "约炮", "网约", "外卖", "上门", "真实", "自拍"],
             "剧情人妻": ["剧情", "人妻", "姐夫", "嫂子", "表妹", "邻居", "出轨", "小三", "房东"],
@@ -231,7 +227,7 @@ class Spider(BaseSpider):
     }
 
     # xxcjpt index 的 spm 参数, 不同分类使用不同 spm 以增加内容差异
-    _XC_SPM = {"7": "home.latest", "8": "home.hot", "9": "home.new", "10": "home.recommend", "11": "latest"}
+    _XC_SPM = {"5": "latest", "7": "home.latest", "8": "home.hot", "9": "home.new", "10": "home.recommend", "11": "latest"}
 
     _FALLBACK_FILTERS = {
         "1": {
@@ -258,44 +254,20 @@ class Spider(BaseSpider):
             "lang": "国语,英语,粤语,韩语,日语,法语",
             "year": "2027,2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,1999,1998",
         },
-        "5": {
-            "class": "都市,重生,逆袭,古装,穿越,虐恋,甜宠,总裁,萌宝,战神,年代,脑洞,悬疑,玄幻",
-        },
         "7": {
             "class": "探花偷拍,剧情人妻,丝袜制服,萝莉调教,熟女阿姨,国产自拍",
         },
     }
 
     def _classes(self):
-        """自动获取分类 — 参照黄豆短剧: 优先API获取, 失败回退内置"""
+        """固定分类列表 (短剧tid=5映射src2 pid=31, 成人分类来自xxcjpt)"""
         if self.class_cache:
             return self.class_cache
-
-        arr = []
-        # 1) 尝试从src2 API获取分类列表 (API无分类端点, 会失败)
-        try:
-            data = self._api_post("/api/vod/category", {})
-            if not data:
-                data = self._api_post("/api/vod/type", {})
-            items = self._list(data)
-            if items:
-                for item in items:
-                    tid = str(item.get("type_id") or item.get("id") or "")
-                    name = item.get("type_name") or item.get("name") or tid
-                    if tid and name:
-                        arr.append({"type_id": tid, "type_name": name})
-        except Exception:
-            pass
-
-        # 2) API失败 → 回退APK内置分类 (等同黄豆短剧的 _FALLBACK_CLASSES)
-        if not arr:
-            arr = [dict(c) for c in self._FALLBACK_CLASSES]
-
-        self.class_cache = arr
-        return arr
+        self.class_cache = [dict(c) for c in self._FALLBACK_CLASSES]
+        return self.class_cache
 
     def _filters(self, classes):
-        """生成筛选 — 参照黄豆短剧 _filters, 从APK tab_list的type_extend提取"""
+        """生成筛选, 从固定分类表提取"""
         fs = {}
         for c in classes:
             tid = c["type_id"]
@@ -354,11 +326,11 @@ class Spider(BaseSpider):
         extend = extend or {}
         pg = int(pg) if str(pg).isdigit() else 1
 
-        # 传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (关键词分类)
-        if str(tid) in ("7", "8", "9", "10", "11"):
+        # 短剧/传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (短剧按剧情类, 传媒按子分类)
+        if str(tid) in ("5", "7", "8", "9", "10", "11"):
             return self._xxcjpt_category(tid, pg, extend)
 
-        # 电影/剧集/综艺/动漫/短剧: src2 API 按 id 簇扫描过滤 type_pid
+        # 电影/剧集/综艺/动漫: src2 API 按 id 簇扫描过滤 type_pid
         return self._src2_category(tid, pg, extend)
 
     def _src2_pool(self, tid):
@@ -462,11 +434,43 @@ class Spider(BaseSpider):
                 break
         return out
 
+    def _xx_img(self, url):
+        """xxcjpt封面: 返回本地代理URL, 由localProxy解密(AES-128-ECB)"""
+        if not url:
+            return ""
+        try:
+            b = self.getProxyUrl()
+            if "?" not in b:
+                b += "?do=py"
+            return b + "&type=img&url=" + quote(url, safe="")
+        except Exception:
+            return url
+
+    def localProxy(self, param):
+        """本地代理: 解密xxcjpt封面 (整图AES-128-ECB, key=976f97d638360cde)"""
+        try:
+            if not isinstance(param, dict):
+                param = {}
+            pt = param.get("type") or param.get("do") or ""
+            u = param.get("url", "")
+            if pt == "img" and u:
+                r = requests.get(unquote(u), headers=self._xxcjpt_headers, timeout=15, verify=False)
+                ct = base64.b64decode(r.text.strip())
+                cipher = AES.new(b"976f97d638360cde", AES.MODE_ECB)
+                data = unpad(cipher.decrypt(ct), AES.block_size)
+                m = re.match(rb"^data:(.*?);base64,(.*)$", data)
+                if m:
+                    img = base64.b64decode(m.group(2))
+                    return [200, m.group(1).decode("ascii"), img]
+            return [404, "text/plain", b"nf"]
+        except Exception:
+            return [500, "text/plain", b"err"]
+
     def _xx_item(self, it):
         return {
             "vod_id": "x_%s" % it.get("id"),
             "vod_name": it.get("title", "") or "",
-            "vod_pic": it.get("image", "") or "",
+            "vod_pic": self._xx_img(it.get("image", "") or ""),
             "vod_remarks": self._format_duration(it.get("duration", 0)),
         }
 
@@ -620,7 +624,7 @@ class Spider(BaseSpider):
         vod = {
             "vod_id": "x_%s" % vid,
             "vod_name": title,
-            "vod_pic": pic,
+            "vod_pic": self._xx_img(pic),
             "vod_year": "",
             "vod_area": "",
             "type_name": "",
