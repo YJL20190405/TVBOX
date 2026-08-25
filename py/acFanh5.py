@@ -315,6 +315,7 @@ class Spider(Spider):
         'av': '57',
         'chuanmei': '58',
         'zhongkou': '59',
+        'manhua': '5',
     }
 
     filters_data = {
@@ -458,6 +459,21 @@ class Spider(Spider):
                 {'n': '人兽', 'v': '人兽'},
                 {'n': '踩踏虐鸡', 'v': '踩踏虐鸡'},
                 {'n': '恋物足交', 'v': '恋物足交'},
+            ]},
+        ],
+        'manhua': [
+            {'key': 'videoTag', 'name': '分类', 'value': [
+                {'n': '全部', 'v': ''},
+                {'n': '同人', 'v': '同人'},
+                {'n': '3D动漫', 'v': '3D动漫'},
+                {'n': '动漫番剧', 'v': '动漫番剧'},
+                {'n': '动漫', 'v': '动漫'},
+                {'n': '剧情', 'v': '剧情'},
+                {'n': '御姐', 'v': '御姐'},
+                {'n': '里番', 'v': '里番'},
+                {'n': 'MMD', 'v': 'MMD'},
+                {'n': '原神', 'v': '原神'},
+                {'n': '崩坏', 'v': '崩坏'},
             ]},
         ],
     }
@@ -641,6 +657,7 @@ class Spider(Spider):
             {'type_id': 'av', 'type_name': 'AV'},
             {'type_id': 'chuanmei', 'type_name': '传媒'},
             {'type_id': 'zhongkou', 'type_name': '重口'},
+            {'type_id': 'manhua', 'type_name': '漫画'},
         ]
         videos = []
         try:
