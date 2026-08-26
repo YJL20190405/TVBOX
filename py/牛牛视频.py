@@ -1,687 +1,242 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-牛牛视频 爬虫 (from APK _1.6.2.apk)
-分类参照黄豆短剧的自动获取方式: 优先从API获取, 失败回退APK内置tab_list
-API: src2 (3DES-CBC加密, dy.wnhyjc.com) + xxcjpt.com (反转base64)
+牛牛视频 爬虫 v2 (主 API nn.123xiangshang.com, 与 APP 数据一致)
+- 分类:   GET /types   (服务端下发, 含 热舞/传媒/吃瓜/福利/午夜/AI短剧 type_id=12)
+- 列表:   GET /list    (class/order/type_id/area/year/state/wd/page, 子分类走 class)
+- 首页:   GET /main
+- 详情:   GET /detail?vod_id=X   (sources[].episodes[].url, 含 player_id)
+- 播放:   player_id → 解析器URL → JSON {code,url,headers}
+响应 AES/ECB/PKCS5 加密, key = "/path?query" 截断16位(不足补"0")
 """
 import base64
 import json
-import os
 import re
-import tempfile
-import time
-import uuid
 import requests
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from urllib.parse import quote, urljoin
-from Crypto.Cipher import DES3
-from Crypto.Util.Padding import pad, unpad
-
+from urllib.parse import quote
+ 
 try:
     from base.spider import Spider as BaseSpider
 except Exception:
     class BaseSpider:
         pass
-
-
-class _Crypto:
-    """3DES-CBC 加解密 (src2: iv=51518888, key=ZT8g6QH2kS3Xj7G5wG4JtU1F)"""
-
-    @staticmethod
-    def des3_encrypt(data, key, iv):
-        cipher = DES3.new(key.encode("utf-8"), DES3.MODE_CBC, iv.encode("utf-8"))
-        ct = cipher.encrypt(pad(data.encode("utf-8"), DES3.block_size))
-        return base64.b64encode(ct).decode("ascii")
-
-    @staticmethod
-    def des3_decrypt(data, key, iv):
-        raw = base64.b64decode(data)
-        cipher = DES3.new(key.encode("utf-8"), DES3.MODE_CBC, iv.encode("utf-8"))
-        pt = unpad(cipher.decrypt(raw), DES3.block_size)
-        return pt.decode("utf-8")
-
-
+ 
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+ 
+ 
 class Spider(BaseSpider):
+    name = "牛牛视频"
+ 
+    # 主 API 域名(APP 默认 base_url, 可在 extend 中覆盖)
+    _HOST = "https://nn.123xiangshang.com:35620"
+ 
+    # 请求头(与 APP 拦截器一致: p/pkg/t/d/v/y/product/sys)
+    _HEADERS = {
+        "p": "android",
+        "pkg": "com.sexy.goddess",
+        "t": "",
+        "d": "0000000000000000",
+        "v": "1.6.2",
+        "y": "0",
+        "product": "Pixel 7",
+        "sys": "13",
+        "User-Agent": "okhttp/4.9.3",
+    }
+ 
+    # Android Uri.encode(query, "-![.:/,%?&=]") 保留字符集
+    _SAFE = "-_.!~*'()[]:/?,%&="
+ 
+    # player_id → 解析器URL模板(%s 为剧集 url), 源配置来自 APP /config
+    # 数字型 ep 走三步源第一步(实测直接返回可播放 url)
+    _PARSERS = {
+        "paopao": "http://116.211.150.40:856/duanju/dj.php?id=%s",      # AI短剧
+        "madou": "http://116.211.150.40:5231/cg/jx.php?id=%s",          # 吃瓜
+        "meiju": "http://82.156.24.206:12345/jx/jxm.php?url=%s",        # 热舞
+        "thzy": "http://198.16.61.170:856/jx/thz.php?id=%s",            # 传媒
+        "xj": "http://82.156.24.206:12345/jx/xj22.php?id=%s",           # 福利
+        "91gc": "http://198.16.61.170:6100/jx/wy.php?id=%s",            # 午夜
+        "djzy": "http://82.156.24.206:12345/jx/dj.php?url=%s",          # 短剧
+        "pp": "http://ccs.js.yy.028ncf.cn/jx/ss.php?id=%s",
+        "shizi": "http://116.211.150.40:856/zhenxiang/jx.php?id=%s",
+        "juzi": "http://116.211.150.40:856/qianduan/jz.php?id=%s",
+        "shanju": "http://116.211.150.40:856/jx/sj.php?id=%s",
+        "ningmeng": "http://116.211.150.40:856/jx/nm.php?id=%s",
+        "leidian": "http://192.144.141.22:12345/cs/db.php?id=%s",
+        "douban": "http://198.16.61.170:6100/jx/db.php?url=%s",
+        "jm3u8": "http://82.156.24.206:12345/jx/jx.php?url=%s",
+        "hm3u8": "http://82.156.24.206:12345/jx/jx.php?url=%s",
+        "xm": "http://152.136.196.209:12345/jx/xm.php?url=%s",
+        "xhs": "http://152.136.181.200:5500/jx/xhs.php?id=%s",
+        "bl": "http://198.16.61.170:6100/jx/ouligei.php?z=bl&id=%s",
+        "xrk": "http://198.16.61.170:6100/jx/ouligei.php?z=xrk&id=%s",
+        "sg": "http://198.16.61.170:6100/jx/ouligei.php?z=sg&id=%s",
+        "cm": "http://198.16.61.170:6100/jx/ouligei.php?z=cm&id=%s",
+        "huagu": "http://152.136.196.209:12345/jx/jxh.php?url=%s",
+        "hema": "http://ccs.js.tt.didian.site/jx/xc.php?url=%s",
+        "ffzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
+        "bfzy": "http://49.232.251.44:894/jx/bf.php?url=%s",
+        "jszy": "http://198.16.61.170:6100/jx/jszy.php?url=%s",
+        "sdzy": "http://49.232.251.44:894/jx/sd.php?url=%s",
+        "snzy": "http://49.232.251.44:894/jx/sn.php?url=%s",
+        "jyzy": "http://198.16.61.170:6100/jx/js.php?url=%s",
+        "kkzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
+        "wjzy": "http://49.232.251.44:894/jx/wj.php?url=%s",
+        "tkzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
+        "lzzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
+        "qyzy": "http://198.16.61.170:6100/jx/qy.php?url=%s",
+        "jzzy": "http://154.8.141.13:5560/jx/ht.php?url=%s",
+        "hmjc": "http://154.8.141.13:5560/jx/dj.php?url=%s",
+        "zbjx": "http://192.144.141.22/jx/migu.php?id=%s",
+        "bddj": "http://82.156.24.206:12345/jx/bddj.php?id=%s",
+        "qmdj": "http://82.156.24.206:12345/jx/qmdj.php?id=%s",
+    }
+ 
+    # 数字型复杂源(hema/xiaocao/xm3u8 需 Src1 token 三步, 不在解析器表内则跳过)
+    _SKIP = {"hema", "xiaocao", "xm3u8"}
+ 
+    # 数字型 ep 中已验证"第一步解析即直接返回可播放 url"的源
+    # (普通分类的 juzi/shanju 等数字型源返回二级签名 API, 不可用)
+    _DIRECT = {"paopao", "madou", "91gc", "xj", "thzy", "meiju", "djzy", "djan", "zbjx"}
+ 
     def __init__(self):
-        self.host = "https://dy.wnhyjc.com"
-        self.init_url = "http://49.233.217.152:5112/api/user/init"
-        self.list_url = "/api/vod/info"
-        self.play_url = "/api/vod/play_url"
-        self.iv = "51518888"
-        self.key = "ZT8g6QH2kS3Xj7G5wG4JtU1F"
-        self.replace_domain = "http://xs85.ruxiangsuisu.cn"
-        self.play_domain = ""
-        self.token = ""
-        self.name = "牛牛视频"
-        self.device_id = uuid.uuid4().hex
-        self.session = requests.Session()
-        self.session.headers.update({
-            "appid": "jijing",
-            "Version-Code": "10000",
-            "Channel": "share",
-            "Sys-Release": "11",
-            "prefersex": "1",
-            "Sys-Platform": "Android",
-            "User-Agent": "Android",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/vnd.yourapi.v1.full+json",
-            "device-id": self.device_id,
-        })
-        self.class_cache = None
-        self.filter_cache = {}
-        self.token_time = 0
+        self.host = self._HOST
+        self._classes = None
+        self._filters = {}
         self.page_size = 20
-        self._xxcjpt_token = "66b30e51a0ab342bc76502b698399356"
-        self._xxcjpt_headers = {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "origin": "https://sixth.xxcjpt.com",
-            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 abab/113eyhy5u7lhz52p1owi",
-            "cookie": "device=113eyhy5u7lhz52p1owi",
-        }
-
+        self.session = requests.Session()
+        self.session.verify = False
+ 
     def init(self, extend=""):
         if extend:
             try:
                 cfg = json.loads(extend)
-                if cfg.get("site"):
-                    self.host = cfg["site"].rstrip("/")
-                if cfg.get("iv"):
-                    self.iv = cfg["iv"]
-                if cfg.get("key"):
-                    self.key = cfg["key"]
-                if cfg.get("replace_domain"):
-                    self.replace_domain = cfg["replace_domain"]
-                if cfg.get("init_url"):
-                    self.init_url = cfg["init_url"]
-                if cfg.get("xxcjpt_token"):
-                    self._xxcjpt_token = cfg["xxcjpt_token"]
+                if cfg.get("host"):
+                    self.host = cfg["host"].rstrip("/")
             except Exception:
                 pass
-        self._get_token()
-
+ 
     def getName(self):
         return self.name
-
-    # ========== Token管理 ==========
-
-    def _get_token(self):
-        if self.token and time.time() - self.token_time < 3600:
-            return
-        try:
-            r = requests.post(self.init_url, data="password=&account=", timeout=15, verify=False,
-                              headers=self.session.headers)
-            r.raise_for_status()
-            data = self._decrypt(r.json().get("data", ""))
-            if data and data.get("code") == 10000:
-                result = data.get("result", {})
-                user_info = result.get("user_info", {})
-                self.token = user_info.get("token", "")
-                sys_conf = result.get("sys_conf", {})
-                if sys_conf.get("host_main"):
-                    self.host = sys_conf["host_main"].rstrip("/")
-                if sys_conf.get("play_domain"):
-                    self.play_domain = sys_conf["play_domain"]
-                self.token_time = time.time()
-        except Exception:
-            pass
-
-    def _decrypt(self, enc_str):
-        if not enc_str:
+ 
+    # ========== 加解密与请求 ==========
+ 
+    def _decrypt(self, pathq, text):
+        """响应解密: 明文JSON直接返回, 否则 AES/ECB key=pathq截断16补0"""
+        text = (text or "").strip()
+        if not text:
             return {}
         try:
-            enc_str = enc_str.replace("\n", "").replace(" ", "").replace("\r", "")
-            return json.loads(_Crypto.des3_decrypt(enc_str, self.key, self.iv))
-        except Exception:
-            try:
-                return json.loads(enc_str)
-            except Exception:
-                return {}
-
-    def _api_post(self, path, params=None):
-        self._get_token()
-        url = self.host + path if path.startswith("/") else path
-        headers = dict(self.session.headers)
-        if self.token:
-            headers["token"] = self.token
-        for attempt in range(2):
-            try:
-                r = requests.post(url, data=params or {}, headers=headers, timeout=15, verify=False)
-                r.raise_for_status()
-                data = self._decrypt(r.json().get("data", ""))
-                if data:
-                    return data
-            except Exception:
-                pass
-            if attempt == 0:
-                time.sleep(1)
-        return {}
-
-    def _xxcjpt_decode(self, text):
-        """xxcjpt.com响应: 反转字符串 → base64解码 → JSON"""
-        if not text or text.startswith("Error"):
-            return None
-        try:
-            rev = text[::-1]
-            pad = len(rev) % 4
-            if pad:
-                rev += "=" * (4 - pad)
-            raw = base64.b64decode(rev)
-            return json.loads(raw.decode("utf-8"))
-        except Exception:
-            return None
-
-    def _xxcjpt_get(self, vid):
-        """调用xxcjpt.com获取视频数据"""
-        url = "https://sixth.xxcjpt.com/java/show/%s" % vid
-        body = "token=%s&vid=%s&spm=home.latest" % (self._xxcjpt_token, vid)
-        try:
-            r = requests.post(url, data=body, headers=self._xxcjpt_headers, timeout=15, verify=False)
-            return self._xxcjpt_decode(r.text)
-        except Exception:
-            return None
-
-    # ========== 自动获取分类 (参照黄豆短剧 _classes) ==========
-    # APK内置tab_list分类 + 实际数据源修正:
-    #   短剧(tid=5) 实际在src2为 pid=31 (id簇 155000-155600)
-    #   传媒/吃瓜/福利/午夜/热舞 来自 xxcjpt.com 成人源
-    _FALLBACK_CLASSES = [
-        {"type_id": "1", "type_name": "电影"},
-        {"type_id": "2", "type_name": "剧集"},
-        {"type_id": "3", "type_name": "综艺"},
-        {"type_id": "4", "type_name": "动漫"},
-        {"type_id": "5", "type_name": "短剧"},
-        {"type_id": "7", "type_name": "传媒"},
-        {"type_id": "8", "type_name": "吃瓜"},
-        {"type_id": "9", "type_name": "福利"},
-        {"type_id": "10", "type_name": "午夜"},
-        {"type_id": "11", "type_name": "热舞"},
-    ]
-
-    # src2 各分类的 id 簇 (枚举实测: 内容按 id 段聚集, 段间有巨大空洞)
-    _SRC2_CLUSTERS = {
-        "1": [(1, 7000), (100000, 101000)],
-        "2": [(100000, 103000), (155000, 155600)],
-        "3": [(100000, 103000), (155000, 155600)],
-        "4": [(100000, 103000), (155000, 155600)],
-        "5": [(155000, 155600)],
-    }
-
-    # 分类tid → src2 type_pid 映射 (短剧实际为 pid=31)
-    _PID_MAP = {"1": "1", "2": "2", "3": "3", "4": "4", "5": "31"}
-
-    # 每分类每页扫描的 id 数 (按实测密度定制: 短剧80%只需30, 电影15%需140)
-    # 实际每页扫描 step*2 个 id, 控制在 src2 限流阈值内
-    _SRC2_STEP = {"1": 70, "2": 30, "3": 60, "4": 60, "5": 15}
-
-    # xxcjpt.com 各分类的关键词过滤 (传媒按子分类, 其余按整分类)
-    _XC_KEYWORDS = {
-        "7": {
-            "探花偷拍": ["探花", "偷拍", "约炮", "网约", "外卖", "上门", "真实", "自拍"],
-            "剧情人妻": ["剧情", "人妻", "姐夫", "嫂子", "表妹", "邻居", "出轨", "小三", "房东"],
-            "丝袜制服": ["丝袜", "黑丝", "白丝", "制服", "足交", "高跟鞋", "包臀"],
-            "萝莉调教": ["萝莉", "调教", "少女", "校花", "青春", "清纯"],
-            "熟女阿姨": ["熟女", "阿姨", "妈妈", "丰满", "丰腴", "熟妇"],
-            "国产自拍": ["国产", "自拍", "素人", "偷拍"],
-        },
-        "8": ["吃瓜", "偷拍", "泄密", "爆料", "真实", "网约", "曝光", "泄露"],
-        "9": ["福利", "私拍", "独家", "泄露", "流出"],
-        "10": ["午夜", "深夜", "夜色", "凌晨", "夜间", "夜夜"],
-        "11": ["舞蹈", "热舞", "秀场", "直播", "扭腰", "钢管"],
-    }
-
-    # xxcjpt index 的 spm 参数, 不同分类使用不同 spm 以增加内容差异
-    _XC_SPM = {"7": "home.latest", "8": "home.hot", "9": "home.new", "10": "home.recommend", "11": "latest"}
-
-    _FALLBACK_FILTERS = {
-        "1": {
-            "class": "剧情,武侠,战争,奇幻,犯罪,同性,动作,喜剧,爱情,科幻,悬疑,恐怖,动画,纪录片",
-            "area": "内地,美国,韩国,日本,法国,英国,泰国,香港,台湾,菲律宾",
-            "lang": "国语,英语,粤语,韩语,日语,泰语,法语",
-            "year": "2027,2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,1999,1998",
-        },
-        "2": {
-            "class": "剧情,古装,历史,都市,动作,喜剧,爱情,科幻,悬疑,恐怖,动画,武侠,战争,奇幻,犯罪,同性,纪录片",
-            "area": "内地,美国,韩国,日本,法国,英国,泰国,香港,台湾",
-            "lang": "国语,英语,粤语,韩语,日语,泰语,法语",
-            "year": "2027,2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,1999,1998",
-        },
-        "3": {
-            "class": "纪录片,真人秀,相声,脱口秀,音乐",
-            "area": "内地,美国,韩国,日本,法国,英国,泰国,香港,台湾",
-            "lang": "国语,英语,粤语,韩语,日语,泰语,法语",
-            "year": "2027,2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,1999,1998",
-        },
-        "4": {
-            "class": "热血,搞笑,运动,动作,喜剧,爱情,科幻,冒险,恋爱,励志,推理,校园,奇幻,竞技,恐怖,同性",
-            "area": "内地,美国,韩国,日本,法国,英国,香港,台湾",
-            "lang": "国语,英语,粤语,韩语,日语,法语",
-            "year": "2027,2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,1999,1998",
-        },
-        "5": {
-            "class": "都市,重生,逆袭,古装,穿越,虐恋,甜宠,总裁,萌宝,战神,年代,脑洞,悬疑,玄幻",
-        },
-        "7": {
-            "class": "探花偷拍,剧情人妻,丝袜制服,萝莉调教,熟女阿姨,国产自拍",
-        },
-    }
-
-    def _classes(self):
-        """自动获取分类 — 参照黄豆短剧: 优先API获取, 失败回退内置"""
-        if self.class_cache:
-            return self.class_cache
-
-        arr = []
-        # 1) 尝试从src2 API获取分类列表 (API无分类端点, 会失败)
-        try:
-            data = self._api_post("/api/vod/category", {})
-            if not data:
-                data = self._api_post("/api/vod/type", {})
-            items = self._list(data)
-            if items:
-                for item in items:
-                    tid = str(item.get("type_id") or item.get("id") or "")
-                    name = item.get("type_name") or item.get("name") or tid
-                    if tid and name:
-                        arr.append({"type_id": tid, "type_name": name})
+            return json.loads(text)
         except Exception:
             pass
-
-        # 2) API失败 → 回退APK内置分类 (等同黄豆短剧的 _FALLBACK_CLASSES)
-        if not arr:
-            arr = [dict(c) for c in self._FALLBACK_CLASSES]
-
-        self.class_cache = arr
+        try:
+            key = (pathq if len(pathq) >= 16 else pathq + "0" * (16 - len(pathq)))[:16]
+            ct = base64.b64decode(text)
+            cipher = AES.new(key.encode("utf-8"), AES.MODE_ECB)
+            return json.loads(unpad(cipher.decrypt(ct), AES.block_size).decode("utf-8"))
+        except Exception:
+            return {}
+ 
+    def _get(self, path, params=None):
+        """GET 主API, 返回解密后的 dict"""
+        raw_q = "&".join("%s=%s" % (k, v) for k, v in (params or {}).items())
+        encoded_q = quote(raw_q, safe=self._SAFE)
+        url = self.host + "/" + path + ("?" + encoded_q if encoded_q else "")
+        pathq = "/" + path + ("?" + encoded_q if encoded_q else "")
+        try:
+            r = self.session.get(url, headers=self._HEADERS, timeout=15)
+            return self._decrypt(pathq, r.text)
+        except Exception:
+            return {}
+ 
+    # ========== 分类与筛选 ==========
+ 
+    def _load_classes(self):
+        if self._classes:
+            return self._classes
+        arr = []
+        j = self._get("types")
+        for m in (j or {}).get("data") or []:
+            tid = m.get("type_id")
+            name = m.get("type_name")
+            if tid is not None and name:
+                arr.append({"type_id": str(tid), "type_name": str(name),
+                            "type_extend": m.get("type_extend") or {}})
+        self._classes = arr
         return arr
-
-    def _filters(self, classes):
-        """生成筛选 — 参照黄豆短剧 _filters, 从APK tab_list的type_extend提取"""
-        fs = {}
-        for c in classes:
-            tid = c["type_id"]
-            ext = self._FALLBACK_FILTERS.get(tid, {})
-            filters = []
-            if ext.get("class"):
-                vals = [{"n": v, "v": v} for v in ext["class"].split(",")]
-                filters.append({"key": "class", "name": "类型", "value": vals})
-            if ext.get("area"):
-                vals = [{"n": v, "v": v} for v in ext["area"].split(",")]
-                filters.append({"key": "area", "name": "地区", "value": vals})
-            if ext.get("lang"):
-                vals = [{"n": v, "v": v} for v in ext["lang"].split(",")]
-                filters.append({"key": "lang", "name": "语言", "value": vals})
-            if ext.get("year"):
-                vals = [{"n": v, "v": v} for v in ext["year"].split(",")]
-                filters.append({"key": "year", "name": "年份", "value": vals})
-            fs[tid] = filters
-        return fs
-
-    # ========== TVBox Spider 接口 ==========
-
-    def _fetch_batch(self, vid_list, max_workers=10):
-        """并发获取多个vod_id的详情"""
-        results = {}
-        def fetch(vid):
-            data = self._api_post(self.list_url, {"vod_id": str(vid)})
-            result = data.get("result")
-            if result and isinstance(result, dict) and result.get("title"):
-                return vid, result
-            return vid, None
-        with ThreadPoolExecutor(max_workers=max_workers) as pool:
-            futures = {pool.submit(fetch, vid): vid for vid in vid_list}
-            for f in as_completed(futures):
-                vid, result = f.result()
-                if result:
-                    results[vid] = result
-        return results
-
+ 
+    def _filters_of(self, types_extend):
+        """type_extend → TVBox filters(class/area/lang/year + order)"""
+        filters = []
+        if types_extend.get("class"):
+            filters.append({
+                "key": "class", "name": "类型",
+                "value": [{"n": v, "v": v} for v in str(types_extend["class"]).split(",")],
+            })
+        if types_extend.get("area"):
+            filters.append({
+                "key": "area", "name": "地区",
+                "value": [{"n": v, "v": v} for v in str(types_extend["area"]).split(",")],
+            })
+        if types_extend.get("year"):
+            filters.append({
+                "key": "year", "name": "年份",
+                "value": [{"n": v, "v": v} for v in str(types_extend["year"]).split(",")],
+            })
+        filters.append({
+            "key": "order", "name": "排序",
+            "value": [
+                {"n": "最新", "v": "最新"},
+                {"n": "最热", "v": "最热"},
+                {"n": "评分", "v": "评分"},
+            ],
+        })
+        return filters
+ 
+    # ========== TVBox 接口 ==========
+ 
     def homeContent(self, filter):
-        classes = self._classes()
-        batch = self._fetch_batch(range(1, 13))
-        items = [self._vod_from_detail(batch[vid]) for vid in sorted(batch.keys())]
-        return {
-            "class": classes,
-            "filters": self._filters(classes),
-            "list": items,
-        }
-
+        classes = []
+        for c in self._load_classes():
+            classes.append({"type_id": c["type_id"], "type_name": c["type_name"]})
+        filters = {c["type_id"]: self._filters_of(c["type_extend"]) for c in self._classes}
+ 
+        # 首页推荐: /main 板块列表
+        items = []
+        j = self._get("main")
+        for block in (j or {}).get("data") or []:
+            for v in block.get("list") or []:
+                items.append(self._vod_from_list(v))
+        if not items:
+            j = self._get("list", {"class": "", "order": "最新", "type_id": "5",
+                                   "area": "", "year": "", "state": "", "wd": "", "page": "1"})
+            items = [self._vod_from_list(v) for v in (j or {}).get("data") or []]
+ 
+        return {"class": classes, "filters": filters, "list": items[:40]}
+ 
     def homeVideoContent(self):
-        batch = self._fetch_batch(range(1, 7))
-        items = [self._vod_from_detail(batch[vid]) for vid in sorted(batch.keys())]
+        j = self._get("list", {"class": "", "order": "最新", "type_id": "5",
+                               "area": "", "year": "", "state": "", "wd": "", "page": "1"})
+        items = [self._vod_from_list(v) for v in (j or {}).get("data") or []]
         return {"list": items}
-
+ 
     def categoryContent(self, tid, pg, filter, extend):
         extend = extend or {}
         pg = int(pg) if str(pg).isdigit() else 1
-
-        # 传媒/吃瓜/福利/午夜/热舞: xxcjpt.com 成人源 (关键词分类)
-        if str(tid) in ("7", "8", "9", "10", "11"):
-            return self._xxcjpt_category(tid, pg, extend)
-
-        # 电影/剧集/综艺/动漫/短剧: src2 API 按 id 簇扫描过滤 type_pid
-        return self._src2_category(tid, pg, extend)
-
-    def _src2_pool(self, tid):
-        """拼接该分类的候选 id 簇 (src2内容按id段聚集, 段间有空洞)"""
-        pool = []
-        for lo, hi in self._SRC2_CLUSTERS.get(str(tid), []):
-            pool.extend(range(lo, hi))
-        return pool
-
-    def _cache_dir(self):
-        try:
-            d = os.path.join(tempfile.gettempdir(), "niuniu_py")
-            os.makedirs(d, exist_ok=True)
-            return d
-        except Exception:
-            return tempfile.gettempdir()
-
-    def _src2_category(self, tid, pg, extend):
-        """src2分类: 从候选id簇中扫描, 过滤 type_pid (控制扫描量避免触发限流)"""
-        want_pid = self._PID_MAP.get(str(tid), str(tid))
-        pool = self._src2_pool(tid)
-        if not pool:
-            return {"page": pg, "pagecount": pg, "limit": self.page_size, "total": 0, "list": []}
-
-        # 分类页缓存: 降低 src2 请求压力, 规避限流
-        cache_key = "cat_%s_%s_%s" % (tid, pg, extend.get("class") or "")
-        cache_path = os.path.join(self._cache_dir(), cache_key + ".json")
-        try:
-            if os.path.exists(cache_path) and time.time() - os.path.getmtime(cache_path) < 1800:
-                with open(cache_path, "r", encoding="utf-8") as f:
-                    cached = json.load(f)
-                if cached.get("list"):
-                    return cached
-        except Exception:
-            pass
-
-        total = len(pool)
-        step = self._SRC2_STEP.get(str(tid), 100)
-        start = ((pg - 1) * step) % total
-        picked = []
-        seen = set()
-        for k in range(2):
-            for i in range(step):
-                v = pool[(start + k * step + i) % total]
-                if v not in seen:
-                    seen.add(v)
-                    picked.append(v)
-
-        batch = self._fetch_batch(picked, max_workers=12)
-
-        # src2 有请求速率限制: 批量请求成功率过低时等待后重试一次
-        if len(batch) < max(1, len(picked) * 0.3):
-            time.sleep(3)
-            batch = self._fetch_batch(picked, max_workers=12)
-
-        items = []
-        for vid in sorted(batch.keys()):
-            result = batch[vid]
-            if str(result.get("type_pid", "")) == want_pid:
-                if self._match_filter(result, extend):
-                    items.append(self._vod_from_detail(result))
-            if len(items) >= self.page_size:
-                break
-
-        pagecount = pg + 1 if items else pg
-        result = {
-            "page": pg,
-            "pagecount": pagecount,
-            "limit": self.page_size,
-            "total": 99999,
-            "list": items,
+        params = {
+            "class": str(extend.get("class") or ""),
+            "order": str(extend.get("order") or "最新"),
+            "type_id": str(tid),
+            "area": str(extend.get("area") or ""),
+            "year": str(extend.get("year") or ""),
+            "state": "",
+            "wd": "",
+            "page": str(pg),
         }
-        if items:
-            try:
-                with open(cache_path, "w", encoding="utf-8") as f:
-                    json.dump(result, f, ensure_ascii=False)
-            except Exception:
-                pass
-        return result
-
-    def _xxcjpt_index(self, spm, page, pages=4):
-        """翻页获取 xxcjpt index 内容列表 [{id,title,image,duration}]"""
-        out = []
-        seen = set()
-        for p in range(page, page + pages):
-            try:
-                r = requests.post(
-                    "https://sixth.xxcjpt.com/java/index",
-                    data="token=%s&spm=%s&page=%d" % (self._xxcjpt_token, spm, p),
-                    headers=self._xxcjpt_headers, timeout=12, verify=False,
-                )
-                data = self._xxcjpt_decode(r.text)
-                lst = (data or {}).get("data", {}).get("list", []) or []
-                for it in lst:
-                    if it.get("id") is not None and it["id"] not in seen:
-                        seen.add(it["id"])
-                        out.append(it)
-            except Exception:
-                break
-            if len(out) >= pages * 20:
-                break
-        return out
-
-    def _xx_item(self, it):
-        return {
-            "vod_id": "x_%s" % it.get("id"),
-            "vod_name": it.get("title", "") or "",
-            "vod_pic": it.get("image", "") or "",
-            "vod_remarks": self._format_duration(it.get("duration", 0)),
-        }
-
-    def _xxcjpt_category(self, tid, pg, extend):
-        """xxcjpt.com分类: 传媒(tid=7, 按子分类关键词) / 吃瓜(8) / 福利(9) / 午夜(10) / 热舞(11)"""
-        page_size = self.page_size
-        tid = str(tid)
-        spm = self._XC_SPM.get(tid, "home.latest")
-
-        kws = []
-        if tid == "7":
-            sub = extend.get("class") or ""
-            kws = self._XC_KEYWORDS["7"].get(sub, [])
-        elif tid in self._XC_KEYWORDS:
-            kws = self._XC_KEYWORDS[tid]
-
-        items = []
-
-        # 吃瓜分类: 优先枚举探花真实段 (id 10000+) 补充真实事件内容
-        if tid == "8":
-            x_start = 10000 + (pg - 1) * 10
-            x_vids = list(range(x_start, x_start + 10))
-            def x_fetch(vid):
-                data = self._xxcjpt_get(str(vid))
-                if data and data.get("code") == 1:
-                    v = data.get("data", {}).get("video", {})
-                    if v and v.get("title"):
-                        return self._xx_item(v)
-                return None
-            with ThreadPoolExecutor(max_workers=10) as pool:
-                futures = [pool.submit(x_fetch, vid) for vid in x_vids]
-                for f in as_completed(futures):
-                    r = f.result()
-                    if r:
-                        items.append(r)
-                    if len(items) >= page_size:
-                        break
-
-        feed = self._xxcjpt_index(spm, pg, pages=4)
-        picked = []
-        for it in feed:
-            title = it.get("title") or ""
-            if not title:
-                continue
-            if not kws or any(k in title for k in kws):
-                picked.append(it)
-
-        if len(items) < page_size:
-            for it in picked:
-                items.append(self._xx_item(it))
-                if len(items) >= page_size:
-                    break
-
-        # 关键词命中不足 → 用最新流兜底, 保证分类有内容
-        if len(items) < page_size:
-            for it in feed:
-                if it in picked:
-                    continue
-                items.append(self._xx_item(it))
-                if len(items) >= page_size:
-                    break
-
-        pagecount = pg + 1 if items else pg
-        return {
-            "page": pg,
-            "pagecount": pagecount,
-            "limit": page_size,
-            "total": 99999,
-            "list": items[:page_size],
-        }
-
-    def detailContent(self, ids):
-        vid = str(ids[0])
-
-        # xxcjpt源 (id以x_开头)
-        if vid.startswith("x_"):
-            return self._xxcjpt_detail(vid[2:])
-
-        # src2源
-        data = {}
-        for _ in range(3):
-            data = self._api_post(self.list_url, {"vod_id": vid})
-            if data.get("result"):
-                break
-            time.sleep(2)
-        result = data.get("result")
-
-        if not result or not isinstance(result, dict):
-            return {"list": []}
-
-        name = result.get("title") or vid
-        pic = result.get("pic") or ""
-        year = result.get("year") or ""
-        area = result.get("area") or ""
-        typename = result.get("tags") or ""
-        actor = result.get("actor") or ""
-        director = result.get("director") or ""
-        content = result.get("intro") or ""
-        remarks = result.get("remarks") or ""
-
-        map_list = result.get("map_list") or []
-        eps = []
-        for m in map_list:
-            mid = str(m.get("id", ""))
-            title = m.get("title") or "高清"
-            collection = m.get("collection", 1)
-            if collection > 1:
-                for i in range(1, collection + 1):
-                    eps.append("第%s集$%s_%s" % (i, vid, mid))
-            else:
-                eps.append("%s$%s_%s" % (title, vid, mid))
-
-        play_url = "#".join(eps) if eps else "高清$%s_1" % vid
-
-        vod = {
-            "vod_id": vid,
-            "vod_name": name,
-            "vod_pic": pic,
-            "vod_year": year,
-            "vod_area": area,
-            "type_name": typename,
-            "vod_actor": actor,
-            "vod_director": director,
-            "vod_content": content,
-            "vod_remarks": remarks,
-            "vod_play_from": self.name,
-            "vod_play_url": play_url,
-        }
-        return {"list": [vod]}
-
-    def _xxcjpt_detail(self, vid):
-        """xxcjpt.com视频详情"""
-        data = self._xxcjpt_get(vid)
-        if not data or data.get("code") != 1:
-            return {"list": []}
-
-        d = data.get("data", {})
-        video = d.get("video", {})
-        if not video:
-            return {"list": []}
-
-        title = video.get("title") or vid
-        pic = video.get("image") or ""
-        duration = self._format_duration(video.get("duration", 0))
-        content = " ".join(video.get("content", []))
-        src = video.get("src") or ""
-
-        guess = d.get("guess", [])
-        play_url = "高清$x_%s" % vid
-
-        vod = {
-            "vod_id": "x_%s" % vid,
-            "vod_name": title,
-            "vod_pic": pic,
-            "vod_year": "",
-            "vod_area": "",
-            "type_name": "",
-            "vod_actor": "",
-            "vod_director": "",
-            "vod_content": content,
-            "vod_remarks": duration,
-            "vod_play_from": self.name,
-            "vod_play_url": play_url,
-        }
-        return {"list": [vod]}
-
-    def searchContent(self, key, quick, pg="1"):
-        pg = int(pg) if str(pg).isdigit() else 1
-
-        # 1) src2 API: 并发枚举多个id簇, 匹配标题/演员/导演
-        #    (电影簇1-100 + 剧集/综艺/动漫簇100000-100060 + 短剧簇155000-155040)
-        search_segments = [
-            range(1, 101),
-            range(100000, 100070),
-            range(155000, 155050),
-        ]
-        vids = []
-        for seg in search_segments:
-            vids.extend(seg)
-        batch = self._fetch_batch(vids, max_workers=20)
-        items = []
-        for vid in sorted(batch.keys()):
-            result = batch[vid]
-            title = result.get("title", "")
-            actor = result.get("actor", "")
-            director = result.get("director", "")
-            if key in title or key in actor or key in director:
-                items.append(self._vod_from_detail(result))
-            if len(items) >= 20:
-                break
-
-        # 2) xxcjpt.com: 并发枚举 10000 段, 匹配标题
-        if len(items) < 10:
-            x_vids = list(range(10000, 10060))
-            def x_search(vid):
-                data = self._xxcjpt_get(str(vid))
-                if data and data.get("code") == 1:
-                    video = data.get("data", {}).get("video", {})
-                    if video and key in (video.get("title") or ""):
-                        return {
-                            "vod_id": "x_%s" % video.get("id", vid),
-                            "vod_name": video.get("title", ""),
-                            "vod_pic": video.get("image", ""),
-                            "vod_remarks": self._format_duration(video.get("duration", 0)),
-                        }
-                return None
-            with ThreadPoolExecutor(max_workers=12) as pool:
-                futures = [pool.submit(x_search, vid) for vid in x_vids]
-                for f in as_completed(futures):
-                    r = f.result()
-                    if r:
-                        items.append(r)
-                    if len(items) >= 20:
-                        break
-
+        j = self._get("list", params)
+        lst = (j or {}).get("data") or []
+        items = [self._vod_from_list(v) for v in lst]
         pagecount = pg + 1 if len(items) >= self.page_size else pg
         return {
             "page": pg,
@@ -690,94 +245,132 @@ class Spider(BaseSpider):
             "total": 99999,
             "list": items,
         }
-
+ 
+    def detailContent(self, ids):
+        vid = str(ids[0])
+        j = self._get("detail", {"vod_id": vid})
+        d = (j or {}).get("data") or {}
+        if not d.get("vod_name"):
+            return {"list": []}
+ 
+        vod = {
+            "vod_id": str(d.get("vod_id") or vid),
+            "vod_name": d.get("vod_name", ""),
+            "vod_pic": d.get("vod_pic", ""),
+            "vod_year": str(d.get("vod_year") or ""),
+            "vod_area": d.get("vod_area", ""),
+            "type_name": d.get("vod_class", ""),
+            "vod_actor": d.get("vod_actor", ""),
+            "vod_director": d.get("vod_director", ""),
+            "vod_content": d.get("vod_content", "") or d.get("vod_blurb", ""),
+            "vod_remarks": d.get("vod_remarks", ""),
+        }
+ 
+        sources = []
+        for s_ in d.get("sources") or []:
+            pid = s_.get("player_id")
+            if not pid or pid in self._SKIP:
+                continue
+            eps = s_.get("episodes") or []
+            if not eps:
+                continue
+            # URL 型 ep 直接可播; 数字型 ep 仅保留已验证直接可播的源
+            first_url = eps[0].get("url") or ""
+            if not first_url.startswith("http") and pid not in self._DIRECT:
+                continue
+            sources.append({"player_id": pid, "prio": int(s_.get("prio") or 999),
+                            "episodes": eps})
+ 
+        if not sources:
+            return {"list": []}
+ 
+        # 按 prio 排序(小→大), 最多保留 4 个可切换源
+        sources.sort(key=lambda x: x["prio"])
+        sources = sources[:4]
+ 
+        play_from = []
+        play_urls = []
+        for s_ in sources:
+            pid = s_["player_id"]
+            play_from.append(pid)
+            eps_str = "#".join(
+                "%s$%s@@%s" % (e.get("name") or "第%02d集" % (i + 1), e.get("url"), pid)
+                for i, e in enumerate(s_["episodes"])
+            )
+            play_urls.append(eps_str)
+        vod["vod_play_from"] = "#".join(play_from)
+        vod["vod_play_url"] = "#".join(play_urls)
+        return {"list": [vod]}
+ 
+    def searchContent(self, key, quick, pg="1"):
+        pg = int(pg) if str(pg).isdigit() else 1
+        j = self._get("list", {"class": "", "order": "最新", "type_id": "",
+                               "area": "", "year": "", "state": "", "wd": str(key),
+                               "page": str(pg)})
+        lst = (j or {}).get("data") or []
+        items = [self._vod_from_list(v) for v in lst]
+        pagecount = pg + 1 if len(items) >= self.page_size else pg
+        return {
+            "page": pg,
+            "pagecount": pagecount,
+            "limit": self.page_size,
+            "total": 99999,
+            "list": items,
+        }
+ 
     def playerContent(self, flag, id, vipFlags):
         s = str(id)
-
-        # xxcjpt源 (id以x_开头)
-        if s.startswith("x_"):
-            vid = s[2:]
-            data = self._xxcjpt_get(vid)
-            if data and data.get("code") == 1:
-                src = data.get("data", {}).get("video", {}).get("src", "")
-                if src:
-                    header = {
-                        "User-Agent": "Mozilla/5.0 (Linux; Android 11) AppleWebKit/537.36",
-                        "Referer": "https://sixth.xxcjpt.com",
-                    }
-                    return {
-                        "parse": 0,
-                        "playUrl": "",
-                        "url": src,
-                        "header": json.dumps(header),
-                    }
+        if "@@" in s:
+            ep, player = s.rsplit("@@", 1)
+        else:
+            ep, player = s, str(flag)
+ 
+        # URL 型 ep(m3u8/mp4/ts)直接可播
+        if ep.startswith("http") and re.search(r"\.(m3u8|mp4|ts|flv)(\?|$)", ep):
+            return {"parse": 0, "playUrl": "", "url": ep, "header": "{}"}
+ 
+        tpl = self._PARSERS.get(player)
+        if not tpl:
             return {"parse": 1, "playUrl": "", "url": ""}
-
-        # src2源: id格式 vod_id_vod_map_id
-        parts = s.split("_")
-        vid = parts[0]
-        vod_map_id = parts[1] if len(parts) > 1 else "1"
-
-        data = self._api_post(self.play_url, {"vod_id": vid, "vod_map_id": vod_map_id})
-        result = data.get("result", {})
-        url = result.get("vod_url") or ""
-
-        if not url:
+ 
+        url = tpl.replace("%s", ep)
+        try:
+            r = self.session.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
+            j = r.json()
+        except Exception:
             return {"parse": 1, "playUrl": "", "url": ""}
-
-        header = {
-            "User-Agent": "Mozilla/5.0 (Linux; Android 11) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
-            "Referer": self.host,
-        }
-        return {
-            "parse": 0,
-            "playUrl": "",
-            "url": url,
-            "header": json.dumps(header),
-        }
-
+ 
+        play = (j or {}).get("url") or ""
+        if not play:
+            return {"parse": 1, "playUrl": "", "url": ""}
+ 
+        headers = self._parse_headers((j or {}).get("headers") or "")
+        return {"parse": 0, "playUrl": "", "url": play, "header": json.dumps(headers)}
+ 
     def isVideoContent(self):
         return True
-
+ 
     # ========== 内部方法 ==========
-
-    def _list(self, data):
-        if isinstance(data, list):
-            return data
-        if not isinstance(data, dict):
-            return []
-        for key in ("list", "items", "data", "result", "rows"):
-            val = data.get(key)
-            if isinstance(val, list):
-                return val
-            if isinstance(val, dict):
-                return self._list(val)
-        return []
-
-    def _vod_from_detail(self, result):
+ 
+    @staticmethod
+    def _parse_headers(s):
+        """解析器响应的 headers 字符串(换行/回车分隔 key:value) → dict"""
+        out = {}
+        if not s:
+            return out
+        for line in str(s).replace("\r", "").split("\n"):
+            if ":" in line:
+                k, _, v = line.partition(":")
+                k = k.strip()
+                if k:
+                    out[k] = v.strip()
+        return out
+ 
+    @staticmethod
+    def _vod_from_list(v):
         return {
-            "vod_id": str(result.get("vod_id") or result.get("id") or ""),
-            "vod_name": result.get("title") or "",
-            "vod_pic": result.get("pic") or "",
-            "vod_remarks": result.get("remarks") or "",
+            "vod_id": str(v.get("vod_id") or ""),
+            "vod_name": v.get("vod_name", ""),
+            "vod_pic": v.get("vod_pic", ""),
+            "vod_remarks": v.get("vod_remarks", ""),
         }
-
-    def _match_filter(self, result, extend):
-        if extend.get("class") and extend["class"] not in (result.get("tags") or ""):
-            return False
-        if extend.get("area") and extend["area"] not in (result.get("area") or ""):
-            return False
-        if extend.get("year") and extend["year"] != (result.get("year") or ""):
-            return False
-        return True
-
-    def _format_duration(self, seconds):
-        if not seconds:
-            return ""
-        try:
-            seconds = int(seconds)
-            m = seconds // 60
-            s = seconds % 60
-            return "%02d:%02d" % (m, s)
-        except Exception:
-            return ""
