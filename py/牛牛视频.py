@@ -1,12 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-牛牛视频 爬虫 v2 (主 API nn.123xiangshang.com, 与 APP 数据一致)
-- 分类:   GET /types   (服务端下发, 含 热舞/传媒/吃瓜/福利/午夜/AI短剧 type_id=12)
-- 列表:   GET /list    (class/order/type_id/area/year/state/wd/page, 子分类走 class)
+牛牛视频 爬虫 v3 (主 API nn.123xiangshang.com, 与 APP 数据一致)
+- 分类:   GET /types
+- 排序:   _CLASS_ORDER 偏好(如 AI短剧紧跟短剧), 仅调序不改数据
+- 配置:   GET /config  (动态获取 parser/src 解析器配置)
+- 筛选:   子分类超 _FILTER_SPLIT(8) 个拆分为多个筛选组(class/class_moreN), 每组分行显示
+- 列表:   GET /list  (class/order/type_id/area/year/state/wd/page, 子分类走 class)
 - 首页:   GET /main
 - 详情:   GET /detail?vod_id=X   (sources[].episodes[].url, 含 player_id)
 - 播放:   player_id → 解析器URL → JSON {code,url,headers}
+- 路线:   多播放源用 $$$ 分隔(集内 #, 集 $), 显示 APP 中文线路名(player_name)
+- 短剧:   keymp4 为 CENC 加密 mp4+key, 经 _KEYMP4_PROXY 解密代理(见 keymp4_proxy.py)输出明文
 响应 AES/ECB/PKCS5 加密, key = "/path?query" 截断16位(不足补"0")
 """
 import base64
@@ -14,23 +19,27 @@ import json
 import re
 import requests
 from urllib.parse import quote
- 
+
 try:
     from base.spider import Spider as BaseSpider
 except Exception:
     class BaseSpider:
         pass
- 
+
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
- 
- 
+
+
 class Spider(BaseSpider):
     name = "牛牛视频"
- 
+
     # 主 API 域名(APP 默认 base_url, 可在 extend 中覆盖)
     _HOST = "https://nn.123xiangshang.com:35620"
- 
+
+    # 短剧(keymp4)解密代理服务地址, 留空则返回原始加密 mp4(标准播放器无法直接播放)
+    # 部署: python3 keymp4_proxy.py --port 8765  (依赖 ffmpeg)
+    _KEYMP4_PROXY = "https://8765-abb3ee7c09cf0bb4.monkeycode-ai.online"
+
     # 请求头(与 APP 拦截器一致: p/pkg/t/d/v/y/product/sys)
     _HEADERS = {
         "p": "android",
@@ -43,70 +52,40 @@ class Spider(BaseSpider):
         "sys": "13",
         "User-Agent": "okhttp/4.9.3",
     }
- 
+
     # Android Uri.encode(query, "-![.:/,%?&=]") 保留字符集
     _SAFE = "-_.!~*'()[]:/?,%&="
- 
-    # player_id → 解析器URL模板(%s 为剧集 url), 源配置来自 APP /config
-    # 数字型 ep 走三步源第一步(实测直接返回可播放 url)
-    _PARSERS = {
-        "paopao": "http://116.211.150.40:856/duanju/dj.php?id=%s",      # AI短剧
-        "madou": "http://116.211.150.40:5231/cg/jx.php?id=%s",          # 吃瓜
-        "meiju": "http://82.156.24.206:12345/jx/jxm.php?url=%s",        # 热舞
-        "thzy": "http://198.16.61.170:856/jx/thz.php?id=%s",            # 传媒
-        "xj": "http://82.156.24.206:12345/jx/xj22.php?id=%s",           # 福利
-        "91gc": "http://198.16.61.170:6100/jx/wy.php?id=%s",            # 午夜
-        "djzy": "http://82.156.24.206:12345/jx/dj.php?url=%s",          # 短剧
-        "pp": "http://ccs.js.yy.028ncf.cn/jx/ss.php?id=%s",
-        "shizi": "http://116.211.150.40:856/zhenxiang/jx.php?id=%s",
-        "juzi": "http://116.211.150.40:856/qianduan/jz.php?id=%s",
-        "shanju": "http://116.211.150.40:856/jx/sj.php?id=%s",
-        "ningmeng": "http://116.211.150.40:856/jx/nm.php?id=%s",
-        "leidian": "http://192.144.141.22:12345/cs/db.php?id=%s",
-        "douban": "http://198.16.61.170:6100/jx/db.php?url=%s",
-        "jm3u8": "http://82.156.24.206:12345/jx/jx.php?url=%s",
-        "hm3u8": "http://82.156.24.206:12345/jx/jx.php?url=%s",
-        "xm": "http://152.136.196.209:12345/jx/xm.php?url=%s",
-        "xhs": "http://152.136.181.200:5500/jx/xhs.php?id=%s",
-        "bl": "http://198.16.61.170:6100/jx/ouligei.php?z=bl&id=%s",
-        "xrk": "http://198.16.61.170:6100/jx/ouligei.php?z=xrk&id=%s",
-        "sg": "http://198.16.61.170:6100/jx/ouligei.php?z=sg&id=%s",
-        "cm": "http://198.16.61.170:6100/jx/ouligei.php?z=cm&id=%s",
-        "huagu": "http://152.136.196.209:12345/jx/jxh.php?url=%s",
-        "hema": "http://ccs.js.tt.didian.site/jx/xc.php?url=%s",
-        "ffzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
-        "bfzy": "http://49.232.251.44:894/jx/bf.php?url=%s",
-        "jszy": "http://198.16.61.170:6100/jx/jszy.php?url=%s",
-        "sdzy": "http://49.232.251.44:894/jx/sd.php?url=%s",
-        "snzy": "http://49.232.251.44:894/jx/sn.php?url=%s",
-        "jyzy": "http://198.16.61.170:6100/jx/js.php?url=%s",
-        "kkzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
-        "wjzy": "http://49.232.251.44:894/jx/wj.php?url=%s",
-        "tkzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
-        "lzzy": "http://198.16.61.170:6100/jx/ff.php?url=%s",
-        "qyzy": "http://198.16.61.170:6100/jx/qy.php?url=%s",
-        "jzzy": "http://154.8.141.13:5560/jx/ht.php?url=%s",
-        "hmjc": "http://154.8.141.13:5560/jx/dj.php?url=%s",
-        "zbjx": "http://192.144.141.22/jx/migu.php?id=%s",
-        "bddj": "http://82.156.24.206:12345/jx/bddj.php?id=%s",
-        "qmdj": "http://82.156.24.206:12345/jx/qmdj.php?id=%s",
+
+    # src 三步源 → player_id 映射(APP 协议固定, src 配置本身不含 player_id)
+    # src1/xm3u8、src2/hema、src7/xiaocao 为 xm3u8 系特殊三步(数字型 ep 需 tokenUrl), 不纳入
+    _SRC_PIDS = {
+        "src3": "pp", "src4": "madou", "src5": "douban", "src6": "juzi",
+        "src8": "shanju", "src9": "ningmeng", "src10": "shizi",
+        "src11": "paopao", "src12": "leidian",
     }
- 
-    # 数字型复杂源(hema/xiaocao/xm3u8 需 Src1 token 三步, 不在解析器表内则跳过)
-    _SKIP = {"hema", "xiaocao", "xm3u8"}
- 
-    # 数字型 ep 中已验证"第一步解析即直接返回可播放 url"的源
-    # (普通分类的 juzi/shanju 等数字型源返回二级签名 API, 不可用)
-    _DIRECT = {"paopao", "madou", "91gc", "xj", "thzy", "meiju", "djzy", "djan", "zbjx"}
- 
+
+    # 实测确认不可用的源(第一步返回二级签名 API 或解析器 500), 播放时直接过滤
+    # juzi/shanju: 二级 API 需应用签名; jzzy/hmjc: ht.php/dj.php 返回 500
+    _BAD = {"juzi", "shanju", "jzzy", "hmjc"}
+
+    # xm3u8 系特殊三步源(数字型 ep 需 tokenUrl 加密流程), 普通解析器不适用, 过滤
+    _XM3U8 = {"xm3u8", "xiaocao", "hema"}
+
+    # 分类排序偏好(仅顺序, 分类数据仍来自 /types): "12"(AI短剧)紧跟 "5"(短剧)之后
+    _CLASS_ORDER = [("12", "5")]
+
+    # 单行子分类上限: 单个"类型"筛选超过该数量即拆分为多个筛选组(每组独立一行), 避免一行过长
+    _FILTER_SPLIT = 8
+
     def __init__(self):
         self.host = self._HOST
-        self._classes = None
-        self._filters = {}
-        self.page_size = 20
+        self.class_cache = None
+        self.config_cache = None
+        self.parsers_cache = None
+        self.page_size = 12
         self.session = requests.Session()
         self.session.verify = False
- 
+
     def init(self, extend=""):
         if extend:
             try:
@@ -115,12 +94,12 @@ class Spider(BaseSpider):
                     self.host = cfg["host"].rstrip("/")
             except Exception:
                 pass
- 
+
     def getName(self):
         return self.name
- 
+
     # ========== 加解密与请求 ==========
- 
+
     def _decrypt(self, pathq, text):
         """响应解密: 明文JSON直接返回, 否则 AES/ECB key=pathq截断16补0"""
         text = (text or "").strip()
@@ -137,7 +116,7 @@ class Spider(BaseSpider):
             return json.loads(unpad(cipher.decrypt(ct), AES.block_size).decode("utf-8"))
         except Exception:
             return {}
- 
+
     def _get(self, path, params=None):
         """GET 主API, 返回解密后的 dict"""
         raw_q = "&".join("%s=%s" % (k, v) for k, v in (params or {}).items())
@@ -149,12 +128,58 @@ class Spider(BaseSpider):
             return self._decrypt(pathq, r.text)
         except Exception:
             return {}
- 
+
+    # ========== 动态配置(来自 /config) ==========
+
+    def _config(self):
+        """拉取 APP 动态配置(含 parser/src 列表), 同进程内走内存缓存"""
+        if self.config_cache is not None:
+            return self.config_cache
+        j = self._get("config")
+        data = (j or {}).get("data") or {}
+        self.config_cache = data
+        return data
+
+    def _parsers(self):
+        """动态构建 player_id → 第一步解析器URL模板(带缓存)
+
+        数据源: /config 的 parser 列表(enable=1 且 url 非空) + src 三步源 yUrl
+        URL 型源(bfzy/tkzy 等)的 ep 是 m3u8 直链, 无需解析器, 播放时直接返回
+        """
+        if self.parsers_cache is not None:
+            return self.parsers_cache
+        cfg = self._config()
+        mapping = {}
+        for p in cfg.get("parser") or []:
+            pid = p.get("player_id")
+            url = p.get("url") or ""
+            if pid and url and p.get("enable") == 1:
+                mapping[pid] = url
+        for src_key, pid in self._SRC_PIDS.items():
+            y_url = (cfg.get(src_key) or {}).get("yUrl") or ""
+            if y_url:
+                mapping[pid] = y_url
+        self.parsers_cache = mapping
+        return mapping
+
+    def _player_names(self):
+        """动态构建 player_id → APP 中文线路名(来自 /config parser.player_name), 空名回退 pid"""
+        cfg = self._config()
+        names = {}
+        for p in cfg.get("parser") or []:
+            pid = p.get("player_id")
+            if not pid:
+                continue
+            name = (p.get("player_name") or "").strip()
+            names[pid] = name if name else pid
+        return names
+
     # ========== 分类与筛选 ==========
- 
-    def _load_classes(self):
-        if self._classes:
-            return self._classes
+
+    def _classes(self):
+        """从 /types 动态获取分类, 同进程内走内存缓存"""
+        if self.class_cache is not None:
+            return self.class_cache
         arr = []
         j = self._get("types")
         for m in (j or {}).get("data") or []:
@@ -163,45 +188,64 @@ class Spider(BaseSpider):
             if tid is not None and name:
                 arr.append({"type_id": str(tid), "type_name": str(name),
                             "type_extend": m.get("type_extend") or {}})
-        self._classes = arr
-        return arr
- 
-    def _filters_of(self, types_extend):
-        """type_extend → TVBox filters(class/area/lang/year + order)"""
-        filters = []
-        if types_extend.get("class"):
-            filters.append({
-                "key": "class", "name": "类型",
-                "value": [{"n": v, "v": v} for v in str(types_extend["class"]).split(",")],
+        self.class_cache = self._reorder(arr)
+        return self.class_cache
+
+    def _reorder(self, classes):
+        """应用分类排序偏好(_CLASS_ORDER: 后一个紧跟在前一个之后), 未提及的分类保持服务端顺序"""
+        classes = list(classes)
+        for after, before in self._CLASS_ORDER:
+            m = next((c for c in classes if c["type_id"] == after), None)
+            if not m or not any(c["type_id"] == before for c in classes):
+                continue
+            classes = [c for c in classes if c["type_id"] != after]
+            pos = next(i + 1 for i, c in enumerate(classes) if c["type_id"] == before)
+            classes.insert(pos, m)
+        return classes
+
+    def _filters(self, classes):
+        """基于每个分类的 type_extend 动态生成筛选条件(class/area/year + order)"""
+        filters = {}
+        for c in classes:
+            te = c.get("type_extend") or {}
+            f = []
+            if te.get("class"):
+                vals = [v for v in str(te["class"]).split(",") if v]
+                # 超过 _FILTER_SPLIT 个子分类时拆分为多个筛选组(每组一行), 避免单行过长看不到后面的
+                groups = [vals[i:i + self._FILTER_SPLIT]
+                          for i in range(0, len(vals), self._FILTER_SPLIT)]
+                for gi, g in enumerate(groups):
+                    f.append({
+                        "key": "class" if gi == 0 else "class_more%d" % gi,
+                        "name": "类型" if gi == 0 else "类型·更多%d" % gi,
+                        "value": [{"n": v, "v": v} for v in g],
+                    })
+            if te.get("area"):
+                f.append({
+                    "key": "area", "name": "地区",
+                    "value": [{"n": v, "v": v} for v in str(te["area"]).split(",")],
+                })
+            if te.get("year"):
+                f.append({
+                    "key": "year", "name": "年份",
+                    "value": [{"n": v, "v": v} for v in str(te["year"]).split(",")],
+                })
+            f.append({
+                "key": "order", "name": "排序",
+                "value": [
+                    {"n": "最新", "v": "最新"},
+                    {"n": "最热", "v": "最热"},
+                    {"n": "评分", "v": "评分"},
+                ],
             })
-        if types_extend.get("area"):
-            filters.append({
-                "key": "area", "name": "地区",
-                "value": [{"n": v, "v": v} for v in str(types_extend["area"]).split(",")],
-            })
-        if types_extend.get("year"):
-            filters.append({
-                "key": "year", "name": "年份",
-                "value": [{"n": v, "v": v} for v in str(types_extend["year"]).split(",")],
-            })
-        filters.append({
-            "key": "order", "name": "排序",
-            "value": [
-                {"n": "最新", "v": "最新"},
-                {"n": "最热", "v": "最热"},
-                {"n": "评分", "v": "评分"},
-            ],
-        })
+            filters[c["type_id"]] = f
         return filters
- 
+
     # ========== TVBox 接口 ==========
- 
+
     def homeContent(self, filter):
-        classes = []
-        for c in self._load_classes():
-            classes.append({"type_id": c["type_id"], "type_name": c["type_name"]})
-        filters = {c["type_id"]: self._filters_of(c["type_extend"]) for c in self._classes}
- 
+        classes = self._classes()
+
         # 首页推荐: /main 板块列表
         items = []
         j = self._get("main")
@@ -212,20 +256,30 @@ class Spider(BaseSpider):
             j = self._get("list", {"class": "", "order": "最新", "type_id": "5",
                                    "area": "", "year": "", "state": "", "wd": "", "page": "1"})
             items = [self._vod_from_list(v) for v in (j or {}).get("data") or []]
- 
-        return {"class": classes, "filters": filters, "list": items[:40]}
- 
+
+        return {
+            "class": [{"type_id": c["type_id"], "type_name": c["type_name"]} for c in classes],
+            "filters": self._filters(classes),
+            "list": items[:40],
+        }
+
     def homeVideoContent(self):
         j = self._get("list", {"class": "", "order": "最新", "type_id": "5",
                                "area": "", "year": "", "state": "", "wd": "", "page": "1"})
         items = [self._vod_from_list(v) for v in (j or {}).get("data") or []]
         return {"list": items}
- 
+
     def categoryContent(self, tid, pg, filter, extend):
         extend = extend or {}
         pg = int(pg) if str(pg).isdigit() else 1
+        # 拆分的"类型·更多N"筛选组共享同一个后端 class 字段, 取第一个非空值
+        cls = str(extend.get("class") or "")
+        for k, v in extend.items():
+            if k.startswith("class_more") and v:
+                cls = str(v)
+                break
         params = {
-            "class": str(extend.get("class") or ""),
+            "class": cls,
             "order": str(extend.get("order") or "最新"),
             "type_id": str(tid),
             "area": str(extend.get("area") or ""),
@@ -237,7 +291,7 @@ class Spider(BaseSpider):
         j = self._get("list", params)
         lst = (j or {}).get("data") or []
         items = [self._vod_from_list(v) for v in lst]
-        pagecount = pg + 1 if len(items) >= self.page_size else pg
+        pagecount = pg + 1 if items else pg
         return {
             "page": pg,
             "pagecount": pagecount,
@@ -245,14 +299,14 @@ class Spider(BaseSpider):
             "total": 99999,
             "list": items,
         }
- 
+
     def detailContent(self, ids):
         vid = str(ids[0])
         j = self._get("detail", {"vod_id": vid})
         d = (j or {}).get("data") or {}
         if not d.get("vod_name"):
             return {"list": []}
- 
+
         vod = {
             "vod_id": str(d.get("vod_id") or vid),
             "vod_name": d.get("vod_name", ""),
@@ -265,43 +319,51 @@ class Spider(BaseSpider):
             "vod_content": d.get("vod_content", "") or d.get("vod_blurb", ""),
             "vod_remarks": d.get("vod_remarks", ""),
         }
- 
+
         sources = []
+        parsers = self._parsers()
         for s_ in d.get("sources") or []:
             pid = s_.get("player_id")
-            if not pid or pid in self._SKIP:
+            if not pid or pid in self._BAD or pid in self._XM3U8:
                 continue
             eps = s_.get("episodes") or []
             if not eps:
                 continue
-            # URL 型 ep 直接可播; 数字型 ep 仅保留已验证直接可播的源
+            # URL 型 ep 直接可播; 数字型 ep 需有动态解析器映射
             first_url = eps[0].get("url") or ""
-            if not first_url.startswith("http") and pid not in self._DIRECT:
+            if not first_url.startswith("http") and pid not in parsers:
                 continue
-            sources.append({"player_id": pid, "prio": int(s_.get("prio") or 999),
-                            "episodes": eps})
- 
+            raw = s_.get("prio")
+            try:
+                prio = int(raw) if raw not in (None, "") else 999
+            except (TypeError, ValueError):
+                prio = 999
+            sources.append({"player_id": pid, "prio": prio, "episodes": eps})
+
         if not sources:
             return {"list": []}
- 
-        # 按 prio 排序(小→大), 最多保留 4 个可切换源
+
+        # 按 prio 排序(小→大); 保留全部可用源作为路线, 自动跟随 APP 侧源增减
         sources.sort(key=lambda x: x["prio"])
-        sources = sources[:4]
- 
+
+        # TVBox 约定: 播放源之间用 $$$ 分隔, 源内各集用 # 分隔, 每集为 "集名$地址@@源id"
+        # (若用 # 连接多个源, TVBox 会把整串当作单一源名, 并将所有源的全部集数合并到选集里)
+        # 路线显示为 APP 中文线路名(player_name), 选集地址仍带 @@英文pid 供播放时取用
+        names = self._player_names()
         play_from = []
         play_urls = []
         for s_ in sources:
             pid = s_["player_id"]
-            play_from.append(pid)
+            play_from.append(re.sub(r"[$#]", "", names.get(pid, pid)))
             eps_str = "#".join(
                 "%s$%s@@%s" % (e.get("name") or "第%02d集" % (i + 1), e.get("url"), pid)
                 for i, e in enumerate(s_["episodes"])
             )
             play_urls.append(eps_str)
-        vod["vod_play_from"] = "#".join(play_from)
-        vod["vod_play_url"] = "#".join(play_urls)
+        vod["vod_play_from"] = "$$$".join(play_from)
+        vod["vod_play_url"] = "$$$".join(play_urls)
         return {"list": [vod]}
- 
+
     def searchContent(self, key, quick, pg="1"):
         pg = int(pg) if str(pg).isdigit() else 1
         j = self._get("list", {"class": "", "order": "最新", "type_id": "",
@@ -309,7 +371,7 @@ class Spider(BaseSpider):
                                "page": str(pg)})
         lst = (j or {}).get("data") or []
         items = [self._vod_from_list(v) for v in lst]
-        pagecount = pg + 1 if len(items) >= self.page_size else pg
+        pagecount = pg + 1 if items else pg
         return {
             "page": pg,
             "pagecount": pagecount,
@@ -317,41 +379,57 @@ class Spider(BaseSpider):
             "total": 99999,
             "list": items,
         }
- 
+
     def playerContent(self, flag, id, vipFlags):
         s = str(id)
         if "@@" in s:
             ep, player = s.rsplit("@@", 1)
         else:
             ep, player = s, str(flag)
- 
+
+        # 路线显示为中文名时, 部分播放器可能把 flag(中文名)直接当源 id 传入, 反查回 pid
+        # (同名线路可能对应多个 pid, 优先取解析器映射中真实生效的那个)
+        if player not in self._parsers():
+            for pid, name in self._player_names().items():
+                if name == player and pid in self._parsers():
+                    player = pid
+                    break
+
         # URL 型 ep(m3u8/mp4/ts)直接可播
         if ep.startswith("http") and re.search(r"\.(m3u8|mp4|ts|flv)(\?|$)", ep):
             return {"parse": 0, "playUrl": "", "url": ep, "header": "{}"}
- 
-        tpl = self._PARSERS.get(player)
+
+        tpl = self._parsers().get(player)
         if not tpl:
             return {"parse": 1, "playUrl": "", "url": ""}
- 
-        url = tpl.replace("%s", ep)
+
+        # src 三步源的 yUrl 为完整前缀(不带 %s), parser 型带 %s 占位符
+        url = tpl.replace("%s", ep) if "%s" in tpl else tpl + ep
         try:
             r = self.session.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
             j = r.json()
         except Exception:
             return {"parse": 1, "playUrl": "", "url": ""}
- 
+
         play = (j or {}).get("url") or ""
         if not play:
             return {"parse": 1, "playUrl": "", "url": ""}
- 
+
+        # keymp4: CENC 加密 mp4 + 解密密钥, 标准播放器无法直播
+        # 配置解密代理后改为返回代理地址(代理内部下载解密并流式输出明文 mp4)
+        if (j or {}).get("type") == "keymp4" and self._KEYMP4_PROXY:
+            key = (j or {}).get("key") or ""
+            if key:
+                play = "%s/decode?u=%s&k=%s" % (self._KEYMP4_PROXY, quote(play, safe=""), key)
+
         headers = self._parse_headers((j or {}).get("headers") or "")
         return {"parse": 0, "playUrl": "", "url": play, "header": json.dumps(headers)}
- 
+
     def isVideoContent(self):
         return True
- 
+
     # ========== 内部方法 ==========
- 
+
     @staticmethod
     def _parse_headers(s):
         """解析器响应的 headers 字符串(换行/回车分隔 key:value) → dict"""
@@ -365,7 +443,7 @@ class Spider(BaseSpider):
                 if k:
                     out[k] = v.strip()
         return out
- 
+
     @staticmethod
     def _vod_from_list(v):
         return {
