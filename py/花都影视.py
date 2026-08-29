@@ -178,6 +178,21 @@ class Spider(Spider):
    global headerx
    global headers
 
+   # 分类排序偏好(按名称), 未提及的分类保持页面原顺序
+   _CLASS_ORDER = [
+       "中字无码", "国产", "AI短剧", "欧美中字", "欧美",
+       "国产精品", "国产传媒", "糖心Vlog", "步兵无码", "中文字幕",
+       "无字幕", "动漫", "中字有码", "骑兵有码", "中字里番", "3D动漫",
+   ]
+
+   def _sort_classes(self, classes):
+        """按 _CLASS_ORDER 名称顺序重排分类, 未提及的分类保持原相对顺序"""
+        order = {name: i for i, name in enumerate(self._CLASS_ORDER)}
+        ordered = [c for c in classes if c["type_name"] in order]
+        rest = [c for c in classes if c["type_name"] not in order]
+        ordered.sort(key=lambda c: order[c["type_name"]])
+        return ordered + rest
+
    def getName(self):
        return "首页"
 
@@ -318,8 +333,8 @@ class Spider(Spider):
                id = f"{fenge[0]}-----------.html"
                id = id.replace('vodtype', 'vodshow')
                if id not in seen_ids:
-                   seen_ids.add(id)
-                   result["class"].append({"type_id": id, "type_name": "集多🌠" + name})
+                    seen_ids.add(id)
+                    result["class"].append({"type_id": id, "type_name": name})
 
        # 2. 提取页面中的所有子分类链接（二级分类）
        # 中字无码、中字有码、步兵无码、骑兵有码、国产精品、国产传媒、糖心Vlog、欧美中字、中字里番、3D动漫、AI短剧
@@ -336,9 +351,11 @@ class Spider(Spider):
                if cid_num in ['1', '2', '3', '4', '5']:
                    continue
            if href not in seen_ids:
-               seen_ids.add(href)
-               result["class"].append({"type_id": href, "type_name": "集多🌠" + name})
+                seen_ids.add(href)
+                result["class"].append({"type_id": href, "type_name": name})
 
+       # 按排序偏好(_CLASS_ORDER)重排分类
+       result["class"] = self._sort_classes(result["class"])
        return result
 
    def homeVideoContent(self):
