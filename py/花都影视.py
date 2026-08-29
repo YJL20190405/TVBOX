@@ -16,22 +16,22 @@ class Spider(Spider):
         self.headers["Referer"] = self.host
         self.mheaders = {"User-Agent":"Linux; Android 12; Pixel 3 XL) AppleWebKit/537.36 Chrome/98.0.4758.101 Mobile Safari/537.36"}
         self.fallback = [
-            {"type_id":"/vodshow/1-----------.html","type_name":"中文字幕"},
-            {"type_id":"/vodshow/2-----------.html","type_name":"无字幕"},
-            {"type_id":"/vodshow/3-----------.html","type_name":"国产"},
-            {"type_id":"/vodshow/4-----------.html","type_name":"动漫"},
-            {"type_id":"/vodshow/5-----------.html","type_name":"欧美"},
             {"type_id":"/vodshow/6-----------.html","type_name":"中字无码"},
-            {"type_id":"/vodshow/7-----------.html","type_name":"中字有码"},
-            {"type_id":"/vodshow/8-----------.html","type_name":"步兵无码"},
-            {"type_id":"/vodshow/9-----------.html","type_name":"骑兵有码"},
+            {"type_id":"/vodshow/3-----------.html","type_name":"国产"},
+            {"type_id":"/vodshow/16-----------.html","type_name":"AI短剧"}
+            {"type_id":"/vodshow/13-----------.html","type_name":"欧美中字"},
+            {"type_id":"/vodshow/5-----------.html","type_name":"欧美"},
             {"type_id":"/vodshow/10-----------.html","type_name":"国产精品"},
             {"type_id":"/vodshow/11-----------.html","type_name":"国产传媒"},
             {"type_id":"/vodshow/12-----------.html","type_name":"糖心Vlog"},
-            {"type_id":"/vodshow/13-----------.html","type_name":"欧美中字"},
+            {"type_id":"/vodshow/8-----------.html","type_name":"步兵无码"},
+            {"type_id":"/vodshow/1-----------.html","type_name":"中文字幕"},
+            {"type_id":"/vodshow/2-----------.html","type_name":"无字幕"},
+            {"type_id":"/vodshow/4-----------.html","type_name":"动漫"},
+            {"type_id":"/vodshow/7-----------.html","type_name":"中字有码"},
+            {"type_id":"/vodshow/9-----------.html","type_name":"骑兵有码"},
             {"type_id":"/vodshow/14-----------.html","type_name":"中字里番"},
-            {"type_id":"/vodshow/15-----------.html","type_name":"3D动漫"},
-            {"type_id":"/vodshow/16-----------.html","type_name":"AI短剧"}
+            {"type_id":"/vodshow/15-----------.html","type_name":"3D动漫"}
         ]
     def _get(self, url):
         if url in self.cache: return self.cache[url]
