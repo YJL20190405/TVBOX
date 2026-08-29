@@ -37,6 +37,7 @@ class Spider(BaseSpider):
         }
         self.class_list = [
             {"type_name": "国产动漫", "type_id": "guochan"},
+            {"type_name": "Ai漫剧", "type_id": "Ai漫剧"},
             {"type_name": "里番", "type_id": "rifan"},
             {"type_name": "泡面番", "type_id": "pao"},
             {"type_name": "Motion Anime", "type_id": "motion"},
