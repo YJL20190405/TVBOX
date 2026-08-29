@@ -5,7 +5,7 @@ import os
 import time
 import hashlib
 from base64 import b64decode, b64encode
-from urllib.parse import urlparse, quote
+from urllib.parse import quote, unquote
 
 import requests
 from Crypto.Cipher import AES
@@ -33,6 +33,20 @@ class Spider(BaseSpider):
     # 例如 [("/category/dydj/", "/category/mrds/")] 表示 AI短剧 紧跟 每日大赛。
     # 未提及的分类保持接口原顺序, 新分类自动排到后面。
     _CLASS_ORDER = []
+    # 分类默认子页偏好表: type_id -> 默认子页 URL。
+    # 例如实时偷拍默认显示"实时监控" (/category/sstp/live/), 点开即实时监控内容。
+    _CLASS_DEFAULT = {
+        '/category/sstp/': '/category/sstp/live/',
+    }
+    # 分类页面内子 tab 偏好表: type_id -> [{n: tab名, v: tabURL}],
+    # 注入该分类的"类型"筛选, 便于在 TVBox 内切换子 tab。
+    _CLASS_TABS = {
+        '/category/sstp/': [
+            {'n': '热门推荐', 'v': '/category/sstp/'},
+            {'n': '实时监控', 'v': '/category/sstp/live/'},
+            {'n': '精彩回放', 'v': '/category/sstp/replay/'},
+        ],
+    }
     # API 成功拉取后写入 spider_cache.json; API 失败时即使过期也用它兜底
     _CACHE_FILE = os.path.join(_BASE_DIR, 'spider_cache.json')
 
@@ -71,13 +85,16 @@ class Spider(BaseSpider):
     def get_working_host(self):
         dynamic_urls = [
             'https://but.ybejhul.com/',
+            'https://air.jrozpnrw.cc/',
             'https://adopt.ybejhul.com'
         ]
         for url in dynamic_urls:
             try:
                 response = requests.get(url, headers=self.headers, proxies=self.proxies, timeout=10)
                 if response.status_code == 200:
-                    return url
+                    # 节点必须返回真实内容, 跳过空壳/验证页节点
+                    if len(self.getpq(response.text)('#index article, article')) > 0:
+                        return url
             except Exception:
                 continue
         return dynamic_urls[0]
@@ -104,9 +121,22 @@ class Spider(BaseSpider):
         if not data:
             data = self._types_from_html()
         if data:
+            self._apply_tabs(data)
             _mem['types'] = data
             self._save_cache('types', data)
         return data
+
+    def _apply_tabs(self, types):
+        # 把页面内子 tab (如实时偷拍的热门推荐/实时监控/精彩回放) 注入为"类型"筛选
+        for c in types.get('class', []):
+            tid = c.get('type_id')
+            tabs = self._CLASS_TABS.get(tid)
+            if not tabs:
+                continue
+            ext = c.setdefault('type_extend', {})
+            if not ext.get('class'):
+                ext['class'] = list(tabs)
+        return types
 
     def _types_from_api(self):
         try:
@@ -207,7 +237,6 @@ class Spider(BaseSpider):
             pu = parser.get('url') or parser.get('api') or parser.get('parse') or ''
             if pu:
                 cfg['parser_url'] = pu
-                cfg['parser_name'] = parser.get('name', '')
         elif isinstance(parser, str):
             if parser:
                 cfg['parser_url'] = parser
@@ -337,17 +366,18 @@ class Spider(BaseSpider):
             return {'class': classes, 'filters': filters, 'list': []}
 
     def homeVideoContent(self):
-        try:
-            response = requests.get(self.host, headers=self.headers, proxies=self.proxies, timeout=15)
-            if response.status_code != 200:
-                return {'list': []}
-            data = self.getpq(response.text)
-            return {'list': self.getlist(data('#index article, article'))}
-        except Exception as e:
-            return {'list': []}
+        return self.homeContent(True)
 
     def _extract_filter(self, filter):
-        f = filter or {}
+        # 兼容 TVBox 各客户端: filter 可能是 dict / JSON字符串 / 布尔 / None
+        if isinstance(filter, str):
+            try:
+                filter = json.loads(filter)
+            except Exception:
+                return '', {}
+        if not isinstance(filter, dict):
+            return '', {}
+        f = filter
         cls = ''
         for k in ('class', 'class_more1', 'class_more2', 'class_more3', 'class_more4', 'class_more5'):
             if f.get(k):
@@ -368,8 +398,26 @@ class Spider(BaseSpider):
                 v = self.getfod(tid.replace('@folder', ''))
                 return {'list': v, 'page': 1, 'pagecount': 1, 'limit': 90, 'total': len(v)}
 
-            pg = int(pg) if pg else 1
-            cls, params = self._extract_filter(filter)
+            try:
+                pg = int(pg)
+            except (TypeError, ValueError):
+                pg = 1
+            if pg < 1:
+                pg = 1
+            # 兼容客户端传参: 多数客户端把筛选放 filter(dict/JSON字符串),
+            # 影视仓/小苹果等把筛选放 extend 而 filter 只传 True/False
+            f = filter
+            if isinstance(extend, dict) and extend:
+                if not isinstance(f, dict):
+                    f = extend
+                else:
+                    f = {**extend, **f}
+            cls, params = self._extract_filter(f)
+            cls = unquote(cls)  # 兼容客户端对筛选值做 URL 编码
+
+            # 无筛选时应用分类默认子页 (如实时偷拍默认显示"实时监控")
+            if not cls and tid in self._CLASS_DEFAULT:
+                tid = self._CLASS_DEFAULT[tid]
 
             if cls and (cls.startswith('http') or cls.startswith('/')):
                 base_url = self._abs(cls).rstrip('/')
@@ -396,7 +444,7 @@ class Spider(BaseSpider):
                 return {'list': [], 'page': pg, 'pagecount': 9999, 'limit': 90, 'total': 0}
 
             data = self.getpq(response.text)
-            videos = self.getlist(data('#archive article, #index article, article'), tid)
+            videos = self.getlist(data('#archive article, #index article, article, a.realtime-card'), tid)
 
             return {'list': videos, 'page': pg, 'pagecount': 9999, 'limit': 90, 'total': 999999}
         except Exception as e:
@@ -508,7 +556,12 @@ class Spider(BaseSpider):
 
     def searchContent(self, key, quick, pg="1"):
         try:
-            pg = int(pg) if pg else 1
+            try:
+                pg = int(pg)
+            except (TypeError, ValueError):
+                pg = 1
+            if pg < 1:
+                pg = 1
 
             if pg == 1:
                 url = f"{self.host}/search/{key}/"
@@ -596,6 +649,23 @@ class Spider(BaseSpider):
         is_folder = '/mrdg' in (tid or '')
         for k in data.items():
             card_html = k.outer_html() if hasattr(k, 'outer_html') else str(k)
+            if k.is_('a.realtime-card') or 'realtime-card' in (k.attr('class') or ''):
+                # 实时偷拍等独立模板: <a class="realtime-card" href="..." aria-label="标题">
+                href = k.attr('href')
+                title = k.attr('aria-label') or k('img').attr('alt') or ''
+                if href and title:
+                    # 真实封面在 data-xkrkllgl, src 只是占位图, 需优先取
+                    img_attr = k('img').attr('data-xkrkllgl') or k('img').attr('data-src') or ''
+                    pic = self._proc_url(img_attr) if img_attr else self.getimg('', k, card_html)
+                    videos.append({
+                        'vod_id': href,
+                        'vod_name': title.strip(),
+                        'vod_pic': pic,
+                        'vod_remarks': k('.realtime-card__status').text().strip() or '',
+                        'vod_tag': '',
+                        'style': {"type": "rect", "ratio": 1.33}
+                    })
+                continue
             a = k if k.is_('a') else k('a').eq(0)
             href = a.attr('href')
             title = k('h2').text() or k('.entry-title').text() or k('.post-title').text()
