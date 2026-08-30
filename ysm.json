@@ -8,7 +8,7 @@
     //"spider": "http://pan.0076sf.cn/f/dPbHG/07101403.png;md5;4e485fbd3b8a48b61e0a90774dd58b9d",//王[二小]弹幕
     //"spider": "https://pan.qingyuji.cn/f/Pm3yi4/1028logo.jpg",//[小米]弹幕
    //"spider": "https://www.lequxiang.com.cn/down.php/eef74b7957e73ed47ee624bb0c67c9b2.txt",//[潇洒]
-    "spider": "https://qiniu.gongxueyun.com/upload/1581765/2026-08-21/training_record/234044207_4_1787290437788.jar;md5;ba25eb6bad40a9352017438a47865a10",
+    "spider": "https://qiniu.gongxueyun.com/upload/1485643/2026-08-30/pay_slip_details/399640384_3_1788121085146.jar;md5;01e3d12b032b87e2e1f7c278453881ce",
     //"spider": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/5EE1360_773_okpng_20250919184254519newMediaFile.png;md5;4675eeed7adff0f35976ab076da9f1de",//OK弹幕
     //"spider": "https://ghfast.top/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/refs/heads/main/custom_spider.jar",
     "sites": [{"name":"🐶[嗷呜]┃豆瓣推荐","key":"Douban","type":3,"api":"csp_DoubanAmns","indexs":1,"searchable":0,"quickSearch":0,"changeable":0,
