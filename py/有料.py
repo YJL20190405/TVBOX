@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# 欢迎来到有料视频！牢记回家地址：  yltv.live
+# 1.编辑任意邮件至邮箱获取最新下载地址youliao1688@gmail.com(地址找回)
 import base64
 import hashlib
 import json
