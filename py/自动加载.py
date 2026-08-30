@@ -26,7 +26,7 @@ class Spider(Spider):
             "name": "🐬自动加载",
             "key": "自动加载",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/自动加载66.py"
+            "api": "https://raw.giteeusercontent.com/youngxiayang/TVBOX/raw/main/py/%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD.py?metadata=eyJyIjoibWFpbiIsImZwIjoicHkv6Ieq5Yqo5Yqg6L29LnB5IiwidWlkIjoxMTkwMDY2MywicGlkIjoyNTk4OTI0Miwic3RvIjoiZ2l0LXNoYXJkaW5nLXN0by00MnQtMDA2IiwicnAiOiJyZXBvcy8zNi8xZC8zNjFkZmMzM2Y1ZjU0MjdmZDgzNjNjZDE5OTAwNGMyNjQwN2FmMWEyZTdkNGI0NTEyYmUwYmU1ZmY4NmI4MGViLmdpdCIsImV4cGlyZV9hdCI6MTc4ODA5OTYwMH0&signature=YBHGsW3_xcSsSgSkKj2tK2vtJaWrVrHm5oOcNncsWsc"
          },
 		{
             "name": "🐬弹幕",
