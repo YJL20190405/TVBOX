@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#SEO https://xb1818.tv
+#TG：https://t.me/xingba018
 """XB 联网版 TVBox Python Spider（单文件）。
 
 仅供账号持有人在已获授权的环境中测试。文件内包含私有设备登录资料，
