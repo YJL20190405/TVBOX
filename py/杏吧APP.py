@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#SEO https://xb1818.tv
+#SEO https://xb1818.tv  邮箱：xingba357@gmail.com
 #TG：https://t.me/xingba018
 """XB 联网版 TVBox Python Spider（单文件）。
 
