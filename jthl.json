@@ -409,13 +409,19 @@
 		},
 		{
 			"key": "eporner",
-			"name": "🐬EPORNER.py｜🔞[成人]",
+			"name": "🐬EPORNER.py墙｜🔞[成人]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/EPORNER.py"
 		},
 		{
 			"key": "91porn",
 			"name": "🐬91porn.py｜🔞[成人]",
+			"type": 3,
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/91porn.py"
+		},
+        		{
+			"key": "91Porn蝌蚪窝.py",
+			"name": "🐬91Porn蝌蚪窝.py｜🔞[成人]",
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/91Porn蝌蚪窝.py"
 		},
@@ -437,7 +443,7 @@
 			"type": 3,
 			"api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/麻豆免费在线播放.py"
 		},
-                {      "key": "有声骚麦",      "name": "🐬有声骚麦.py墙🔞[成人听书]",      "type": 3,      "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/有声骚麦.py"},
+                {      "key": "有声骚麦",      "name": "🐬有声骚麦.py🔞[成人听书]",      "type": 3,      "api": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/py/有声骚麦.py"},
   // {"key":"csp_XYQHiker_黄色仓库","name": "🔞黄色仓库✈️🔗(XYQHiker)","type": 3,"api": "csp_XYQHiker","searchable": 1,"quickSearch": 0,"filterable": 0,
    //"jar":"raw.githubusercontent.com/wanganni/yinshiyuan/main/jar/xyq202503缝合.jar",
    //"ext": "https://ghfast.top/https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/XYQHiker/hsck.json","style": {"type": "rect","ratio": 1.6}},
