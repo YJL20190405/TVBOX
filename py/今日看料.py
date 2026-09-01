@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 🌈 Love 
+# 🌈 Love 投稿邮箱：7qihuad@gmail.com   或者飞机号@aaass000 商务合作飞机号@qihuad2（唯一官方号没有其他，切勿受骗）
 import json
 import random
 import re
