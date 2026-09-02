@@ -1,4 +1,6 @@
 # coding=utf-8
+#📮 官方邮箱：huijiadelu109@gmail.com
+#Telegram： https://t.me/douyin18_1597
 import json, time, ssl, re, base64, random
 from base.spider import Spider
 import requests
