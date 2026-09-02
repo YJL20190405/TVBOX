@@ -207,6 +207,20 @@ class Spider(Spider):
         },
     }
 
+    def _split_class_filter(self, values, name="类型"):
+        rows = []
+        for i in range(0, len(values), 8):
+            key = "class" if i == 0 else f"class_more{i // 8}"
+            rows.append({"key": key, "name": name, "value": values[i:i + 8]})
+        return rows
+
+    def _pick_class(self, ext):
+        for i in range(8):
+            v = (ext or {}).get("class" if i == 0 else f"class_more{i}")
+            if v:
+                return v
+        return ""
+
     def _parse_video_list(self, html):
         result = []
         items = re.findall(r'<li>\s*<div class="video-item">(.*?)</li>', html, re.DOTALL)
@@ -390,7 +404,7 @@ class Spider(Spider):
             f = []
             if cid in ("video", "melon"):
                 if c.get("cates"):
-                    f.append({"key": "cat", "name": "分类", "value": c["cates"]})
+                    f.extend(self._split_class_filter(c["cates"], "类型"))
                 if c.get("sorts"):
                     f.append({"key": "sort", "name": "排序", "value": c["sorts"]})
             elif cid == "av":
@@ -414,7 +428,7 @@ class Spider(Spider):
         pg = int(pg) if str(pg).isdigit() else 1
         ext = self._parse_ext(ext)
         if cid == "video":
-            cat = ext.get("cat", "")
+            cat = self._pick_class(ext)
             sort = ext.get("sort", "")
             url = self._build_url(cid, cat, sort, pg)
             html = self._req(url)
@@ -422,7 +436,7 @@ class Spider(Spider):
             pc = self._extract_max_page(html)
             return {"list": vods, "page": pg, "pagecount": pc, "limit": 24, "total": pc * 24}
         if cid == "melon":
-            cat = ext.get("cat", "")
+            cat = self._pick_class(ext)
             sort = ext.get("sort", "")
             url = self._build_url(cid, cat, sort, pg)
             html = self._req(url)
