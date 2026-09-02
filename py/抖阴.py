@@ -207,18 +207,28 @@ class Spider(Spider):
         },
     }
 
-    def _split_class_filter(self, values, name="类型"):
-        rows = []
-        for i in range(0, len(values), 8):
-            key = "class" if i == 0 else f"class_more{i // 8}"
-            rows.append({"key": key, "name": name, "value": values[i:i + 8]})
-        return rows
+    _CLASS_CHUNK = 8
+
+    def _split_class_filter(self, values, name="类型", chunk=None):
+        if not values:
+            return []
+        chunk = chunk or self._CLASS_CHUNK
+        parts = [values[i:i + chunk] for i in range(0, len(values), chunk)]
+        return [{"key": "class", "name": name, "value": list(part)} for part in parts]
 
     def _pick_class(self, ext):
-        for i in range(8):
-            v = (ext or {}).get("class" if i == 0 else f"class_more{i}")
+        if not ext:
+            return ""
+        for k in ("class", "cat", "cateId"):
+            v = ext.get(k)
             if v:
                 return v
+        i = 1
+        while i <= 30:
+            v = ext.get(f"class_more{i}")
+            if v:
+                return v
+            i += 1
         return ""
 
     def _parse_video_list(self, html):
@@ -408,7 +418,7 @@ class Spider(Spider):
                 if c.get("sorts"):
                     f.append({"key": "sort", "name": "排序", "value": c["sorts"]})
             elif cid == "av":
-                f.append({"key": "cateId", "name": "类型", "value": c["sorts"]})
+                f.extend(self._split_class_filter(c["sorts"], "类型"))
             elif cid == "av_theme":
                 f.append({"key": "by", "name": "影片排序", "value": c["sorts"]})
             elif cid == "av_actors":
@@ -427,8 +437,9 @@ class Spider(Spider):
     def categoryContent(self, cid, pg, filter, ext):
         pg = int(pg) if str(pg).isdigit() else 1
         ext = self._parse_ext(ext)
+        cls = self._pick_class(ext)
         if cid == "video":
-            cat = self._pick_class(ext)
+            cat = cls
             sort = ext.get("sort", "")
             url = self._build_url(cid, cat, sort, pg)
             html = self._req(url)
@@ -436,7 +447,7 @@ class Spider(Spider):
             pc = self._extract_max_page(html)
             return {"list": vods, "page": pg, "pagecount": pc, "limit": 24, "total": pc * 24}
         if cid == "melon":
-            cat = self._pick_class(ext)
+            cat = cls
             sort = ext.get("sort", "")
             url = self._build_url(cid, cat, sort, pg)
             html = self._req(url)
@@ -444,7 +455,7 @@ class Spider(Spider):
             pc = self._extract_max_page(html)
             return {"list": vods, "page": pg, "pagecount": pc, "limit": 24, "total": pc * 24}
         if cid == "av":
-            cateId = ext.get("cateId", "trending")
+            cateId = cls or "trending"
             url = f"{self.host}/av/{cateId}/{pg}"
             html = self._req(url)
             vods = self._parse_video_list(html)
