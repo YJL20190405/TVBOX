@@ -33,6 +33,10 @@ var index_config_default = {
     factoryTimeoutMs: 1e4,
     urlTimeoutMs: 1e4
   },
+  bili: {
+    cookie: "",
+    json: "https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"
+  },
   color: [
     {
       light: {
