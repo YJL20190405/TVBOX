@@ -65,7 +65,10 @@ var index_config_default = {
   },
   bili: {
     cookie: "",
-    url: "https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"
+    configUrl: "https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/Bilibili/BLHJ.json"
+  },
+  acfanh5: {
+    scriptUrl: "https://raw.githubusercontent.com/YJL20190405/TVBOX/refs/heads/main/maoyuan/acfanh5.js"
   },
   muou: {
     url: ""
