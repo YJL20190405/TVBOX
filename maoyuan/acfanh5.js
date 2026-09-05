@@ -1,5 +1,6 @@
 import req from '../../util/req.js';
-import crypto from 'crypto';
+import cryptoLib from 'crypto';
+let crypto=cryptoLib&&cryptoLib.createHash?cryptoLib:(cryptoLib&&cryptoLib.default&&cryptoLib.default.createHash?cryptoLib.default:cryptoLib);
 
 let host="https://accfanan.x18c87so.work";
 let token="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NTgxMjQ2NyIsImlhdCI6MTc4NjY0NjkwOCwibmJmIjoxNzg2NjY0OTIyLCJleHAiOjE5NDQzNDQ5MjJ9.7poZoAttovGH_UnkM0ZKYVjExOVGc8Uh5U62TVVQNuE";
@@ -209,7 +210,7 @@ return [
 }
 async function homeVideos(e){
 let data=await api("/video/getByClassify",{page:1,pageSize:20,classifyId:4,sortType:0,restricted:0});
-return parseList(e,data);
+return parseList(e,data)||[];
 }
 async function shortCategory(e,page,extend){
 let mode=extVal(extend,"shortMode")||"find";
@@ -220,6 +221,7 @@ data=await api("/video/list",{page,pageSize:20,loadType:2});
 cachePut("rec",page,data);
 }else{
 let cid=plot||"42";
+if(/^\d+$/.test(cid)) cid=parseInt(cid,10);
 data=await api("/video/getByClassify",{page,pageSize:20,classifyId:cid,sortType:1,restricted:0});
 cachePut("find_"+cid,page,data);
 }
@@ -266,6 +268,7 @@ return res;
 async function comicCategory(e,page,extend){
 let vt=extVal(extend,"videoTag");
 let cid=comicClass[vt]||"1";
+if(/^\d+$/.test(cid)) cid=parseInt(cid,10);
 let data=await api("/comics/base/findList",{classId:cid,orderType:0,restricted:0,page,pageSize:20},"POST");
 return pageResult(page,comicParse(e,data),data&&data.total);
 }
@@ -412,12 +415,17 @@ return out;
 }
 async function acfInit(e,t){ return {} }
 async function acfHome(e,t){
-return{class:classes(),filters,list:await homeVideos(e),type:"影视"};
+let list=[];
+try{list=await homeVideos(e)}catch{}
+return{class:classes(),filters,list:list||[],type:"影视"};
 }
 async function acfCate(e,t){
-let page=parseInt(e.body.page||1,10)||1;
-let tid=String(e.body.id||"");
-let extend=e.body.filters||{};
+let page=1,tid="",extend={};
+try{
+let b=e&&e.body||{};
+page=parseInt(b.page||1,10)||1;
+tid=String(b.id||b.tid||b.t||"");
+extend=b.filters||b.extend||{};
 if(typeof extend==="string"){ try{extend=JSON.parse(extend)}catch{extend={}} }
 extend=extend||{};
 if(tid==="manhua") return comicCategory(e,page,extend);
@@ -431,11 +439,13 @@ if(jx==="short") return shortCategory(e,page,extend);
 if(jx==="fiction") return fictionCategory(e,page,extend);
 }
 let cid=extVal(extend,"classifyId")||catMap[tid]||"";
+if(/^\d+$/.test(cid)) cid=parseInt(cid,10);
 let vt=extVal(extend,"videoTag");
 let data=vt
 ? await api("/video/tagTitleList",{tagsTitle:vt,page,pageSize:20,sortType:0,restricted:0})
 : await api("/video/getByClassify",{page,pageSize:20,sortType:0,restricted:0,classifyId:cid});
 return pageResult(page,parseList(e,data),data&&data.total);
+}catch{return pageResult(page,[],0)}
 }
 async function acfDetail(e,t){
 let vid=Array.isArray(e.body.id)?e.body.id[0]:e.body.id;
@@ -529,6 +539,14 @@ return t.code(404),t.header("Content-Type","text/plain"),t.send("nf");
 
 export default {
   meta: { key: "acfanh5", name: "\u300C\u76F4\u300D\u{1F4FD}\uFE0EAcFanH5", type: 3 },
+  init: acfInit,
+  home: acfHome,
+  category: acfCate,
+  detail: acfDetail,
+  play: acfPlay,
+  search: acfSearch,
+  pic: acfPic,
+  proxy: acfProxy,
   api: async (app) => {
     app.post("/init", acfInit);
     app.post("/home", acfHome);
